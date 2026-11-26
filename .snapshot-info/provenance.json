@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 19,
+    "requested_repository": "pimcore/pimcore",
+    "repository": "pimcore/pimcore",
+    "url": "https://github.com/pimcore/pimcore",
+    "description": "Core Framework for the Open Core Data & Experience Management Platform (PIM, MDM, CDP, DAM, DXP/CMS & Digital Commerce)",
+    "size_kb": 549979,
+    "fork": false,
+    "default_branch": "2026.x",
+    "commit": "6cd72e1a0a016b38e0b9adf37ac4b1e27aeeb200",
+    "commit_date": "2020-12-30T12:54:47Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE.md",
+    "license_url": "https://github.com/pimcore/pimcore/blob/6cd72e1a0a016b38e0b9adf37ac4b1e27aeeb200/LICENSE.md",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0-or-later option",
+    "evidence_path": "LICENSE.md",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "04e533c14d88130a54c7acfb27561d1fe9f836f2d83ccca8a4fa42016e95d0ad",
+  "source_import_commit": "d3290cb974ddf01d90289652a667a122eb380209",
+  "source_files": 8877,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
