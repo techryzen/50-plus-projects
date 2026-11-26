@@ -1,0 +1,43 @@
+{
+  "id": 24,
+  "name": "SuiteCRM",
+  "upstream_url": "https://github.com/salesagility",
+  "origin_as_reported": "2013",
+  "domain": "Customer relationship management",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/SuiteCRM/SuiteCRM",
+  "selected_upstream_commit": "d57e91389d97791fe621d811f03fe05f8f5a7f78",
+  "selected_commit_date": "2020-11-05T22:04:01Z",
+  "selected_branch": "hotfix",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 24,
+    "branch": "project/024-suitecrm",
+    "upstream_commit": "d57e91389d97791fe621d811f03fe05f8f5a7f78",
+    "import_commit": "a43a175f3e41fc4accc58ef81f0ced22974224d9",
+    "files": 9551,
+    "archive_sha256": "700b85c57e9904c06d75757160e0d01b9482ffe2a79ed4a54798ef3264b82b71",
+    "source_bytes": 98802222,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "4ef2c89c799df915e0a0b49a09e5e7586a37ba0c",
+    "provenance_added": true
+  },
+  "folder": "projects/024-suitecrm"
+}
