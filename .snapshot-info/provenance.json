@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 20,
+    "requested_repository": "liferay/liferay-portal",
+    "repository": "liferay/liferay-portal",
+    "url": "https://github.com/liferay/liferay-portal",
+    "description": null,
+    "size_kb": 46038158,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "65ca1519b40665f44ca2aca56108deb998031278",
+    "commit_date": "2020-12-31T13:06:52Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "copyright.txt",
+    "license_url": "https://github.com/liferay/liferay-portal/blob/65ca1519b40665f44ca2aca56108deb998031278/copyright.txt",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1-or-later",
+    "evidence_path": "copyright.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "d3d1e58ce66a18a6439bffc77af54f59b4d652f239a81f37b6b34e4325c22921",
+  "source_import_commit": "1beb6c0312718417065892770d2bc5811cdaa614",
+  "source_files": 100106,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
