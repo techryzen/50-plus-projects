@@ -1,0 +1,43 @@
+{
+  "id": 100,
+  "name": "Apache CloudStack",
+  "upstream_url": "https://github.com/apache/cloudstack",
+  "origin_as_reported": "2010*",
+  "domain": "Cloud infrastructure management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/apache/cloudstack",
+  "selected_upstream_commit": "3a326f7280fefcd809573149ceb05b5fc7d07893",
+  "selected_commit_date": "2020-12-24T03:20:24Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 100,
+    "branch": "project/100-apache-cloudstack",
+    "upstream_commit": "3a326f7280fefcd809573149ceb05b5fc7d07893",
+    "import_commit": "18c9ebf52fd2833eabc3f4b46c72dd45c6d1475e",
+    "files": 8264,
+    "archive_sha256": "78d0fb750f20f5c4e8f26ed3f14ffb1d57521520df02c1987fe94f5b408b573c",
+    "source_bytes": 76726992,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "d8e2e145ade3be805cda1db3d90dde23e113a72c",
+    "provenance_added": true
+  },
+  "folder": "projects/100-apache-cloudstack"
+}
