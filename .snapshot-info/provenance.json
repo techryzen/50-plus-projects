@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 15,
+    "requested_repository": "pentaho/pentaho-kettle",
+    "repository": "pentaho/pentaho-kettle",
+    "url": "https://github.com/pentaho/pentaho-kettle",
+    "description": "Pentaho Data Integration ( ETL ) a.k.a Kettle",
+    "size_kb": 762655,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "90405e50c46fe66f91e6c36f490bf59061edbce8",
+    "commit_date": "2020-12-24T09:44:25Z",
+    "license_spdx": "Apache-2.0",
+    "license_path": "LICENSE.txt",
+    "license_url": "https://github.com/pentaho/pentaho-kettle/blob/90405e50c46fe66f91e6c36f490bf59061edbce8/LICENSE.txt",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "0333828baca8045b3e7229d7ba3b716bc753565320db6297f3d6e577829d4eba",
+  "source_import_commit": "3e641856ea414890195fb08a2c2e3318529b247c",
+  "source_files": 10355,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
