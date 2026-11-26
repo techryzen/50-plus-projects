@@ -1,0 +1,43 @@
+{
+  "id": 33,
+  "name": "Zammad",
+  "upstream_url": "https://github.com/zammad",
+  "origin_as_reported": "2016",
+  "domain": "Customer support management",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/zammad/zammad",
+  "selected_upstream_commit": "88d4e534b2cfaf70137297a51e8a0e02eee5ca4b",
+  "selected_commit_date": "2020-12-31T07:36:40Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 33,
+    "branch": "project/033-zammad",
+    "upstream_commit": "88d4e534b2cfaf70137297a51e8a0e02eee5ca4b",
+    "import_commit": "7b52b8e6fc26b64a2176e505f4c25dc7b857dbb7",
+    "files": 3990,
+    "archive_sha256": "18e48b12261a50312eb4adad917ebb00ccb3ca4191d22914fbfc3918e7b3c3b0",
+    "source_bytes": 37742549,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "44a42bf68085e61b2b13be50c0293218c186c4b1",
+    "provenance_added": true
+  },
+  "folder": "projects/033-zammad"
+}
