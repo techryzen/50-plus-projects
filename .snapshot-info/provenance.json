@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 7,
+    "requested_repository": "xwiki/xwiki-platform",
+    "repository": "xwiki/xwiki-platform",
+    "url": "https://github.com/xwiki/xwiki-platform",
+    "description": "The XWiki platform",
+    "size_kb": 662235,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "07082c6038c2bdc737917a798db44056b4d74f64",
+    "commit_date": "2020-12-31T15:41:03Z",
+    "license_spdx": "LGPL-2.1",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/xwiki/xwiki-platform/blob/07082c6038c2bdc737917a798db44056b4d74f64/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "c2954aef9a745ce38a8a6f2668bf282e132e8f4278eead5695440d2da3750183",
+  "source_import_commit": "f19d741cdf49ed91845e422744ac1bd9c9bb92d5",
+  "source_files": 11072,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
