@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 1,
+    "requested_repository": "Bahmni/openmrs-module-bahmniapps",
+    "repository": "Bahmni/openmrs-module-bahmniapps",
+    "url": "https://github.com/Bahmni/openmrs-module-bahmniapps",
+    "description": "Bahmni EMR Frontend code for Clinicians and staff members, written in Angular.JS and React",
+    "size_kb": 31671,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "f32427ab60bf1d38fdbf3dd42db6258dd55f5004",
+    "commit_date": "2020-12-15T09:41:07Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/Bahmni/openmrs-module-bahmniapps/blob/f32427ab60bf1d38fdbf3dd42db6258dd55f5004/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0-or-later",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "d050908f93618550cf49edf245628534fb710a2247d3d9f0743e01f3cf26166f",
+  "source_import_commit": "c9730e65ee1fc780d47a8110a37502fa92cdc333",
+  "source_files": 1423,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
