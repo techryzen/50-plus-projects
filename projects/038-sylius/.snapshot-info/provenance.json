@@ -1,0 +1,43 @@
+{
+  "id": 38,
+  "name": "Sylius",
+  "upstream_url": "https://github.com/Sylius",
+  "origin_as_reported": "2011",
+  "domain": "E-commerce platform",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Sylius/Sylius",
+  "selected_upstream_commit": "4ebf2b602b7a53b3590dbee749e6ae8e9283c5be",
+  "selected_commit_date": "2020-12-31T16:48:31Z",
+  "selected_branch": "2.3",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "MIT",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 38,
+    "branch": "project/038-sylius",
+    "upstream_commit": "4ebf2b602b7a53b3590dbee749e6ae8e9283c5be",
+    "import_commit": "7c770f31ee095250d42a7d35b7d5b449d3f6508e",
+    "files": 7806,
+    "archive_sha256": "16b0364c19819fa1105d0a557bda21f4cfbf81501e9bde0f2118c9b31fb11d80",
+    "source_bytes": 45489945,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "998d9324a45ce240d72f33b6fad234b71bc70aaf",
+    "provenance_added": true
+  },
+  "folder": "projects/038-sylius"
+}
