@@ -1,0 +1,43 @@
+{
+  "id": 59,
+  "name": "OpenClinica",
+  "upstream_url": "https://github.com/OpenClinica",
+  "origin_as_reported": "2005",
+  "domain": "Clinical trial data management",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/OpenClinica/OpenClinica",
+  "selected_upstream_commit": "b1c8df3dd363903467b83305162a00feef064d13",
+  "selected_commit_date": "2020-12-22T19:09:22Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1-or-later",
+    "evidence_path": "core/LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 59,
+    "branch": "project/059-openclinica",
+    "upstream_commit": "b1c8df3dd363903467b83305162a00feef064d13",
+    "import_commit": "79067bcd980046c311ad8417cedbbf71376142f4",
+    "files": 5386,
+    "archive_sha256": "520f15b836946fe4f4b2cb2d69a0fe47633f75e3317def8055e7a2fe36cf31c9",
+    "source_bytes": 30652207,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "3ea83ed75ea321ce7c8a3b17cdaab93cafad0a19",
+    "provenance_added": true
+  },
+  "folder": "projects/059-openclinica"
+}
