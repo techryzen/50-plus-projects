@@ -1,0 +1,43 @@
+{
+  "id": 31,
+  "name": "Bonita",
+  "upstream_url": "https://github.com/bonitasoft",
+  "origin_as_reported": "2001",
+  "domain": "Business workflow management",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/bonitasoft/bonita-engine",
+  "selected_upstream_commit": "8fd5f315cd1f235fb48c0e03021fb737f6fda594",
+  "selected_commit_date": "2020-12-24T13:07:01Z",
+  "selected_branch": "dev",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1",
+    "evidence_path": "license/license.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 31,
+    "branch": "project/031-bonita",
+    "upstream_commit": "8fd5f315cd1f235fb48c0e03021fb737f6fda594",
+    "import_commit": "3651bb7cd0f45cfbcb9bdee4c00b2226f43ee0ff",
+    "files": 4942,
+    "archive_sha256": "81bfc3167f5c9fd8f29b894e7400a1ee616a68c719645e08f5f9b80d28efe6dc",
+    "source_bytes": 27590022,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "7f1ad5016a0027bb86d496fc9044e95bc8b8694e",
+    "provenance_added": true
+  },
+  "folder": "projects/031-bonita"
+}
