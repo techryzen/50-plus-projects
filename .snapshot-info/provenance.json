@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 21,
+    "requested_repository": "apache/ofbiz-framework",
+    "repository": "apache/ofbiz-framework",
+    "url": "https://github.com/apache/ofbiz-framework",
+    "description": "Apache OFBiz is an open source product for the automation of enterprise processes. It includes framework components and business applications for ERP, CRM, E-Business/E-Commerce, Supply Chain Management and Manufacturing Resource Planning. OFBiz provides a foundation and starting point for reliable, secure and scalable enterprise solutions.",
+    "size_kb": 780100,
+    "fork": false,
+    "default_branch": "trunk",
+    "commit": "66decd89f790494adca16c66183585156f1bfa22",
+    "commit_date": "2020-12-29T10:28:16Z",
+    "license_spdx": "Apache-2.0",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/apache/ofbiz-framework/blob/66decd89f790494adca16c66183585156f1bfa22/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "de3e36ab5afb1dbc3647744e1ca7547973bb9abf7877736c8b197d28e7f6b140",
+  "source_import_commit": "a5afc79b1c6adea246d85af4bf4dabfb2c05c7e6",
+  "source_files": 6348,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
