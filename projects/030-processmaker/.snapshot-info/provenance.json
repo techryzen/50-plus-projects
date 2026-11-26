@@ -1,0 +1,43 @@
+{
+  "id": 30,
+  "name": "ProcessMaker",
+  "upstream_url": "https://github.com/ProcessMaker",
+  "origin_as_reported": "2008",
+  "domain": "Business process automation",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/ProcessMaker/processmaker",
+  "selected_upstream_commit": "83993df2eebe2d62ea97bcec8210f5d9efce450c",
+  "selected_commit_date": "2020-12-25T11:56:03Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 30,
+    "branch": "project/030-processmaker",
+    "upstream_commit": "83993df2eebe2d62ea97bcec8210f5d9efce450c",
+    "import_commit": "36510b9040f12fcfa1d92d912cb8db878fe5147e",
+    "files": 1496,
+    "archive_sha256": "d9607219d57b5a569770d01add21f0049d8da43b1c91d22bd714bb598ea2111e",
+    "source_bytes": 21308968,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "63ed4c76bf919192022104d895c9d9cf34985e14",
+    "provenance_added": true
+  },
+  "folder": "projects/030-processmaker"
+}
