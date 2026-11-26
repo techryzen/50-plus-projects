@@ -1,0 +1,43 @@
+{
+  "id": 60,
+  "name": "CKAN",
+  "upstream_url": "https://github.com/ckan",
+  "origin_as_reported": "2007",
+  "domain": "Government and institutional data portals",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/ckan/ckan",
+  "selected_upstream_commit": "395fd99b1d000679bc1b1d8cc478c543f9602e83",
+  "selected_commit_date": "2020-12-29T07:25:36Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0-or-later",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 60,
+    "branch": "project/060-ckan",
+    "upstream_commit": "395fd99b1d000679bc1b1d8cc478c543f9602e83",
+    "import_commit": "61b98539fe949696e497bbb624af2d5c2d50e28c",
+    "files": 2070,
+    "archive_sha256": "5f66fa5f26aac28031327091cb5b190d76af170e27d09a283be0c01db3bb66f7",
+    "source_bytes": 35094342,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "17f89c418ddba4b95d874ee8cf7f0d00ff2e3a54",
+    "provenance_added": true
+  },
+  "folder": "projects/060-ckan"
+}
