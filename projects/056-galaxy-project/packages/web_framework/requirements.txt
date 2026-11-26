@@ -1,0 +1,12 @@
+babel
+galaxy-data
+galaxy-util
+galaxy-web-stack
+MarkupSafe
+paste
+pydantic
+requests
+Routes
+six
+SQLAlchemy
+WebOb
