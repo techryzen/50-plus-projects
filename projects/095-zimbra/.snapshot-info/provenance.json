@@ -1,0 +1,43 @@
+{
+  "id": 95,
+  "name": "Zimbra",
+  "upstream_url": "https://github.com/Zimbra",
+  "origin_as_reported": "2005",
+  "domain": "Enterprise communication",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Zimbra/zm-mailbox",
+  "selected_upstream_commit": "d279ac274ca2a61b29c958292afbb7fe3bbf5c2b",
+  "selected_commit_date": "2020-12-21T12:22:17Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Zimbra core mailbox platform",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0",
+    "evidence_path": "store/src/java/com/zimbra/cs/account/Account.java",
+    "scope": "Historical source license notices checked; preserve all notices. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 95,
+    "branch": "project/095-zimbra",
+    "upstream_commit": "d279ac274ca2a61b29c958292afbb7fe3bbf5c2b",
+    "import_commit": "3751cae7fb12ec9e50385a145302765c991716ae",
+    "files": 5913,
+    "archive_sha256": "4525863497759efdc800e148f050ae39f23fdf765fdcbdb27f176853646d475a",
+    "source_bytes": 81590897,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "3b69ed5ab4d5f8bf3995e32fd5eec1da4cd80ecd",
+    "provenance_added": true
+  },
+  "folder": "projects/095-zimbra"
+}
