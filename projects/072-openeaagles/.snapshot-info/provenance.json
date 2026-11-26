@@ -1,0 +1,43 @@
+{
+  "id": 72,
+  "name": "OpenEaagles",
+  "upstream_url": "https://github.com/doughodson/OpenEaagles",
+  "origin_as_reported": "2000s",
+  "domain": "Aerospace simulation framework",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/doughodson/OpenEaagles",
+  "selected_upstream_commit": "b3d7e74a9bf52934e13fd6a11f45dc9767ac9192",
+  "selected_commit_date": "2017-06-01T22:00:08Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1-or-later",
+    "evidence_path": "doc/licenses/license-openeaagles.txt",
+    "scope": "Historical source license notices checked; preserve all notices. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 72,
+    "branch": "project/072-openeaagles",
+    "upstream_commit": "b3d7e74a9bf52934e13fd6a11f45dc9767ac9192",
+    "import_commit": "7c9400af64f06bb2d11b47d31ef1dae76652d6b0",
+    "files": 916,
+    "archive_sha256": "e757a684983bd9a9b02095de1c663ab8a7f030d06a701dc4b89c318e248bd992",
+    "source_bytes": 15215011,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "87d94d709633127a3ee5367e279d309da60f52da",
+    "provenance_added": true
+  },
+  "folder": "projects/072-openeaagles"
+}
