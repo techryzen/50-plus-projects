@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 10,
+    "requested_repository": "OpenModelica/OpenModelica",
+    "repository": "OpenModelica/OpenModelica",
+    "url": "https://github.com/OpenModelica/OpenModelica",
+    "description": "OpenModelica is an open-source Modelica-based modeling and simulation environment intended for industrial and academic usage.",
+    "size_kb": 436946,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "201edb2eefb6c6ff0410b9bf14c3dc66bdf9787c",
+    "commit_date": "2020-12-31T18:21:50Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "OSMC-License.txt",
+    "license_url": "https://github.com/OpenModelica/OpenModelica/blob/201edb2eefb6c6ff0410b9bf14c3dc66bdf9787c/OSMC-License.txt",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0 option in OSMC license",
+    "evidence_path": "OSMC-License.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "0ee3b5660b2ae2c7e040d741a6c6212bff0c654d8f2682feba111b0e9099addb",
+  "source_import_commit": "92405fb95fb55b973b3768e9f76bddaba9397a12",
+  "source_files": 14213,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
