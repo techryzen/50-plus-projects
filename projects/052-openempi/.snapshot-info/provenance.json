@@ -1,0 +1,43 @@
+{
+  "id": 52,
+  "name": "OpenEMPI",
+  "upstream_url": "https://openhub.net/p/openempi",
+  "origin_as_reported": "2000s",
+  "domain": "Enterprise patient indexing",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/jnshwu/openempi",
+  "selected_upstream_commit": "2d0712c072de70e1f0df808bab406095ddeae7c6",
+  "selected_commit_date": "2014-08-21T19:01:34Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": "Historical mirror linked by the Open Hub page cited in the original shortlist; it ends in 2014. Global latest pre-2021 official version not established.",
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0-or-later",
+    "evidence_path": "nhin-adapter/src/main/java/org/hl7/v3/COCTMT090000UV01LicensedEntity.java",
+    "scope": "Historical source headers grant redistribution. Full AGPL text supplied with import. Source is the mirror linked by the original Open Hub source; latest official upstream version is not established."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 52,
+    "branch": "project/052-openempi",
+    "upstream_commit": "2d0712c072de70e1f0df808bab406095ddeae7c6",
+    "import_commit": "4885461aa267c4b0ac793c227f3dc4feaf8f1438",
+    "files": 8010,
+    "archive_sha256": "36ce40931036a9fe4a40d6d38c6619b3fe46f5b7238287673330e68c8fb19fad",
+    "source_bytes": 72844592,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "9ddb7fa8e860ea395a757368bbe6040ca08346a0",
+    "provenance_added": true
+  },
+  "folder": "projects/052-openempi"
+}
