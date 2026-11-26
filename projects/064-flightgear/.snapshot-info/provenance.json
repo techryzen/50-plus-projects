@@ -1,0 +1,43 @@
+{
+  "id": 64,
+  "name": "FlightGear",
+  "upstream_url": "https://github.com/FlightGear",
+  "origin_as_reported": "1997",
+  "domain": "Flight simulation",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/FlightGear/flightgear",
+  "selected_upstream_commit": "c478a80c5c58bb9e088bda513312543a02006bf7",
+  "selected_commit_date": "2020-12-30T17:01:29Z",
+  "selected_branch": "next",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0",
+    "evidence_path": "COPYING",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 64,
+    "branch": "project/064-flightgear",
+    "upstream_commit": "c478a80c5c58bb9e088bda513312543a02006bf7",
+    "import_commit": "8ddb8ac6b94108c8de9859f7e28531001a464b98",
+    "files": 3028,
+    "archive_sha256": "d6c7de881fa3936fdcee07806fea9bbf1b12c69e32d73de303a70df8f8180f36",
+    "source_bytes": 53148306,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "182f17c30a67d3c401f29a87a371e7daccb38276",
+    "provenance_added": true
+  },
+  "folder": "projects/064-flightgear"
+}
