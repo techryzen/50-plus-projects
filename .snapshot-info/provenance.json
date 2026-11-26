@@ -1,0 +1,23 @@
+{
+  "upstream": {
+    "id": 12,
+    "requested_repository": "https://codeberg.org/gnuhealth/his",
+    "repository": "https://codeberg.org/gnuhealth/his",
+    "url": "https://codeberg.org/gnuhealth/his",
+    "commit": "14ac9e06ac5ff8bbd0cb53529b729d8b9396b56d",
+    "commit_date": "2020-12-30T06:29:33+01:00",
+    "status": "snapshot_resolved",
+    "retrieval": "git archive of historical commit from official repository"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0",
+    "evidence_path": "COPYING",
+    "scope": "Historical license evidence checked; retain all notices and bundled licenses. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "3c1359619b554ade21ce6a35e7b8d499cd4d52080b2fcf9058a0f025e07e53f9",
+  "source_import_commit": "009e09cf41c164615236ce75331e61452b96b120",
+  "source_files": 1897,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
