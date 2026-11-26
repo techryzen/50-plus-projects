@@ -1,0 +1,43 @@
+{
+  "id": 45,
+  "name": "Samvera",
+  "upstream_url": "https://github.com/samvera",
+  "origin_as_reported": "2008",
+  "domain": "Digital asset preservation",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/samvera/hyrax",
+  "selected_upstream_commit": "77c6dfba6f2a87d5679da27f4846bcd6a560a962",
+  "selected_commit_date": "2020-12-28T18:09:42Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Samvera Hyrax application",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 45,
+    "branch": "project/045-samvera",
+    "upstream_commit": "77c6dfba6f2a87d5679da27f4846bcd6a560a962",
+    "import_commit": "1726588cd0d06a2dd3a3c972b0f9fb8413bea248",
+    "files": 2611,
+    "archive_sha256": "01e270651196a1ac22f94ec083c9f2619aa318ff00a17c1a101c2cd7417e9eaa",
+    "source_bytes": 13888099,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "2b1e2407a043e23840ded11013289418ded17924",
+    "provenance_added": true
+  },
+  "folder": "projects/045-samvera"
+}

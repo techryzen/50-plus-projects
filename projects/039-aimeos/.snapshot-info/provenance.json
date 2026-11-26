@@ -1,0 +1,43 @@
+{
+  "id": 39,
+  "name": "Aimeos",
+  "upstream_url": "https://github.com/aimeos",
+  "origin_as_reported": "2014",
+  "domain": "Modular e-commerce",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/aimeos/aimeos-core",
+  "selected_upstream_commit": "a721dd01a37790214d15e12a8a77bc045234d62f",
+  "selected_commit_date": "2020-12-30T08:20:26Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 39,
+    "branch": "project/039-aimeos",
+    "upstream_commit": "a721dd01a37790214d15e12a8a77bc045234d62f",
+    "import_commit": "e2d7fa5323b2b12ddd05d942964fe0d16a7b90a0",
+    "files": 1772,
+    "archive_sha256": "a31e039fcd3d63ae7957840000af307b4010a688f958dc0e0558c22e2a0b57bf",
+    "source_bytes": 9926459,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "c9cd8b012b228af03f078b4fc94390c9eb76fb93",
+    "provenance_added": true
+  },
+  "folder": "projects/039-aimeos"
+}

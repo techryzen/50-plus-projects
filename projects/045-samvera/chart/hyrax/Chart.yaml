@@ -1,0 +1,27 @@
+apiVersion: v2
+name: hyrax
+description: An open-source, Samvera-powered digital repository system
+type: application
+version: 0.4.1
+appVersion: 3.0.0-rc2
+dependencies:
+  - name: fcrepo
+    version: 0.4.1
+    repository: file://../fcrepo
+  - name: memcached
+    version: 4.2.21
+    repository: https://charts.bitnami.com/bitnami
+    condition: memcached.enabled
+  - name: postgresql
+    version: 9.3.3
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  - name: redis
+    version: 10.7.16
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+  - name: solr
+    version: 1.5.2
+    repository: http://storage.googleapis.com/kubernetes-charts-incubator
+    condition: solr.enabled
+  # need something for fcrepo

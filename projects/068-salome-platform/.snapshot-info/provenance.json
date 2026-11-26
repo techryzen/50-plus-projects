@@ -1,0 +1,43 @@
+{
+  "id": 68,
+  "name": "SALOME Platform",
+  "upstream_url": "https://git.salome-platform.org/",
+  "origin_as_reported": "2000",
+  "domain": "Numerical simulation",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/SalomePlatform/kernel",
+  "selected_upstream_commit": "07a2f4b4bc26848b3258984a221f0cb2e4572f3a",
+  "selected_commit_date": "2020-12-30T01:45:30Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "SALOME kernel; not the complete platform",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1",
+    "evidence_path": "COPYING",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 68,
+    "branch": "project/068-salome-platform",
+    "upstream_commit": "07a2f4b4bc26848b3258984a221f0cb2e4572f3a",
+    "import_commit": "5c2d45c0cda06b20784f676c73a0fe76fb2d484c",
+    "files": 1304,
+    "archive_sha256": "85edfd26d997b57a944d6fbdc1a281e5766aeecd3f0a5b20ca4f97ca649be7d5",
+    "source_bytes": 10736240,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "2f1fceec4da32fae4b9367d7c6c318c835711dff",
+    "provenance_added": true
+  },
+  "folder": "projects/068-salome-platform"
+}

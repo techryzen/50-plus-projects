@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "hyrax.fullname" . }}-env
+  labels:
+    app.kubernetes.io/name: {{ include "hyrax.name" . }}
+    helm.sh/chart: {{ include "hyrax.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  {{- if .Values.postgresql.enabled }}
+  DB_HOST: {{ template "hyrax.postgresql.fullname" . }}
+  DB_PORT: "5432"
+  {{- end }}
+  {{- if .Values.memcached.enabled }}
+  MEMCACHED_HOST: {{ template "hyrax.memcached.fullname" . }}
+  {{- end }}
+  RACK_ENV: production
+  RAILS_ENV: production
+  {{- if .Values.redis.enabled }}
+  REDIS_HOST: {{ template "hyrax.redis.fullname" . }}-master
+  {{- end }}
+  {{- if .Values.fcrepo.enabled }}
+  FCREPO_PORT: {{ .Values.fcrepo.servicePort | default 8080 | quote }}
+  FCREPO_HOST: {{ template "hyrax.fcrepo.fullname" . }}
+  FCREPO_REST_PATH: {{ .Values.fcrepo.restPath | default "fcrepo/rest" }}
+  {{- end }}
+  {{- if .Values.solr.enabled }}
+  SOLR_HOST: {{ template "hyrax.solr.fullname" . }}-svc
+  SOLR_PORT: "8983"
+  SOLR_URL: http://{{ template "hyrax.solr.fullname" . }}-svc:8983/solr/hyrax
+  {{- end }}
