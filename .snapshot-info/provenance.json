@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 5,
+    "requested_repository": "axelor/axelor-open-suite",
+    "repository": "axelor/axelor-open-suite",
+    "url": "https://github.com/axelor/axelor-open-suite",
+    "description": "The Axelor Open Suite based on Axelor Open Platform",
+    "size_kb": 463519,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "146e616d25a62884c5c374ad388d522e042f0465",
+    "commit_date": "2020-12-31T06:14:30Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/axelor/axelor-open-suite/blob/146e616d25a62884c5c374ad388d522e042f0465/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "75a193b684adbf572a3de2a121289bdf72dc9f6e850cd69e8591937b4e0c9968",
+  "source_import_commit": "2254078c0a97046e090f0d7dec9a1a2cd6019cf5",
+  "source_files": 4722,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
