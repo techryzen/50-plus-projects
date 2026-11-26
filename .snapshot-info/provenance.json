@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 14,
+    "requested_repository": "ManageIQ/manageiq",
+    "repository": "ManageIQ/manageiq",
+    "url": "https://github.com/ManageIQ/manageiq",
+    "description": "ManageIQ Open-Source Management Platform",
+    "size_kb": 424769,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "794fa20ab22c425ddb5b3a9570e2e0f92b4e34a6",
+    "commit_date": "2020-12-30T05:50:33Z",
+    "license_spdx": "Apache-2.0",
+    "license_path": "LICENSE.txt",
+    "license_url": "https://github.com/ManageIQ/manageiq/blob/794fa20ab22c425ddb5b3a9570e2e0f92b4e34a6/LICENSE.txt",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "e61dacdfa10cfbc02f17cfa79a175c0a4ec4070e91926e42d86ffd1df708b04d",
+  "source_import_commit": "ae67010a5895dffab18e7acd425569412a5775e8",
+  "source_files": 2822,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
