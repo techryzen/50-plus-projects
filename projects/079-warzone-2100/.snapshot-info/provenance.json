@@ -1,0 +1,43 @@
+{
+  "id": 79,
+  "name": "Warzone 2100",
+  "upstream_url": "https://github.com/Warzone2100",
+  "origin_as_reported": "1999",
+  "domain": "3D strategy game",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Warzone2100/warzone2100",
+  "selected_upstream_commit": "79976323cfa7bfa84cd7fa2c81b1171c5bec6703",
+  "selected_commit_date": "2020-12-30T17:16:59Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0",
+    "evidence_path": "COPYING",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 79,
+    "branch": "project/079-warzone-2100",
+    "upstream_commit": "79976323cfa7bfa84cd7fa2c81b1171c5bec6703",
+    "import_commit": "3535924114620c617471e1d230e82061a011f5b3",
+    "files": 4165,
+    "archive_sha256": "41192e7f77f97814d8e37fccfeeabab8d66f667dbd58e8e84c4127a2882e0bf5",
+    "source_bytes": 69225236,
+    "has_gitmodules": true,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "e89aa5bddeb269e689bca0746fe99c5b119bd3a5",
+    "provenance_added": true
+  },
+  "folder": "projects/079-warzone-2100"
+}
