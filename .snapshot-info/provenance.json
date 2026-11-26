@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 13,
+    "requested_repository": "theforeman/foreman",
+    "repository": "theforeman/foreman",
+    "url": "https://github.com/theforeman/foreman",
+    "description": "an application that automates the lifecycle of servers ",
+    "size_kb": 155836,
+    "fork": false,
+    "default_branch": "develop",
+    "commit": "41a3edb3b844ba5faa4fabb9929b2a3fab627aee",
+    "commit_date": "2020-12-31T17:54:17Z",
+    "license_spdx": "GPL-3.0",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/theforeman/foreman/blob/41a3edb3b844ba5faa4fabb9929b2a3fab627aee/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "dd9e89c0bc0713a9d3603f26464c3af14c73842a5d01eb292eb340771cc388ae",
+  "source_import_commit": "4ecebc684dcbfe04b5cc41650ba33ff8cd72f205",
+  "source_files": 5201,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
