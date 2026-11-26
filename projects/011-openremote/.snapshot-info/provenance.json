@@ -1,0 +1,43 @@
+{
+  "id": 11,
+  "name": "OpenRemote",
+  "upstream_url": "https://github.com/openremote",
+  "origin_as_reported": "2008",
+  "domain": "Industrial IoT management",
+  "technologies_as_reported": "Java, TypeScript",
+  "category": "priority-ecosystems",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/openremote/core",
+  "selected_upstream_commit": "4abf78cb9cda332211e73199dfdca0f175891240",
+  "selected_commit_date": "2020-12-21T09:08:15Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0-or-later",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 11,
+    "branch": "project/011-openremote",
+    "upstream_commit": "4abf78cb9cda332211e73199dfdca0f175891240",
+    "import_commit": "f4fb6c0c14b550325ea85effca28193d69fc28bb",
+    "files": 3890,
+    "archive_sha256": "8c753b339968830945acb78ff18aa4c904f6c5180551b26a1dad467a84c9a70b",
+    "source_bytes": 111637815,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "2fb29dc64cb08f5d35233e8a42d458238484df20",
+    "provenance_added": true
+  },
+  "folder": "projects/011-openremote"
+}

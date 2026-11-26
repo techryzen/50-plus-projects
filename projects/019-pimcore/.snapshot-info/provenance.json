@@ -1,0 +1,43 @@
+{
+  "id": 19,
+  "name": "Pimcore",
+  "upstream_url": "https://github.com/pimcore",
+  "origin_as_reported": "2010",
+  "domain": "Product information management",
+  "technologies_as_reported": "PHP",
+  "category": "priority-ecosystems",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/pimcore/pimcore",
+  "selected_upstream_commit": "6cd72e1a0a016b38e0b9adf37ac4b1e27aeeb200",
+  "selected_commit_date": "2020-12-30T12:54:47Z",
+  "selected_branch": "2026.x",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0-or-later option",
+    "evidence_path": "LICENSE.md",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 19,
+    "branch": "project/019-pimcore",
+    "upstream_commit": "6cd72e1a0a016b38e0b9adf37ac4b1e27aeeb200",
+    "import_commit": "de34463d2f128568c09cae6d86b2e2b822eee43f",
+    "files": 8877,
+    "archive_sha256": "04e533c14d88130a54c7acfb27561d1fe9f836f2d83ccca8a4fa42016e95d0ad",
+    "source_bytes": 105027561,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "d3290cb974ddf01d90289652a667a122eb380209",
+    "provenance_added": true
+  },
+  "folder": "projects/019-pimcore"
+}

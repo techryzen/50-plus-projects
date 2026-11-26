@@ -1,0 +1,43 @@
+{
+  "id": 17,
+  "name": "DSpace",
+  "upstream_url": "https://github.com/DSpace",
+  "origin_as_reported": "2002",
+  "domain": "Digital asset management",
+  "technologies_as_reported": "Java",
+  "category": "priority-ecosystems",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/DSpace/DSpace",
+  "selected_upstream_commit": "a0a7226a43ac6dcb5e84eb0d38bb491509a1155e",
+  "selected_commit_date": "2020-12-30T12:52:39Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "BSD-3-Clause",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 17,
+    "branch": "project/017-dspace",
+    "upstream_commit": "a0a7226a43ac6dcb5e84eb0d38bb491509a1155e",
+    "import_commit": "ed30ea6c81b2a9ad9e500bd3d1a215df7a123666",
+    "files": 3153,
+    "archive_sha256": "de6a208f45bee21ccf71997315d1884cffd1ea68c8f6c56daf4b7e92ebf637b6",
+    "source_bytes": 20334116,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "974d7ae6d0178222215a6aa4ebb304ff705d5ea1",
+    "provenance_added": true
+  },
+  "folder": "projects/017-dspace"
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<knimeNode type="Other" icon="blocking.png">
+	<name>Block Programmatically (Variable)</name>
+	
+	<shortDescription>
+		Used in unit tests to pause the execution until a prgrammatic "release" is triggered.
+	</shortDescription>
+	
+	<fullDescription>
+		<intro>
+			<p>
+				Used in unit tests to pause the execution until a prgrammatic "release" is
+				triggered. This node is part of the workflow manager test framework. It's
+				used to simulate a long processing job. It uses a java.util.concurrent.Lock object 
+				to stall. Using this node makes	only sense if used in unit tests. In normal KNIME execution
+				this node will just pass the input to the output. 
+			</p>
+		</intro>
+		<option name="Lock ID">
+		  ID of the lock being used. Must be present in the global lock 
+		  repository (i.e. programmatically added beforehand).
+		</option>		
+	</fullDescription>
+	
+	<ports>
+		<inPort index="0" name="Variable Input">Any variable</inPort>
+		<outPort index="0" name="Variable Output">Input Variables</outPort>
+	</ports>	
+</knimeNode>

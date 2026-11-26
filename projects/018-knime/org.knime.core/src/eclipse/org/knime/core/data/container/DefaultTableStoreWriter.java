@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------------------
+ *  Copyright by KNIME AG, Zurich, Switzerland
+ *  Website: http://www.knime.com; Email: contact@knime.com
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License, Version 3, as
+ *  published by the Free Software Foundation.
+ *
+ *  This program is distributed in the hope that it will be useful, but
+ *  WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, see <http://www.gnu.org/licenses>.
+ *
+ *  Additional permission under GNU GPL version 3 section 7:
+ *
+ *  KNIME interoperates with ECLIPSE solely via ECLIPSE's plug-in APIs.
+ *  Hence, KNIME and ECLIPSE are both independent programs and are not
+ *  derived from each other. Should, however, the interpretation of the
+ *  GNU GPL Version 3 ("License") under any applicable laws result in
+ *  KNIME and ECLIPSE being a combined program, KNIME AG herewith grants
+ *  you the additional permission to use and propagate KNIME together with
+ *  ECLIPSE with only the license terms in place for ECLIPSE applying to
+ *  ECLIPSE and the GNU GPL Version 3 applying for KNIME, provided the
+ *  license terms of ECLIPSE themselves allow for the respective use and
+ *  propagation of ECLIPSE together with KNIME.
+ *
+ *  Additional permission relating to nodes for KNIME that extend the Node
+ *  Extension (and in particular that are based on subclasses of NodeModel,
+ *  NodeDialog, and NodeView) and that only interoperate with KNIME through
+ *  standard APIs ("Nodes"):
+ *  Nodes are deemed to be separate and independent programs and to not be
+ *  covered works.  Notwithstanding anything to the contrary in the
+ *  License, the License does not apply to Nodes, you are not required to
+ *  license Nodes under the License, and you are granted a license to
+ *  prepare and propagate Nodes, in each case even if such Nodes are
+ *  propagated with or for interoperation with KNIME.  The owner of a Node
+ *  may freely choose the license terms applicable to such Node, including
+ *  when such Node is propagated with or for interoperation with KNIME.
+ * -------------------------------------------------------------------
+ *
+ * History
+ *   Mar 15, 2016 (wiswedel): created
+ */
+package org.knime.core.data.container;
+
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.knime.core.data.DataCell;
+import org.knime.core.data.DataRow;
+import org.knime.core.data.DataTableSpec;
+import org.knime.core.data.RowKey;
+import org.knime.core.data.container.DCObjectOutputVersion2.BlockableDCObjectOutputVersion2;
+import org.knime.core.data.container.DefaultTableStoreFormat.CompressionFormat;
+import org.knime.core.data.container.storage.AbstractTableStoreWriter;
+import org.knime.core.node.NodeSettingsWO;
+
+/**
+ * The default table store writer used to write tables to disc.
+ * @author wiswedel
+ */
+final class DefaultTableStoreWriter extends AbstractTableStoreWriter implements KNIMEStreamConstants {
+
+    /**
+     * the stream that writes to the file, it's a special object output stream, in which we can mark the end of an entry
+     * (to figure out when a cell implementation reads too many or too few bytes).
+     */
+    private final BlockableDCObjectOutputVersion2 m_outStream;
+
+    /** The compression format. */
+    private final CompressionFormat m_compFormat;
+
+    /**
+     * Constructs a writer for writing KNIME tables to disk using the given compression format.
+     *
+     * @param spec the specification of the KNIME table to write to disk
+     * @param outputStream
+     * @param writeRowKey a flag that determines whether to store the row keys in the Parquet file
+     * @param compFormat the compression format
+     * @throws IOException any type of I/O problem
+     */
+    public DefaultTableStoreWriter(final DataTableSpec spec, final OutputStream outputStream, final boolean writeRowKey,
+        final CompressionFormat compFormat) throws IOException {
+        super(spec, writeRowKey);
+        m_compFormat = compFormat;
+        m_outStream = initOutFile(new BufferedOutputStream(outputStream));
+    }
+
+    /**
+     * Serializes a row to the output stream. This method is called from <code>addRow(DataRow)</code>.
+     *
+     * @throws IOException If an IO error occurs while writing to the file.
+     */
+    @Override
+    public void writeRow(final DataRow row) throws IOException {
+        RowKey id = row.getKey();
+        writeRowKey(id, m_outStream);
+        for (int i = 0; i < row.getNumCells(); i++) {
+            DataCell cell =
+                row instanceof BlobSupportDataRow ? ((BlobSupportDataRow)row).getRawCell(i) : row.getCell(i);
+            writeDataCell(cell, m_outStream);
+            m_outStream.endBlock();
+        }
+        m_outStream.endRow();
+    }
+
+    /**
+     * Writes the row key to the out stream. This method is overridden in {@link NoKeyBuffer} in order to skip the row
+     * key.
+     *
+     * @param key The key to write.
+     * @param outStream To write to.
+     * @throws IOException If that fails.
+     */
+    void writeRowKey(final RowKey key, final BlockableDCObjectOutputVersion2 outStream) throws IOException {
+        if (isWriteRowKey()) {
+            outStream.writeRowKey(key);
+            outStream.endBlock();
+        }
+    }
+
+    /**
+     * Creates short cut array and wraps the argument stream in a {@link DCObjectOutputVersion2}.
+     */
+    @SuppressWarnings("resource")
+    private BlockableDCObjectOutputVersion2 initOutFile(final OutputStream outStream) throws IOException {
+        final OutputStream out = m_compFormat.getOutputStream(outStream);
+        return new BlockableDCObjectOutputVersion2(out, this);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void writeMetaInfoAfterWrite(final NodeSettingsWO settings) {
+        m_compFormat.saveSettings(settings);
+        super.writeMetaInfoAfterWrite(settings);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public void close() throws IOException {
+        m_outStream.close();
+    }
+
+}
