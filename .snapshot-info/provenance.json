@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 9,
+    "requested_repository": "sakaiproject/sakai",
+    "repository": "sakaiproject/sakai",
+    "url": "https://github.com/sakaiproject/sakai",
+    "description": "Sakai is a freely available, feature-rich technology solution for learning, teaching, research and collaboration. Sakai is an open source software suite developed by a diverse and global adopter community.",
+    "size_kb": 578175,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "f888d505166eeacf2e26b58ab41870778442ecce",
+    "commit_date": "2020-12-23T21:04:49Z",
+    "license_spdx": "ECL-2.0",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/sakaiproject/sakai/blob/f888d505166eeacf2e26b58ab41870778442ecce/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "ECL-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "5445740d7a251a116b611f1af336e638ce02e0e13d5d42a643a88e860c8c1fb0",
+  "source_import_commit": "d0836257eaf4f059f92666cc2561455c42cfcfee",
+  "source_files": 18087,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
