@@ -1,0 +1,43 @@
+{
+  "id": 92,
+  "name": "Gluu Server",
+  "upstream_url": "https://github.com/GluuFederation",
+  "origin_as_reported": "2009",
+  "domain": "Enterprise identity management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/GluuFederation/oxAuth",
+  "selected_upstream_commit": "3c850818d8325b70871db40e8831ae8d96b683df",
+  "selected_commit_date": "2020-12-18T15:55:56Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Gluu authentication server component",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "MIT",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 92,
+    "branch": "project/092-gluu-server",
+    "upstream_commit": "3c850818d8325b70871db40e8831ae8d96b683df",
+    "import_commit": "37167adec8949dc9f68826afcf1d1f37e095dc2d",
+    "files": 1560,
+    "archive_sha256": "f4f58be24b5c1231380b3689e19d062b6da4d219830935864a904750f288cc45",
+    "source_bytes": 20998659,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "0c15168ad37026129437e938d782faf63f810ace",
+    "provenance_added": true
+  },
+  "folder": "projects/092-gluu-server"
+}
