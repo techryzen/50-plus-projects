@@ -1,3 +1,3 @@
 # Historical source projects
 
-28 of 60 projects published. Browse the [project folders](projects/). Each folder contains its source snapshot and license notices.
+29 of 60 projects published. Browse the [project folders](projects/). Each folder contains its source snapshot and license notices.

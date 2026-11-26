@@ -1,0 +1,43 @@
+{
+  "id": 93,
+  "name": "Apache Syncope",
+  "upstream_url": "https://github.com/apache/syncope",
+  "origin_as_reported": "2010",
+  "domain": "Digital identity management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/apache/syncope",
+  "selected_upstream_commit": "7198828c487e797583c2ff025b9aa126b01ada82",
+  "selected_commit_date": "2020-12-31T11:14:20Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 93,
+    "branch": "project/093-apache-syncope",
+    "upstream_commit": "7198828c487e797583c2ff025b9aa126b01ada82",
+    "import_commit": "a3135ddc2797f4917e7f57d60e654c668094236c",
+    "files": 4721,
+    "archive_sha256": "8b225d3a1c8d6db09534431438945355258dbe09f70e1f54c4791343450b4d24",
+    "source_bytes": 20958391,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "e7f34954992553e0cda742732a0ce7b8c057de17",
+    "provenance_added": true
+  },
+  "folder": "projects/093-apache-syncope"
+}
