@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+#########################
+# Rights
+#########################
+
+## Make sure tomcat is able to write in the data folder
+chown -R tomcat8.tomcat8 /var/lib/xwiki/data
+
+#########################
+# Configuration
+#########################
+
+. /usr/share/debconf/confmodule

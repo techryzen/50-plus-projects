@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+#########################
+# Restart Tomcat
+#########################
+
+# Restart tomcat9 service if it's active
+systemctl -q is-active tomcat9.service && service tomcat9 restart

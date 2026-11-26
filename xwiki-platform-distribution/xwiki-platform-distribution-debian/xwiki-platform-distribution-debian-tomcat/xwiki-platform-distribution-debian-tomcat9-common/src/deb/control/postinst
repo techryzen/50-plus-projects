@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+#########################
+# Rights
+#########################
+
+## Make sure tomcat is able to write in the data folder
+chown -R tomcat.tomcat /var/lib/xwiki/data
+
+#########################
+# Configuration
+#########################
+
+. /usr/share/debconf/confmodule
+
+#########################
+# Restart Tomcat
+#########################
+
+# Need to reload systemd for the injected tomcat9 service configuration to be taken into account
+systemctl daemon-reload
