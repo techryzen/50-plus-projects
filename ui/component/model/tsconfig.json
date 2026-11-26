@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "rootDir": "src",
+    "preserveConstEnums": true
+  },
+  "include": [
+    "./src"
+  ]
+}

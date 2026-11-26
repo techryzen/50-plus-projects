@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "rootDir": "src"
+  },
+  "include": [
+    "./src"
+  ],
+  "references": [
+    { "path": "../core" },
+    { "path": "../rest" },
+    { "path": "../model" },
+    { "path": "../or-mwc-components" },
+    { "path": "../or-translate" },
+    { "path": "../or-input" },
+    { "path": "../or-icon" }
+  ]
+}

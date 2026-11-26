@@ -1,0 +1,25 @@
+buildDir = "dist"
+
+task generate(type: Exec) {
+    commandLine npmCommand("npm"), "run-script", "generate"
+}
+
+task clean() {
+    doLast {
+        delete "dist"
+    }
+}
+
+task prepareUi() {
+    dependsOn clean, npmPrepare
+}
+
+task publishUi() {
+    dependsOn clean, npmPublish
+}
+
+task installDist(type: Copy) {
+    dependsOn generate
+    from "${buildDir}/mdi-icons.json"
+    into "${project(':deployment').buildDir}/manager/shared"
+}

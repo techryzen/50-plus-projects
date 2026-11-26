@@ -1,0 +1,65 @@
+apply plugin: "java"
+apply plugin: "groovy"
+
+dependencies {
+
+    compile resolveProject(":model")
+
+    compile "org.codehaus.groovy:groovy:$groovyVersion"
+    compile "org.kohsuke:groovy-sandbox:$groovySandboxVersion"
+
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:slf4j-jdk14:$slf4jVersion"
+    compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+    compile "org.slf4j:log4j-over-slf4j:$slf4jVersion"
+
+    compile "com.google.guava:guava:$guavaVersion"
+    compile "com.devskiller.friendly-id:friendly-id:$friendlyIdVersion"
+
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion"
+
+    compile "io.undertow:undertow-servlet:$undertowVersion"
+    compile "io.undertow:undertow-websockets-jsr:$undertowVersion"
+
+    compile "org.jboss.resteasy:resteasy-jaxrs:$resteasyVersion"
+    compile "org.jboss.resteasy:resteasy-client:$resteasyVersion"
+    compile "org.jboss.resteasy:resteasy-jackson2-provider:$resteasyVersion"
+    compile "org.jboss.resteasy:resteasy-multipart-provider:$resteasyVersion"
+    compile("org.jboss.resteasy:resteasy-cache-core:$resteasyVersion") {
+        exclude group: "org.infinispan"
+    }
+    compile "org.jboss.resteasy:resteasy-validator-provider-11:$resteasyVersion"
+    compile "org.jboss.resteasy:async-http-servlet-3.0:$resteasyVersionAsyncHttpServlet"
+
+    compile "org.keycloak:keycloak-client-registration-api:$keycloakVersion"
+    compile "org.keycloak:keycloak-undertow-adapter:$keycloakVersion"
+    compile "org.keycloak:keycloak-admin-client:$keycloakVersion"
+
+    compile "org.postgresql:postgresql:$postgresJdbcVersion"
+    compile "org.flywaydb:flyway-core:$flywaydbVersion"
+    compile "com.zaxxer:HikariCP:$hikaricpVersion"
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "org.hibernate:hibernate-validator:$hibernateValidatorVersion"
+
+    compile "javax.el:javax.el-api:3.0.0"
+
+    compile "org.apache.camel:camel-core:$camelVersion"
+    compile "org.apache.camel:camel-jackson:$camelVersion"
+
+    compile("com.fasterxml.uuid:java-uuid-generator:$uuidGeneratorVersion") {
+        exclude group: "log4j"
+    }
+
+    compile("org.cyclopsgroup:jmxterm:$jmxtermVersion") {
+        exclude group: "javax.servlet"
+        exclude group: "log4j"
+        exclude group: "logkit"
+        exclude group: "commons-logging"
+    }
+}
+
+jar {
+    archivesBaseName = "openremote-${project.name}"
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./.tsbuildinfo"
+  },
+  "include": [
+    "./src"
+  ],
+  "references": [
+    { "path": "../../component/core" }
+  ]
+}

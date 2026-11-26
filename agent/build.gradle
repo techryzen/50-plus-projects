@@ -1,0 +1,41 @@
+apply plugin: "java"
+apply plugin: "groovy"
+
+dependencies {
+
+    compile resolveProject(":container")
+
+    compile("io.netty:netty-transport-rxtx:$nettyVersion") {
+        exclude group: "org.rxtx"
+    }
+    compile "io.netty:netty-codec:$nettyVersion"
+    compile "io.netty:netty-codec-http:$nettyVersion"
+    compile "com.neuronrobotics:nrjavaserial:$nrjavaserialVersion"
+
+    compile "com.luckycatlabs:SunriseSunsetCalculator:$sunriseSunsetCalculatorVersion"
+    compile("org.quartz-scheduler:quartz:$quartzVersion") {
+        exclude group: "c3p0"
+    }
+
+    compile("com.github.calimero:calimero-core:$calimeroVersion") {
+        // Libraries should not depend on a logging implementation and/or alpha versions!
+        exclude group: "org.slf4j"
+    }
+
+    compile ("com.github.calimero:calimero-tools:$calimeroVersion") {
+        // Libraries should not depend on a logging implementation and/or alpha versions!
+        exclude group: "org.slf4j"
+    }
+
+    compile "net.sf.saxon:Saxon-HE:$saxonHEVersion"
+
+    //IKEA Tradfri agent dependencies
+    compile "org.eclipse.californium:californium-core:$californiumCoreVersion"
+    compile "org.eclipse.californium:scandium:$californiumScandiumVersion"
+    
+    compile "org.openremote:or-zwave:$zwaveVersion"                        
+}
+
+jar {
+    archivesBaseName = "openremote-${project.name}"
+}
