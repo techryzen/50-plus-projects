@@ -1,0 +1,195 @@
+@external hidePreview, previewVisible;
+
+.previewVisible{}
+
+/* The height and width are set as inline style. */
+div.previewDialog {
+	position:absolute;
+	top: 28px;
+	left:0px;
+	right: 0px;
+	bottom: 0px;
+	display: block;
+	background-color: value("constants.css.backgroundColorDialog");
+	z-index: value("constants.css.zIndexInline");
+}
+div.previewDialog div.previewTitle{
+	position:absolute;
+	top: -28px;
+	left:0px;
+	display: block;
+}
+
+.hidePreview .previewDialog{
+	display: none;
+}
+
+.hiding .hiding{
+	display: none;	
+}
+
+.previewCloseButton{
+	position: absolute;
+	top:0px;
+	right:0px;
+	margin:6px;
+}
+
+/* Preview panel */
+.previewHolder {		
+	border:1px solid value("constants.css.borderColor");	
+	margin:1px;
+	overflow: auto;
+}
+
+.previewPanel {	
+	line-height: inherit;
+	height:100%;
+}
+
+.previewHolder .previewPanel img{
+	vertical-align: middle;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+.imagePanel {
+	text-align: center;
+	line-height: inherit;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%; 
+}
+
+/* Tabs panel (details) */
+.detailsHolder {	
+	margin:1px;
+	position: relative;
+}
+
+.previewButtonBar{
+	position: absolute;
+	bottom:4px;
+	right:3px;
+	margin:2px;
+}
+
+.previewButtonBar > * {
+	margin-right: 10px !important; 
+}
+
+.savePropertiesButton{
+	position: absolute;
+	bottom: 1px;
+	left: 1px;
+}
+
+.previewButton {
+	margin-left:1px;
+}
+
+/* Properties tab. */
+.propertiesList {	
+	height:80px; /* Change the height on resize */
+	overflow: auto;
+	position: relative;
+	margin:0px;
+	padding-right:5px;
+	padding-top:2px;	
+}
+
+.clearFix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    line-height: 1px;
+}
+
+table.infoTable{
+	width: 100%;
+	border: none;
+	padding: 3px;
+	clear: both;
+}
+
+table.infoTable div{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+table.infoTable tr, table.infoTable td{
+	border: none;
+}
+
+/* Form css */
+.propertyLeft {
+	margin:1px 1px 1px 5px;
+	float:left;
+}
+
+.propertyRight {
+	margin:1px 1px 1px 5px;
+	float:right;
+}
+
+.propertyForm {
+	display: flex; 
+	align-items: center;
+	margin: 0 3px 3px 9px !important;
+} 
+
+.labelField{
+	font-weight:bold;
+	white-space: nowrap;
+	width: 122px;
+}
+
+.inputField{
+	-ms-flex: 1; 
+	flex: 1; 
+}
+
+/* Image format tab. */
+.formatsPanel.propertiesList{
+	padding-top:3px;
+	height: auto;
+}
+
+/* Line with format select box. */
+.formatsLine, .formatsLineSize {
+	margin:0 0 3px;
+}
+
+.formatButton{
+	margin-left:5px;
+}
+
+.formatSelectBox {
+	width:150px;
+	margin-left:5px;
+	vertical-align:middle;		
+}
+
+.formatLabel, .formatText{
+	width:100px;
+	margin-left:5px;
+	vertical-align:middle;
+}
+
+.formatLabel{
+	font-weight:bold;
+}
+
+
+
+.formatLabel, .formatText, .formatSelectBox{
+	display: inline-block;
+}

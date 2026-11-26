@@ -1,0 +1,43 @@
+{
+  "id": 81,
+  "name": "OpenCms",
+  "upstream_url": "https://github.com/alkacon/opencms-core",
+  "origin_as_reported": "1999",
+  "domain": "Enterprise content management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/alkacon/opencms-core",
+  "selected_upstream_commit": "4d640605712476281edc8ea56793f05e06147388",
+  "selected_commit_date": "2020-12-18T13:23:07Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.1",
+    "evidence_path": "license.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 81,
+    "branch": "project/081-opencms",
+    "upstream_commit": "4d640605712476281edc8ea56793f05e06147388",
+    "import_commit": "fda80342b1bc0e158d388a0988a83d663a730db5",
+    "files": 8234,
+    "archive_sha256": "8cce5f13f3f70023f59d40dd6917fe010340eae7224e656282cb95ab2fe14f55",
+    "source_bytes": 94681372,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "3bf3729e3e643b1ac877ac8648e0f105a20a8f59",
+    "provenance_added": true
+  },
+  "folder": "projects/081-opencms"
+}
