@@ -1,0 +1,43 @@
+{
+  "id": 29,
+  "name": "Kill Bill",
+  "upstream_url": "https://github.com/killbill",
+  "origin_as_reported": "2010",
+  "domain": "Subscription billing",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/killbill/killbill",
+  "selected_upstream_commit": "e719d7d75d4dc9e831ec3a3706febac837abc0d2",
+  "selected_commit_date": "2020-12-23T21:17:25Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 29,
+    "branch": "project/029-kill-bill",
+    "upstream_commit": "e719d7d75d4dc9e831ec3a3706febac837abc0d2",
+    "import_commit": "2468ff95477a56da8a7c70c468f79fffeba5bdd8",
+    "files": 1887,
+    "archive_sha256": "8a0695340af3487e91745ba97a778eb21a62e4e7051b5c683527e838bb28fb87",
+    "source_bytes": 26909345,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "968947261fd3f1adc33ed182ca0e922c17775698",
+    "provenance_added": true
+  },
+  "folder": "projects/029-kill-bill"
+}
