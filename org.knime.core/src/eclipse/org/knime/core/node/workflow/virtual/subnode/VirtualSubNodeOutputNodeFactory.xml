@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE knimeNode PUBLIC "-//UNIKN//DTD KNIME Node 2.0//EN" "http://www.knime.org/Node.dtd">
+<!--  Node type is defined in java code -->
+<knimeNode icon="./empty.png" type="Other">
+    <name>Component Output</name>
+    <shortDescription>Component output handle</shortDescription>
+    <fullDescription>
+    <intro>
+        Component output handle. All objects passed to this node will be forwarded downstream of the Component.
+    </intro>
+    </fullDescription>
+    <ports>
+        <!--  Port description is defined in java code -->
+    </ports>
+</knimeNode>

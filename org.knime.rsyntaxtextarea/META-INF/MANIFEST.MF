@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KNIME Shared Library for RSyntaxTextArea
+Bundle-SymbolicName: org.knime.rsyntaxtextarea;singleton:=true
+Bundle-Version: 4.4.0.qualifier
+Bundle-ClassPath: knime-rsyntaxtextarea.jar
+Bundle-Vendor: KNIME AG, Zurich, Switzerland
+Export-Package: org.knime.rsyntaxtextarea,
+  org.knime.rsyntaxtextarea.guarded
+Require-Bundle: org.knime.core;bundle-version="[4.0.0,5.0.0)",
+  com.fifesoft.autocomplete;bundle-version="[2.6.0,3.0.0)",
+  com.fifesoft.rsyntaxtextarea;bundle-version="[2.6.0,3.0.0)",
+  com.fifesoft.languagesupport;bundle-version="[2.6.0,3.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Eclipse-BundleShape: dir
