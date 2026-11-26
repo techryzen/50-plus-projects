@@ -1,0 +1,29 @@
+<!--BEGIN ReportProjectSpecificFields.vm -->
+#set($groups=$om.getFieldDefinitionGroups($item.getXSIType(), $project))
+#if($groups.size()>0)
+	<h3 style="margin: 1em 0 0.5em;">Custom Variable Sets</h3>
+	#foreach($group in $groups)
+		#if($group.getFields_field().size()>0)
+		<table id="customvar-$group.getId()" class="xnat-table compact alt1">
+            <thead>
+            <th colspan="2" class="left">
+                #if($group.getDescription())$group.getDescription()#else $group.getId() Fields#end
+            </th>
+            </thead>
+            <tbody>
+            #foreach($f in $group.getFields_field())
+                #if($!om.getProperty($f.getXmlpath()))
+                <tr>
+                    <th>#escapeCleanHTML($!f.getName())</th>
+                    <td>#escapeCleanHTML($!om.getProperty($f.getXmlpath()))</td>
+                </tr>
+                #end
+            #end
+            </tbody>
+        </table>
+		<br>
+
+		#end
+	#end
+#end
+<!--END ReportProjectSpecificFields.vm -->

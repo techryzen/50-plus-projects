@@ -1,0 +1,43 @@
+{
+  "id": 57,
+  "name": "XNAT",
+  "upstream_url": "https://github.com/NrgXnat",
+  "origin_as_reported": "2004",
+  "domain": "Medical imaging management",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/NrgXnat/xnat-web",
+  "selected_upstream_commit": "d462735e675f88c7e6febc7b1ba720b4b3de2e95",
+  "selected_commit_date": "2020-12-23T15:31:29Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "BSD-2-Clause",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 57,
+    "branch": "project/057-xnat",
+    "upstream_commit": "d462735e675f88c7e6febc7b1ba720b4b3de2e95",
+    "import_commit": "80ac45ecb9e8403f8326e80be125cbcf595c7efa",
+    "files": 5402,
+    "archive_sha256": "45ccfee1058aeedf23f8049fde29e44f4c9e1ff8e4b953b52a160b60a502fb61",
+    "source_bytes": 57594580,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "acb12036c246faa95834f94bb85ab774201012ba",
+    "provenance_added": true
+  },
+  "folder": "projects/057-xnat"
+}

@@ -1,0 +1,6 @@
+<!-- Sequence: 20 -->
+<!-- allowGuest: true -->
+
+   <li class="yuimenuitem">
+    <a class="yuimenuitemlabel" data-wait="Preparing data for download..." href="$link.setAction("ProjectDownloadAction").addPathInfo('project',$project.getId())">Download Images</A>
+   </li>

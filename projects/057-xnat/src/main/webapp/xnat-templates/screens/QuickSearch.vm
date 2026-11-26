@@ -1,0 +1,129 @@
+<!-- QuickSearch -->
+<div>
+    $!systemName currently contains $proj_count $displayManager.getPluralDisplayNameForProject().toLowerCase(),
+    $sub_count $displayManager.getPluralDisplayNameForSubject().toLowerCase(),
+    and $isd_count imaging $displayManager.getPluralDisplayNameForImageSession().toLowerCase().
+</div>
+<br/>
+## this "spacer" thing is not good
+## let's make it go away
+<style>
+    span.spacer { display:none !important; }
+    div.quick-search-tab { min-height: 160px; }
+</style>
+
+<div id="front_search" class="yui-navset"></div>
+
+<script type="text/javascript">
+    XNAT.frontTabSearchItems = XNAT.frontTabSearchItems || [];
+</script>
+
+#addGlobalCustomScreens("quick_search/plugins/pre")
+
+<script type="text/javascript">
+    (function(){
+
+        // add 'xnat-home' class to <body> on home page
+        $('body').addClass('xnat-home');
+
+        // only show the header logo on the 'home' page
+        $('#header_logo').show();
+        XNAT.app.adjustHeaderAndNavForLogoSize();
+
+        var frontTabs = new YAHOO.widget.TabView('front_search');
+
+        frontTabs.addTab(new YAHOO.widget.Tab({
+            active: true,
+            label: '<span data-tab="quick-search-project">$displayManager.getPluralDisplayNameForProject()</span>',
+            content: '<div id="quick-search-project" data-type="projectData" class="quick-search-tab"></div>'
+        }));
+
+        frontTabs.addTab(new YAHOO.widget.Tab({
+            label: '<span data-tab="quick-search-subject">$displayManager.getPluralDisplayNameForSubject()</span>',
+            content: '<div id="quick-search-subject" data-type="subjectData" class="quick-search-tab"></div>'
+        }));
+
+        frontTabs.addTab(new YAHOO.widget.Tab({
+            label: '<span data-tab="quick-search-mr">MR</span>',
+            content: '<div id="quick-search-mr" data-type="mrSessionData" class="quick-search-tab"></div>'
+        }));
+
+        frontTabs.addTab(new YAHOO.widget.Tab({
+            label: '<span data-tab="quick-search-pet">PET</span>',
+            content: '<div id="quick-search-pet" data-type="petSessionData" class="quick-search-tab"></div>'
+        }));
+
+        frontTabs.addTab(new YAHOO.widget.Tab({
+            label: '<span data-tab="quick-search-ct">CT</span>',
+            content: '<div id="quick-search-ct" data-type="ctSessionData" class="quick-search-tab"></div>'
+        }));
+
+        $.each(XNAT.frontTabSearchItems, function(i, e) {
+            frontTabs.addTab(new YAHOO.widget.Tab({
+                label: '<span data-tab="'+e['dataTab']+'">'+e['tabTitle']+'</span>',
+                content: '<div id="'+e['dataTab']+'" data-type="'+e['dataType']+'" class="quick-search-tab"></div>'
+            }));
+        });
+
+        // get the tab contents with jQuery's $().load() method
+        // instead of loading on tab click with YUI
+        // (loads the HTML returned via AJAX into the <div>)
+
+        function loadDataTypeSearch(tabId){
+
+            var container = $('#' + tabId);
+
+            if (container[0].hasAttribute('data-loaded')) return;
+
+            var dataType = container.data('type');
+            if (!dataType.match(/^[A-Za-z]*:/)) {
+                dataType = 'xnat:' + dataType;
+            }
+            var url = XNAT.url.rootUrl('/app/template/DataTypeSearch.vm/dataType/' + dataType, '', true, false);
+
+            // get JUST the <form> from the returned HTML
+            url += ' form.data-type-search'
+
+            container.load(url, function(){
+                // callbacks
+                menuInit();
+                XNAT.app.searchMethodToggler(container);
+                container[0].setAttribute('data-loaded', '');
+            });
+
+        }
+
+        // don't load the search tab contents until clicking the tab
+        $(document).on('click', '#front_search .yui-nav > li', function(){
+            var tabId = $(this).find('span[data-tab]').data('tab');
+            loadDataTypeSearch(tabId)
+        });
+
+        // load the project search on page load
+        loadDataTypeSearch('quick-search-project');
+
+    })()
+
+</script>
+
+<br>
+
+<div id="home-data">
+
+            <div id="projects-container" class="container">
+                <div class="withColor containerTitle">$displayManager.getPluralDisplayNameForProject()</div>
+                <div id="projectsBody" class="containerBody">
+                    #parse("/screens/minProjectsList.vm")
+                </div>
+            </div>
+
+            <div id="data-container" class="container">
+                <div class="withColor containerTitle">Recent Data Activity</div>
+                <div id="dataBody" class="containerBody">
+                    #parse("/screens/recentExptList.vm")
+                </div>
+            </div>
+
+    <div class="clear"></div>
+</div>
+<!-- /QuickSearch -->
