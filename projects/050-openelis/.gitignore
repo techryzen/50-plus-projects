@@ -1,0 +1,25 @@
+# compiled code #
+*.class
+
+# Package Files #
+*.war
+*.ear
+
+#local use files
+liqubase.properties
+
+# IDE files #
+.classpath
+.settings/
+.project
+
+# Maven Files #
+*target/
+
+#Developer specific docker-compose
+/docker-compose.yml
+
+# Additional build files
+src/main/resources/adminPassword.txt
+/OEInstaller/
+/docs_back
