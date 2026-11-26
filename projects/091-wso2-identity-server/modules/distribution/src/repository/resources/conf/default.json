@@ -1,0 +1,39 @@
+{
+  "realm_manager": {
+    "properties": {
+      "isCascadeDeleteEnabled": true,
+      "initializeNewClaimManager": true
+    }
+  },
+  "user_store.type": "read_write_ldap",
+  "keystore.primary.type" : "JKS",
+  "keystore.userstore_password_encryption": "",
+  "truststore.type" : "JKS",
+
+  "transport.https.sslHostConfig.properties.certificateVerification": "want",
+
+  "authentication.consent.data_source": "jdbc/WSO2IdentityDB",
+
+  "server.hide_menu_items": [
+    "claim_mgt_menu",
+    "identity_mgt_emailtemplate_menu",
+    "identity_security_questions_menu",
+    "metrics_menu"
+  ],
+  "http_access_log.pattern": "%h %l %u %t %r %s %b &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot; %T",
+
+  "log_correlation.header_config": "{'activityid':'Correlation-ID'}",
+
+  "monitoring.jmx.rmi_server_start": false,
+  "product.version" : "${product.version}",
+
+  "transport.http.enabled" : true,
+  "transport.https.enabled" : true,
+
+  "system.parameter.\u0027org.wso2.CipherTransformation\u0027": "AES/GCM/NoPadding",
+
+  "encryption.internal_crypto_provider": "org.wso2.carbon.crypto.provider.SymmetricKeyInternalCryptoProvider",
+  "encryption.key": "03BAFEB27A8E871CAD83C5CD4E771DAB",
+
+  "authorization_manager.properties.GroupAndRoleSeparationEnabled": "true"
+}

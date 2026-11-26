@@ -1,0 +1,43 @@
+{
+  "id": 91,
+  "name": "WSO2 Identity Server",
+  "upstream_url": "https://github.com/wso2",
+  "origin_as_reported": "2007",
+  "domain": "Identity and access management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/wso2/product-is",
+  "selected_upstream_commit": "23f23a0f0a8782b871e43b2aed58d33e9b6930fd",
+  "selected_commit_date": "2020-12-24T15:03:03Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "WSO2 Identity Server product repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 91,
+    "branch": "project/091-wso2-identity-server",
+    "upstream_commit": "23f23a0f0a8782b871e43b2aed58d33e9b6930fd",
+    "import_commit": "91c437e0831928ff34264a6e292ce5e91f4fd6af",
+    "files": 2964,
+    "archive_sha256": "2e07c2a603a6b1f0d3d3993b69a79773cf32503b305c5cf2c683158739685000",
+    "source_bytes": 42943349,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "606cd45619acbd6735a9dc2c53d6d850902d81a4",
+    "provenance_added": true
+  },
+  "folder": "projects/091-wso2-identity-server"
+}

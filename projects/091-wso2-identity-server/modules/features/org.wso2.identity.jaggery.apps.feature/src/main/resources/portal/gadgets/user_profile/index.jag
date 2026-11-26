@@ -1,0 +1,57 @@
+<%
+var log = new Log();
+var cookie = request.getParameter("cookie");
+var user = request.getParameter("user");
+getUser();
+function getUser(){
+
+session.put('auth-cookie', cookie);
+
+ try{
+
+var profileClient = require('controllers/my-profile/profileClient.jag');
+var fidoClient = require('controllers/my-profile/fido-check.jag');
+var userMgtClient = require('controllers/my-profile/userstoreMgtClient.jag');
+var fieldValues = profileClient.getUserProfile(user, 'default');
+var secretKey = profileClient.getUserClaim('http://wso2.org/claims/identity/secretkey', 'default');
+if (secretKey !== null && secretKey.length > 0) {
+    fieldValues.return.totpSecretKey = secretKey;
+}
+var identityUtil = Packages.org.wso2.carbon.identity.core.util.IdentityUtil;
+var isWebAuthnEnabled = identityUtil.getProperty("FIDO.WebAuthn.Enable");
+if( isWebAuthnEnabled == "false") {
+    var isEnabled = fidoClient.isDeviceRegistered();
+    fieldValues.return.fidoEnabled = isEnabled.return;
+}
+
+var totpName = "totp";
+var FrameworkUtils = Packages.org.wso2.carbon.identity.application.authentication.framework.util.FrameworkUtils;
+var totpAuthenticator = FrameworkUtils.getAppAuthenticatorByName(totpName);
+if (totpAuthenticator !== null) {
+    fieldValues.return.totpAuthenticatorActive = true;
+} else {
+    fieldValues.return.totpAuthenticatorActive = false;
+}
+
+print( fieldValues );
+    } catch(e) {
+        print(getErrorMessage(e.message));
+    }
+
+}
+
+function getErrorMessage(message) {
+    if (message != null && message.length > 0) {
+        if (message.indexOf('401 Error: Unauthorized') > -1) {
+            return '{"success":false, "reLogin":true}';
+    } else {
+            var msg = message.split(':');
+            if (msg.length > 0) {
+                return '{"success":false, "message":"' + msg[1] + '"}';
+            }
+        }
+    }
+    return '{"success":false, "message":null}';
+}
+
+%>

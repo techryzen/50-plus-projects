@@ -1,0 +1,59 @@
+<%
+
+include("../wsUtil.jag");
+var util = require("../../util/utility.jag");
+var multitenantUtils = Packages.org.wso2.carbon.utils.multitenancy.MultitenantUtils;
+var encode = Packages.org.owasp.encoder.Encode;
+
+var log = new Log();
+var serverUrl = util.getServerUrl();
+serverUrl = serverUrl + "/UserProfileMgtService";
+
+var ws = require('ws');
+var webService = new ws.WSRequest();
+
+function updateProfile(payload){
+    callWSInOnly(webService, serverUrl, "urn:setUserProfile", payload );
+}
+
+
+function getProfileFieldsForInternalStore(){
+    var result = callWSReturnXML(webService, serverUrl, "urn:getProfileFieldsForInternalStore", null);
+    return result;
+}
+
+function getUserProfile(username, profileName){
+
+    var tenantAwareUserName = multitenantUtils.getTenantAwareUsername(username);
+    var result = callWSReturnJSON(webService, serverUrl, "urn:getUserProfile", new Array(tenantAwareUserName, profileName));
+    result.return.fieldValues = util.sortNumber(result.return.fieldValues, 'displayOrder', true, true);
+
+    for(var x = 0; x < result.return.fieldValues.length; x++){
+        var obj = result.return.fieldValues[x];
+        obj.fieldValue = encode.forHtmlContent(obj.fieldValue);
+        if(obj.required === "false"){
+            obj.required = "";
+        }
+
+        if(obj.readOnly === "false"){
+           obj.readOnly = "";
+        }
+    }
+
+
+    return result;
+
+}
+
+function getUserClaim(claimUri, profileName) {
+
+    var payload = '<ser:getUserClaim xmlns:ser="http://mgt.profile.user.identity.carbon.wso2.org"><ser:claimUri>' + claimUri + '</ser:claimUri><ser:profileName>' + profileName + '</ser:profileName></ser:getUserClaim>';
+    var result = callWSReturnJSON(webService, serverUrl, "urn:getUserClaim", null, payload);
+    var claimValue = "";
+    if (result != "") {
+        claimValue = result.return;
+    }
+    return claimValue;
+}
+
+%>
