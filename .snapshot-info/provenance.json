@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 3,
+    "requested_repository": "dhis2/dhis2-core",
+    "repository": "dhis2/dhis2-core",
+    "url": "https://github.com/dhis2/dhis2-core",
+    "description": "DHIS 2 Core. Written in Java. Contains the service layer and Web API.",
+    "size_kb": 408010,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "9ce26a51f68369c10af70468405db7488d8eed32",
+    "commit_date": "2020-12-29T09:22:00Z",
+    "license_spdx": "BSD-3-Clause",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/dhis2/dhis2-core/blob/9ce26a51f68369c10af70468405db7488d8eed32/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "BSD-3-Clause",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "8bdc68956541415248eceea7a0b04267a22ad7731528314ac36bf190dd6020fb",
+  "source_import_commit": "a8e39f082346023b7706146734b495e3c3f11995",
+  "source_files": 7810,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
