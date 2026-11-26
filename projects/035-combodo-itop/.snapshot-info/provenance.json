@@ -1,0 +1,43 @@
+{
+  "id": 35,
+  "name": "Combodo iTop",
+  "upstream_url": "https://github.com/Combodo",
+  "origin_as_reported": "2010",
+  "domain": "IT service management",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Combodo/iTop",
+  "selected_upstream_commit": "dd4d40ce815beec6f3657d629691c00caf0a759b",
+  "selected_commit_date": "2020-12-31T16:02:44Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "license.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 35,
+    "branch": "project/035-combodo-itop",
+    "upstream_commit": "dd4d40ce815beec6f3657d629691c00caf0a759b",
+    "import_commit": "f96ca0b33f7cdab3eea0eb425d18f74f76f3723d",
+    "files": 5661,
+    "archive_sha256": "a4ba916c870ba9b2b7d97ed18c8a02333312b963f548ae761c03a712f1178c9b",
+    "source_bytes": 62558484,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "8f7cea47d5af7da2a7ca844a82a48f68ae83f68d",
+    "provenance_added": true
+  },
+  "folder": "projects/035-combodo-itop"
+}
