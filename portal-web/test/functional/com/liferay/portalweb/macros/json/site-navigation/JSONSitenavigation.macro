@@ -1,0 +1,29 @@
+definition {
+
+	macro addSiteNavigationMenu {
+		Variables.assertDefined(parameterList = "${groupName},${siteNavigationMenuName}");
+
+		var groupId = JSONSitenavigationSetter.setGroupId(groupName = "${groupName}", site = "${site}");
+
+		if (!(isSet(auto))) {
+			var auto = "false";
+		}
+
+		JSONSitenavigationAPI._addSiteNavigationMenu(
+			auto = "${auto}",
+			groupId = "${groupId}",
+			siteNavigationMenuName = "${siteNavigationMenuName}");
+	}
+
+	macro deleteSiteNavigationMenu {
+		Variables.assertDefined(parameterList = "${groupName},${siteNavigationMenuName}");
+
+		var siteNavigationMenuId = JSONSitenavigationSetter.setSiteNavigationMenuId(
+			groupName = "${groupName}",
+			site = "${site}",
+			siteNavigationMenuName = "${siteNavigationMenuName}");
+
+		JSONSitenavigationAPI._deleteSiteNavigationMenu(siteNavigationMenuId = "${siteNavigationMenuId}");
+	}
+
+}
