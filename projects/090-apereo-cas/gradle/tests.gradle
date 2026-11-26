@@ -1,0 +1,213 @@
+import java.time.Duration
+
+enum TestCategories {
+    Kafka,
+    Logout,
+    CAS,
+    ExpirationPolicy,
+    Metrics,
+    Tickets,
+    PasswordOps,
+    Attributes,
+    Audits,
+    Web,
+    Infinispan,
+    Spnego,
+    WebApp,
+    Authentication,
+    ActuatorEndpoint,
+    RegisteredService,
+    Utility,
+    WSFederation,
+    SMS,
+    CasConfiguration,
+    Hazelcast,
+    JMX,
+    Simple,
+    MFA,
+    X509,
+    SHELL,
+    Cassandra,
+    Webflow,
+    WebflowConfig,
+    WebflowEvents,
+    WebflowActions,
+    WebflowMfaActions,
+    CosmosDb,
+    ZooKeeper,
+    JMS,
+    AmazonWebServices,
+    Radius,
+    Couchbase,
+    CouchDb,
+    MySQL,
+    Postgres,
+    MsSqlServer,
+    MariaDb,
+    DynamoDb,
+    Ehcache,
+    FileSystem,
+    Ignite,
+    InfluxDb,
+    Oracle,
+    Ldap,
+    Groovy,
+    Mail,
+    RestfulApi,
+    Memcached,
+    MongoDb,
+    Redis,
+    OAuth,
+    UMA,
+    OIDC,
+    SAML,
+    JDBC
+}
+
+if (rootProject.tasks.findByName("testCategories") == null) {
+    rootProject.tasks.create(name: "testCategories", description: "Display all available test categories") {
+        doLast {
+            println("Found ${TestCategories.values().length} test categories:")
+            println(TestCategories.values().toSorted({ o1, o2 ->
+                o1.name().compareTo(o2.name())
+            }))
+        }
+    }
+}
+
+TestCategories.values().each({ category ->
+    if (hasTestsOfCategory(project, category.name())) {
+        def taskName = "test${category.name()}"
+        if (tasks.findByName(taskName) == null) {
+            // println "Creating task ${taskName} for ${project.name}"
+            tasks.create(name: taskName, type: Test, description: "Testing category ${category.name()}") {
+                enabled = shouldTest(project, category.name())
+                //finalizedBy jacocoTestReport
+                useJUnitPlatform {
+                    includeTags category.name()
+                }
+            }
+        }
+    }
+})
+
+test {
+    enabled = false
+    onlyIf = {
+        false
+    }
+}
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    ignoreFailures = Boolean.getBoolean("ignoreTestFailures")
+    forkEvery = 1000
+    doFirst {
+        maxParallelForks = project.ext.properties.get("maxParallelForksForTests", 2)
+        if (maxParallelForks != 2) {
+            logger.info "Maximum number of parallel forks is set to ${maxParallelForks}"
+        }
+    }
+    if (System.getenv().containsKey("CI")) {
+        outputs.upToDateWhen { false }
+    }
+    systemProperty("spring.main.banner-mode", "off")
+//    systemProperty("spring.main.lazy-initialization", "true")
+    systemProperty("CI", System.getProperty("CI"))
+
+    failFast = true
+
+    def list = []
+    list.add("--add-modules")
+    list.add("java.se")
+    list.add("--add-exports")
+    list.add("java.base/jdk.internal.ref=ALL-UNNAMED")
+    list.add("--add-opens")
+    list.add("java.base/java.lang=ALL-UNNAMED")
+    list.add("--add-opens")
+    list.add("java.base/java.nio=ALL-UNNAMED")
+    list.add("--add-opens")
+    list.add("java.base/sun.nio.ch=ALL-UNNAMED")
+    list.add("--add-opens")
+    list.add("java.management/sun.management=ALL-UNNAMED")
+    list.add("--add-opens")
+    list.add("jdk.management/com.sun.management.internal=ALL-UNNAMED")
+    list.add("-Xms512m")
+    list.add("-Xmx4g")
+    jvmArgs = list
+
+    classpath = it.classpath + files("${projectDir}/src/main/resources") + files("${projectDir}/src/test/resources")
+    testLogging {
+        events = ["FAILED", "STANDARD_OUT"]
+        exceptionFormat = "full"
+        showStandardStreams = Boolean.getBoolean("showStandardStreams")
+        showExceptions = true
+        showCauses = true
+        beforeSuite { desc ->
+            if (!desc.parent) {
+                println "Started running test suite [${desc.displayName}] @ ${new java.util.Date()} "
+            }
+        }
+        beforeTest { desc ->
+            println "Started running test [${desc.className}:${desc.displayName}] @ ${new java.util.Date()} "
+        }
+        afterTest { desc, result ->
+            println """
+Results for test [${desc.className}:${desc.displayName}]: ${result.resultType} @ ${new java.util.Date()} 
+(${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)
+"""
+        }
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                println """
+Results for test suite [${desc.displayName}]: ${result.resultType} @ ${new java.util.Date()} 
+(${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)
+"""
+            }
+        }
+    }
+    if (!Boolean.getBoolean("skipTestRetry")) {
+        retry {
+            maxRetries = 3
+            maxFailures = 5
+            failOnPassedAfterRetry = false
+        }
+    }
+    jacoco {
+        dumpOnExit = true
+        excludes = rootProject.excludedFilesFromTestCoverage
+    }
+}
+
+def shouldTest(Project project, String category) {
+    def foundTest = gradle.startParameter.taskNames.any {task -> task.matches(/^test${category}$/) }
+    if (!foundTest) {
+        logger.debug "No tests with category ${category} found for ${project.name}"
+    }
+    return !Boolean.getBoolean("skipTests") && foundTest  && hasTestsOfCategory(project, category)
+}
+
+def hasTestsOfCategory(Project project, String category) {
+    def testSrc = project.sourceSets.test.java.srcDirs
+    def res = srcTagMap.computeIfAbsent(testSrc) {
+        def tags = new HashSet()
+        testSrc.each { src ->
+            try {
+                src.eachFileRecurse { file ->
+                    if (file ==~ /.*Tests\.\w+/) {
+                        file.readLines().parallelStream().forEach() { line ->
+                            def m = line =~ /^\s*@Tag\("(\w+)"\)\s*$/
+                            if (m) {
+                                tags.addAll(m.collect { it[1] })
+                            }
+                        }
+                    }
+                }
+            } catch (ignored) {
+            }
+        }
+        tags
+    }
+    res.contains(category)
+}
+
