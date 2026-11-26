@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 18,
+    "requested_repository": "knime-oss/knime-core",
+    "repository": "knime-oss/knime-core",
+    "url": "https://github.com/knime-oss/knime-core",
+    "description": null,
+    "size_kb": 83930,
+    "fork": false,
+    "default_branch": "releases/STS",
+    "commit": "fc0a0f349a3c5b1180e7ac8cdc3bd051329b66e6",
+    "commit_date": "2020-12-22T13:35:14Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/knime-oss/knime-core/blob/fc0a0f349a3c5b1180e7ac8cdc3bd051329b66e6/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0 with KNIME additional permissions",
+    "evidence_path": "org.knime.core/LICENSE.txt",
+    "scope": "Historical source license checked; preserve all notices and module-specific licenses. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "da1552d8c2edfda4dbb8157bb14ca7e15564c617fa11970e23a735e37273d8dc",
+  "source_import_commit": "f8bec1e4d7585fd7fae37f2c40fa88ac96b7845c",
+  "source_files": 5784,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
