@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <bean id="plutoProcessActionFilter" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="org.jahia.services.render.filter.AbstractFilter"/>    
+    </bean>
+    
+    <bean id="RenderService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="org.jahia.services.render.RenderService" />
+    </bean>
+
+    <bean id="org.jahia.services.render.filter.URLTraverser" class="org.jahia.services.render.filter.HtmlTagAttributeTraverser">
+        <constructor-arg>
+            <map>
+                <entry key="a">
+                    <set>
+                        <value>href</value>
+                    </set>
+                </entry>
+                <entry key="embed">
+                    <set>
+                        <value>src</value>
+                    </set>
+                </entry>
+                <entry key="form">
+                    <set>
+                        <value>action</value>
+                    </set>
+                </entry>
+                <entry key="img">
+                    <set>
+                        <value>src</value>
+                    </set>
+                </entry>
+                <entry key="link">
+                    <set>
+                        <value>href</value>
+                    </set>
+                </entry>
+                <entry key="param">
+                    <set>
+                        <value>value</value>
+                    </set>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>

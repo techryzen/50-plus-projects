@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<home xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+      j:isHomePage="true"
+      j:templateName="home"
+      jcr:primaryType="jnt:page">
+    <j:translation_en
+            jcr:language="en"
+            jcr:mixinTypes="mix:title"
+            jcr:primaryType="jnt:translation"
+            jcr:title="Home"/>
+    <acl1 j:templateName="two-cols"
+          jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="acl1"/>
+        <page1-1 j:templateName="two-cols"
+                 jcr:primaryType="jnt:page">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="page1-1"/>
+            <page1-1-1 j:templateName="two-cols"
+                       jcr:primaryType="jnt:page">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:mixinTypes="mix:title"
+                        jcr:primaryType="jnt:translation"
+                        jcr:title="page1-1-1"/>
+            </page1-1-1>
+        </page1-1>
+        <page1-2 j:templateName="two-cols"
+                 jcr:primaryType="jnt:page">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="page1-2"/>
+        </page1-2>
+        <simple-page-root jcr:mixinTypes="jmix:accessControlled"
+                          jcr:primaryType="jnt:page"
+                          j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for root"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-root>
+        <simple-page-users jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:page"
+                           j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for users only"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-users>
+        <simple-page-AB jcr:mixinTypes="jmix:accessControlled"
+                        jcr:primaryType="jnt:page"
+                        j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for userAB"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_u_userAB j:aceType="GRANT"
+                                j:principal="u:userAB"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-AB>
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="ACL test"/>
+        <simple-page-AC jcr:mixinTypes="jmix:accessControlled"
+                        jcr:primaryType="jnt:page"
+                        j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for userAC"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_u_userAC j:aceType="GRANT"
+                                j:principal="u:userAC"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-AC>
+        <simple-page-BC jcr:mixinTypes="jmix:accessControlled"
+                        jcr:primaryType="jnt:page"
+                        j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for userBC"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_u_userBC j:aceType="GRANT"
+                                j:principal="u:userBC"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-BC>
+        <simple-page-A jcr:mixinTypes="jmix:accessControlled"
+                       jcr:primaryType="jnt:page"
+                       j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for groupA"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_g_groupA j:aceType="GRANT"
+                                j:principal="g:groupA"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-A>
+        <simple-page-B jcr:mixinTypes="jmix:accessControlled"
+                       jcr:primaryType="jnt:page"
+                       j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for groupB"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_g_groupB j:aceType="GRANT"
+                                j:principal="g:groupB"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-B>
+        <simple-page-C jcr:mixinTypes="jmix:accessControlled"
+                       jcr:primaryType="jnt:page"
+                       j:templateName="two-cols">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="visible for groupC"/>
+            <j:acl j:inherit="true"
+                   jcr:primaryType="jnt:acl">
+                <DENY_u_guest j:aceType="DENY"
+                              j:principal="u:guest"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <DENY_g_users j:aceType="DENY"
+                              j:principal="g:users"
+                              j:protected="false"
+                              j:roles="reader"
+                              jcr:primaryType="jnt:ace"/>
+                <GRANT_g_groupC j:aceType="GRANT"
+                                j:principal="g:groupC"
+                                j:protected="false"
+                                j:roles="reader"
+                                jcr:primaryType="jnt:ace"/>
+            </j:acl>
+        </simple-page-C>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text-root jcr:mixinTypes="jmix:accessControlled"
+                              jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for root"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-root>
+            <simple-text-users jcr:mixinTypes="jmix:accessControlled"
+                               jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for users only"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-users>
+            <simple-text-AB jcr:mixinTypes="jmix:accessControlled"
+                            jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for userAB"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_u_userAB j:aceType="GRANT"
+                                    j:principal="u:userAB"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-AB>
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="ACL test"/>
+            <simple-text-AC jcr:mixinTypes="jmix:accessControlled"
+                            jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for userAC"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_u_userAC j:aceType="GRANT"
+                                    j:principal="u:userAC"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-AC>
+            <simple-text-BC jcr:mixinTypes="jmix:accessControlled"
+                            jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for userBC"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_u_userBC j:aceType="GRANT"
+                                    j:principal="u:userBC"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-BC>
+            <simple-text-A jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for groupA"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_g_groupA j:aceType="GRANT"
+                                    j:principal="g:groupA"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-A>
+            <simple-text-B jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for groupB"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_g_groupB j:aceType="GRANT"
+                                    j:principal="g:groupB"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-B>
+            <simple-text-C jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="visible for groupC"/>
+                <j:acl j:inherit="true"
+                       jcr:primaryType="jnt:acl">
+                    <DENY_u_guest j:aceType="DENY"
+                                  j:principal="u:guest"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_g_users j:aceType="DENY"
+                                  j:principal="g:users"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <GRANT_g_groupC j:aceType="GRANT"
+                                    j:principal="g:groupC"
+                                    j:protected="false"
+                                    j:roles="reader"
+                                    jcr:primaryType="jnt:ace"/>
+                </j:acl>
+            </simple-text-C>
+        </main>
+        <Right-column jcr:primaryType="jnt:contentList"/>
+        <absolute-1 jcr:primaryType="jnt:contentList">
+            <simple-text jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="absolute-level1-acl1"/>
+            </simple-text>
+        </absolute-1>
+    </acl1>
+    <peruser j:templateName="two-cols"
+             jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="peruser"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text
+                         jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="Username : ##username##"/>
+            </simple-text>
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="ACL - Per user key"/>
+        </main>
+    </peruser>
+    <user-per-content-test j:templateName="two-cols"
+                           jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:page">
+        <j:translation_en jcr:language="en"
+                          jcr:primaryType="jnt:translation"
+                          jcr:title="User per content test"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text-1 jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:acl j:inherit="true" jcr:primaryType="jnt:acl">
+                    <DENY_u_user2 j:aceType="DENY"
+                                  j:principal="u:user2"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_u_user3 j:aceType="DENY"
+                                  j:principal="u:user3"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                </j:acl>
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  text="content for user1"/>
+            </simple-text-1>
+            <simple-text-2 jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:acl j:inherit="true" jcr:primaryType="jnt:acl">
+                    <DENY_u_user1 j:aceType="DENY"
+                                  j:principal="u:user1"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_u_user3 j:aceType="DENY"
+                                  j:principal="u:user3"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                </j:acl>
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  text="content for user2"/>
+            </simple-text-2>
+            <simple-text-3 jcr:mixinTypes="jmix:accessControlled"
+                           jcr:primaryType="jnt:text">
+                <j:acl j:inherit="true" jcr:primaryType="jnt:acl">
+                    <DENY_u_user1 j:aceType="DENY"
+                                  j:principal="u:user1"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                    <DENY_u_user2 j:aceType="DENY"
+                                  j:principal="u:user2"
+                                  j:protected="false"
+                                  j:roles="reader"
+                                  jcr:primaryType="jnt:ace"/>
+                </j:acl>
+                <j:translation_en jcr:language="en"
+                                  jcr:primaryType="jnt:translation"
+                                  text="content for user3"/>
+            </simple-text-3>
+        </main>
+        <j:acl j:inherit="true" jcr:primaryType="jnt:acl">
+            <DENY_u_guest j:aceType="DENY"
+                          j:principal="u:guest"
+                          j:protected="false"
+                          j:roles="reader"
+                          jcr:primaryType="jnt:ace"/>
+            <DENY_g_users j:aceType="DENY"
+                          j:principal="g:users"
+                          j:protected="false"
+                          j:roles="reader"
+                          jcr:primaryType="jnt:ace"/>
+            <GRANT_u_user1 j:aceType="GRANT"
+                           j:principal="u:user1"
+                           j:protected="false"
+                           j:roles="reader"
+                           jcr:primaryType="jnt:ace"/>
+            <GRANT_u_user2 j:aceType="GRANT"
+                           j:principal="u:user2"
+                           j:protected="false"
+                           j:roles="reader"
+                           jcr:primaryType="jnt:ace"/>
+            <GRANT_u_user3 j:aceType="GRANT"
+                           j:principal="u:user3"
+                           j:protected="false"
+                           j:roles="reader"
+                           jcr:primaryType="jnt:ace"/>
+        </j:acl>
+    </user-per-content-test>
+    <references j:templateName="two-cols"
+                jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="references"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="text content"/>
+            </simple-text>
+            <simple-text-1 j:node="/sites/cachetest/home/references/main/simple-text"
+                           jcr:primaryType="jnt:contentReference"/>
+            <simple-text-2 j:node="/sites/cachetest/home/references/main/simple-text"
+                           j:referenceView="alternate"
+                           jcr:mixinTypes="jmix:renderableReference"
+                           jcr:primaryType="jnt:contentReference"/>
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="Reference test - alternate view"/>
+        </main>
+    </references>
+    <pager j:templateName="two-cols"
+           jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="pager"/>
+        <main jcr:primaryType="jnt:contentList">
+            <pager displayNbOfItemsPerPage="true"
+                   displayNbOfItemsPerPageValues="5,10,25,50,100"
+                   displayPager="true"
+                   j:bindedComponent="/sites/cachetest/home/pager/main/content-list"
+                   jcr:primaryType="jnt:pager"
+                   nbOfPages="10"
+                   pageSize="10"/>
+            <content-list jcr:primaryType="jnt:contentList">
+                <simple-text jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text1"/>
+                </simple-text>
+                <simple-text-1 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text2"/>
+                </simple-text-1>
+                <simple-text-2 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text3"/>
+                </simple-text-2>
+                <simple-text-3 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text4"/>
+                </simple-text-3>
+                <simple-text-4 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text5"/>
+                </simple-text-4>
+                <simple-text-5 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text6"/>
+                </simple-text-5>
+                <simple-text-6 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text7"/>
+                </simple-text-6>
+                <simple-text-7 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text8"/>
+                </simple-text-7>
+                <simple-text-8 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text9"/>
+                </simple-text-8>
+                <simple-text-9 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text10"/>
+                </simple-text-9>
+                <simple-text-10 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text11"/>
+                </simple-text-10>
+                <simple-text-11 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text12"/>
+                </simple-text-11>
+                <simple-text-12 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text13"/>
+                </simple-text-12>
+                <simple-text-13 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text14"/>
+                </simple-text-13>
+                <simple-text-14 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text15"/>
+                </simple-text-14>
+                <simple-text-15 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text16"/>
+                </simple-text-15>
+                <simple-text-16 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text17"/>
+                </simple-text-16>
+                <simple-text-17 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text18"/>
+                </simple-text-17>
+                <simple-text-18 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text19"/>
+                </simple-text-18>
+                <simple-text-19 jcr:primaryType="jnt:text">
+                    <j:translation_en
+                            jcr:language="en"
+                            jcr:primaryType="jnt:translation"
+                            text="text20"/>
+                </simple-text-19>
+            </content-list>
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="Parameters test - Pager"/>
+        </main>
+        <Right-column jcr:primaryType="jnt:contentList"/>
+    </pager>
+    <header-left jcr:primaryType="jnt:contentList"
+                 jcr:uuid="bc234a69-ec9b-44ef-8f22-cc6963bfb318"/>
+    <header-col2 jcr:primaryType="jnt:contentList"
+                 jcr:uuid="d810414e-dd88-4f02-ac0e-d68ac5a0c433">
+        <header-right j:allowedTypes=""
+                      jcr:primaryType="jnt:absoluteArea"/>
+    </header-col2>
+    <header-col1 jcr:primaryType="jnt:contentList"
+                 jcr:uuid="b9d7eb29-4a54-4d3b-bde6-7459dcbe5c13">
+        <header-left j:allowedTypes=""
+                     jcr:primaryType="jnt:absoluteArea"/>
+    </header-col1>
+    <events j:templateName="events"
+            jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="events"/>
+        <events jcr:primaryType="jnt:contentList">
+            <event1 endDate="2013-06-26T10:57:00.000+02:00"
+                    eventsType="meeting"
+                    jcr:primaryType="jnt:event"
+                    startDate="2013-06-17T10:57:00.000+02:00">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:mixinTypes="mix:title"
+                        jcr:primaryType="jnt:translation"
+                        jcr:title="event1"/>
+            </event1>
+            <event2 endDate="2013-07-26T10:57:00.000+02:00"
+                    eventsType="conference"
+                    jcr:primaryType="jnt:event"
+                    startDate="2013-07-14T10:57:00.000+02:00">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:mixinTypes="mix:title"
+                        jcr:primaryType="jnt:translation"
+                        jcr:title="event2"/>
+            </event2>
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="Parameters test - facets"/>
+        </events>
+    </events>
+    <error j:templateName="two-cols"
+           jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="error"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text j:view="error"
+                         jcr:mixinTypes="jmix:renderable"
+                         jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="text error"/>
+            </simple-text>
+        </main>
+    </error>
+    <aside jcr:primaryType="jnt:contentList"
+           jcr:uuid="20560f1f-70fe-4d28-8720-220bfa72a13a">
+        <login j:displayLoginButton="true"
+               j:displayRememberMeButton="false"
+               jcr:primaryType="jnt:loginForm">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:mixinTypes="mix:title"
+                    jcr:primaryType="jnt:translation"
+                    jcr:title="login"/>
+        </login>
+    </aside>
+    <long j:templateName="two-cols"
+          jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="long"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text j:view="sleep"
+                         jcr:mixinTypes="jmix:renderable"
+                         jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="long"/>
+            </simple-text>
+        </main>
+    </long>
+    <long5 j:templateName="two-cols"
+          jcr:primaryType="jnt:page">
+        <j:translation_en
+                jcr:language="en"
+                jcr:mixinTypes="mix:title"
+                jcr:primaryType="jnt:translation"
+                jcr:title="long"/>
+        <main jcr:primaryType="jnt:contentList">
+            <simple-text j:view="sleep5"
+                         jcr:mixinTypes="jmix:renderable"
+                         jcr:primaryType="jnt:text">
+                <j:translation_en
+                        jcr:language="en"
+                        jcr:primaryType="jnt:translation"
+                        text="long"/>
+            </simple-text>
+        </main>
+    </long5>
+    <absolute-0 jcr:primaryType="jnt:contentList"
+                jcr:uuid="9557d4b5-e3ca-4918-89f7-2aaee4bfafc8">
+        <simple-text jcr:primaryType="jnt:text">
+            <j:translation_en
+                    jcr:language="en"
+                    jcr:primaryType="jnt:translation"
+                    text="absolute-level0"/>
+        </simple-text>
+    </absolute-0>
+</home>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>Jahia User library</description>
+    <display-name>Jahia User</display-name>
+    <tlib-version>7.0</tlib-version>
+    <short-name>user</short-name>
+    <uri>http://www.jahia.org/tags/user</uri>
+
+    <function>
+        <description>Returns true if the current user is member of the specified group name or comma-separated list of
+            group names
+        </description>
+        <name>memberOf</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.Boolean memberOf(java.lang.String, org.jahia.services.render.RenderContext)</function-signature>
+        <example>
+            &lt;c:if test="${user:memberOf('administrators', renderContext)}"&gt;
+            The user belongs to administrators
+            &lt;/c:if&gt;
+        </example>
+    </function>
+    <function>
+        <description>Returns true if the current user is NOT member of the specified group name or any of the specified
+            groups (comma-separated list of group names)
+        </description>
+        <name>notMemberOf</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.Boolean notMemberOf(java.lang.String, org.jahia.services.render.RenderContext)</function-signature>
+        <example>
+            &lt;c:if test="${user:notMemberOf('administrators,editors', renderContext)}"&gt;
+            The user neither belongs to administrators nor to editors
+            &lt;/c:if&gt;
+        </example>
+    </function>
+    <function>
+        <description>Returns the list of members
+        </description>
+        <name>getMembers</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.util.Collection getMembers(java.lang.String,org.jahia.services.render.RenderContext)</function-signature>
+    </function>
+    <function>
+        <description>
+            Lookup the user by the user key (path) or username.
+        </description>
+        <name>lookupUser</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>org.jahia.services.content.decorator.JCRUserNode lookupUser(java.lang.String)</function-signature>
+        <example>
+            ${user:lookupUser('sergiy')} or ${user:lookupUser('/users/aa/bb/cc/john')}
+        </example>
+    </function>
+    <function>
+        <description>
+            Lookup the user by the username and site
+        </description>
+        <name>lookupUserByUsernameAndSite</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>org.jahia.services.content.decorator.JCRUserNode lookupUser(java.lang.String,java.lang.String)</function-signature>
+        <example>
+            ${user:lookupUser('sergiy','ACME')}
+        </example>
+    </function>
+    <function>
+        <description>
+            Retrieve the displayable name for a principal object. For the moment this implementation only changes
+            the guest user and guest group names to be localized using resource bundle entries (see jahia.properties
+            for configuration of resource bundle name and key).
+        </description>
+        <name>displayName</name>
+        <function-class>org.jahia.data.viewhelper.principal.PrincipalViewHelper</function-class>
+        <function-signature>java.lang.String getDisplayName(java.lang.Object)</function-signature>
+        <example>
+            ${user:displayName(jahiaUser)}
+        </example>
+    </function>
+    <function>
+        <description>
+            Retrieve the full name or displayable for a principal object.
+            Builds the full user name, which is build the following way :
+            - for a JahiaGroup, simply calls getDisplayName(p)
+            - for a JahiaUser, if the firstName and lastName properties are defined, they are concatenated and this method
+            returns that result. If the properties don't exist, this is equivalent to getDisplayName(p)
+        </description>
+        <name>fullName</name>
+        <function-class>org.jahia.data.viewhelper.principal.PrincipalViewHelper</function-class>
+        <function-signature>java.lang.String getFullName(java.lang.Object)</function-signature>
+        <example>
+            ${user:fullName(jahiaUser)} or ${user:fullName(jahiaGroup)}
+        </example>
+    </function>
+    <function>
+        <description>Returns map of string groupName,JahiaGroup value</description>
+        <name>getUserMembership</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.util.Map getUserMembership(org.jahia.services.content.JCRNodeWrapper)</function-signature>
+        <example>
+            ${user:getUserMembership(currentNode)}
+        </example>
+    </function>
+    <function>
+        <description>
+            Returns the full user name, including first and last name.
+            If those are not available, returns the username.
+        </description>
+        <name>userFullName</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.String userFullName(org.jahia.services.content.JCRNodeWrapper)
+        </function-signature>
+        <example>
+            &lt;c:out value="${user:userFullName(currentUserNode)}"/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Returns the user search result as a list
+        </description>
+        <name>searchUsers</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.util.Set searchUsers(java.util.Map)</function-signature>
+        <example>
+            ${user:searchUsers()} or ${user:searchUsers(criteriasMap)}
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Check if a property is editable.
+        </description>
+        <name>isPropertyEditable</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.Boolean isPropertyEditable(org.jahia.services.content.decorator.JCRUserNode,java.lang.String)
+        </function-signature>
+        <example>
+            &lt;c:if test="${user:isPropertyEditable(currentUserNode,'j:firstName')}"/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Format a principal so it can be used as a value in a form select drop down.
+        </description>
+        <name>formatUserValueOption</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.String formatUserValueOption(java.lang.Object)</function-signature>
+        <example>
+            &lt;c:if test="${user:formatUserValueOption(principal)}"/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Format a principal so it can be used as a text in a form select drop down.
+        </description>
+        <name>formatUserTextOption</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.String formatUserTextOption(org.jahia.services.content.JCRNodeWrapper,java.lang.String)
+        </function-signature>
+        <example>
+            &lt;c:if test="${user:formatUserTextOption(principal,'Name,30;Properties,30'}"/&gt;
+        </example>
+    </function>
+    <function>
+        <description>
+            Returns the type of the principal for provided principal object: 'u' (user) or 'g' (group).
+        </description>
+        <name>principalType</name>
+        <function-class>org.jahia.data.viewhelper.principal.PrincipalViewHelper</function-class>
+        <function-signature>char getPrincipalType(java.security.Principal)</function-signature>
+        <example>
+            &lt;c:if test="${user:principalType(principal) == 'u'}"/&gt;
+                this is a user
+            &lt;/c:if/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Check whether the current user is assignable to the specified task (represented by the specified node)
+        </description>
+        <name>isAssignable</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.Boolean isAssignable(org.jahia.services.content.JCRNodeWrapper)</function-signature>
+        <example>
+            &lt;c:if test="${user:isAssignable(task)}"/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Checks if the provided principal comes from a read-only provider
+        </description>
+        <name>isReadOnlyProvider</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.Boolean isReadOnlyProvider(org.jahia.services.content.JCRNodeWrapper)</function-signature>
+        <example>
+            &lt;c:if test="${user:isReadOnlyProvider(testUser)}"/&gt;
+        </example>
+    </function>
+
+    <function>
+        <description>
+            Returns the value for of the preferred UI theme for the currently logged in user.
+            If the preferred theme property is not set for the user, we use the globally configured theme. [since 7.2.3.1]
+        </description>
+        <name>getUITheme</name>
+        <function-class>org.jahia.taglibs.user.User</function-class>
+        <function-signature>java.lang.String getUITheme(org.jahia.services.content.decorator.JCRUserNode)</function-signature>
+    </function>
+
+</taglib>

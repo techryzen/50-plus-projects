@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="felixFileInstallConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean" depends-on="settingsBean">
+        <property name="properties">
+            <props value-type="java.lang.String">
+                <prop key="felix.fileinstall.dir">#{settingsBean.jahiaModulesDiskPath}</prop>
+                <prop key="felix.fileinstall.filter">.*\.jar</prop>
+                <prop key="felix.fileinstall.poll">${jahia.modules.fileinstall.poll:2000}</prop>
+                <prop key="felix.fileinstall.start.level">#{settingsBean.moduleStartLevel}</prop>
+                <prop key="felix.fileinstall.active.level">#{settingsBean.moduleStartLevel}</prop>
+                <prop key="felix.fileinstall.log.level">3</prop>
+                <prop key="felix.fileinstall.bundles.new.start">#{T(java.lang.Boolean).toString(jahiaProperties['jahia.modules.fileinstall.bundles.new.start'] != null ? jahiaProperties['jahia.modules.fileinstall.bundles.new.start'] : settingsBean.developmentMode)}</prop>
+                <prop key="felix.fileinstall.bundles.uninstall.remove">${jahia.modules.fileinstall.bundles.uninstall.remove:true}</prop>
+                <prop key="felix.fileinstall.noInitialDelay">true</prop>
+                <prop key="felix.fileinstall.enableConfigSave">false</prop>
+                <prop key="felix.fileinstall.bundleLocationMapFile">#{settingsBean.jahiaVarDiskPath}/bundles-deployed/module-bundle-location.map</prop>
+                <prop key="felix.fileinstall.customHandler">(&amp;(objectClass=org.apache.felix.fileinstall.CustomHandler)(type=dx-modules))</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean name="combinedOsgiProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean" depends-on="settingsBean">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="properties">
+            <props value-type="java.lang.String">
+
+                <prop key="karaf.name">dx</prop>
+
+                <prop key="karaf.home">${jahiaWebAppRoot}/WEB-INF/karaf</prop>
+                <prop key="karaf.base">#{settingsBean.jahiaVarDiskPath}/karaf</prop>
+                <prop key="karaf.data">#{settingsBean.jahiaVarDiskPath}/karaf/data</prop>
+                <prop key="karaf.etc">#{settingsBean.jahiaVarDiskPath}/karaf/etc</prop>
+                <prop key="karaf.history">#{settingsBean.jahiaVarDiskPath}/karaf/data/history.txt</prop>
+                <prop key="karaf.instances">#{settingsBean.jahiaVarDiskPath}/karaf/instances</prop>
+
+                <prop key="karaf.startLocalConsole">false</prop>
+                <prop key="karaf.startRemoteShell">#{T(java.lang.Boolean).toString(jahiaProperties['karaf.remoteShell.port'] != '-1')}</prop>
+                <prop key="karaf.remoteShellPort">#{jahiaProperties['karaf.remoteShell.port'] != null ? jahiaProperties['karaf.remoteShell.port'] : '8101'}</prop>
+                <prop key="karaf.remoteShellHost">#{jahiaProperties['karaf.remoteShell.host'] != null ? jahiaProperties['karaf.remoteShell.host'] : '0.0.0.0'}</prop>
+                <prop key="karaf.lock">false</prop>
+
+                <prop key="org.osgi.framework.storage">#{settingsBean.jahiaVarDiskPath}/bundles-deployed</prop>
+
+                <prop key="log4j.ignoreTCL">true</prop>
+                <prop key="pax.log4j.rootLogger">OFF</prop>
+
+                <prop key="felix.webconsole.manager.root">/console</prop>
+
+                <prop key="hazelcast.osgi.jsr223.disabled">true</prop>
+                <prop key="hazelcast.slow.operation.detector.stacktrace.logging.enabled">true</prop>
+                <prop key="hazelcast.shutdownhook.enabled">false</prop>
+
+                <prop key="org.apache.karaf.cellar.core.event.EventHandlerRegistryDispatcher.threadPool.singleThreadExecutor">true</prop>
+
+            </props>
+        </property>
+        <property name="locations">
+            <list>
+                <value>classpath*:org/jahia/defaults/config/properties/felix-framework*.properties</value>
+                <value>/WEB-INF/etc/config/felix-framework.properties</value>
+                <value>/WEB-INF/etc/config/osgi-framework.properties</value>
+                <value>classpath*:org/jahia/config/felix-framework*.properties</value>
+                <value>classpath*:jahia/felix-framework*.properties</value>
+                <value>classpath*:jahia/osgi-framework*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="osgiProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <!-- Effective OSGi properties: combined (defaults + configured in files) properties
+            are overridden with the DX specific system properties -->
+        <property name="propertiesArray">
+            <list>
+                <ref bean="combinedOsgiProperties"/>
+                <ref bean="jahiaSystemProperties"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

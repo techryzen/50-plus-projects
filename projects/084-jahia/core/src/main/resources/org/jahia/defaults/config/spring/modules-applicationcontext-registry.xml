@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/webflow-config
+       http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean name="org.jahia.modules.default.ModuleRegistry"
+          class="org.jahia.services.templates.TemplatePackageRegistry$ModuleRegistry">
+        <property name="templatePackageRegistry" ref="org.jahia.services.templates.TemplatePackageRegistry"/>
+        <property name="choiceListRendererService" ref="choiceListRenderers"/>
+        <property name="choiceListInitializers" ref="choiceListInitializers"/>
+        <property name="renderService" ref="RenderService"/>
+        <property name="staticAssetMapping" ref="org.jahia.services.render.StaticAssetMappingRegistry"/>
+        <property name="workflowService" ref="workflowService"/>
+        <property name="visibilityService" ref="visibilityService"/>
+        <property name="jcrStoreService" ref="JCRStoreService"/>
+        <property name="compositeFilter" ref="CompositeFilter"/>
+        <property name="searchService" ref="SearchService"/>
+        <property name="gwtResourceConfig" ref="GWTResourceConfig"/>
+        <property name="passwordService" ref="PasswordService"/>
+        <property name="publicationService" ref="jcrPublicationService"/>
+    </bean>
+
+    <bean id="modulePlaceholderConfig"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="properties" ref="jahiaProperties"/>
+        <property name="locations" ref="modulePlaceholderConfigLocations"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="localOverride" value="true"/>
+    </bean>
+
+    <util:list id="modulePlaceholderConfigLocations" value-type="java.lang.String">
+        <value>osgibundle:jahia-modules-*.properties</value>
+        <value>osgibundle:jahia/jahia-modules-*.properties</value>
+        <value>rootclasspath*:jahia-modules-*.properties</value>
+        <value>rootclasspath*:jahia/jahia-modules-*.properties</value>
+    </util:list>
+
+    <bean name="managerEditorConfigurerModules" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="org.jahia.services.uicomponents.bean.contentmanager.Column">
+                    <bean class="org.jahia.services.uicomponents.bean.contentmanager.ColumnPropertyEditor"/>
+                </entry>
+                <entry key="org.jahia.services.uicomponents.bean.contentmanager.Repository">
+                    <bean class="org.jahia.services.uicomponents.bean.contentmanager.RepositoryPropertyEditor"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean name="editmodeEditorConfigurerModules"
+          class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                    <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTabPropertyEditor"/>
+                </entry>
+                <entry key="org.jahia.services.uicomponents.bean.Visibility">
+                    <bean class="org.jahia.services.uicomponents.bean.VisibilityPropertyEditor"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="jBPMModuleProcessLoader" class="org.jahia.services.workflow.jbpm.JBPMModuleProcessLoader">
+        <property name="jbpm6WorkflowProvider" ref="jBPMProvider"/>
+        <property name="mailTemplateRegistry" ref="mailTemplateRegistry"/>
+        <property name="processes">
+            <list>
+                <value>osgibundle:org/jahia/modules/**/*.bpmn2</value>
+            </list>
+        </property>
+        <property name="mailTemplates">
+            <list>
+                <value>osgibundle:org/jahia/modules/**/*.mail</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="springTypeConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" lazy-init="true"/>
+
+    <bean id="JahiaFlowConversionService" class="org.jahia.services.render.webflow.JahiaFlowConversionService" lazy-init="true">
+        <constructor-arg ref="springTypeConversionService"/>
+    </bean>
+
+    <bean id="JahiaViewFactoryCreator" class="org.jahia.services.render.webflow.BundleViewFactoryCreator" lazy-init="true"/>
+
+    <webflow:flow-builder-services id="jahiaFlowBuilderServices" development="true"
+                                   conversion-service="JahiaFlowConversionService"
+                                   view-factory-creator="JahiaViewFactoryCreator"
+                                   validator="validatorFactoryBean"/>
+
+    <webflow:flow-registry id="jahiaFlowRegistry" base-path="osgibundle:/"
+                           flow-builder-services="jahiaFlowBuilderServices">
+        <webflow:flow-location-pattern value="**/*.flow/flow.xml"/>
+    </webflow:flow-registry>
+
+    <bean id="moduleSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          depends-on="settingsBean" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="org.jahia.modules"/>
+        <property name="hibernateProperties">
+            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+                <property name="properties">
+                    <map>
+                        <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+                        <entry key="hibernate.hbm2ddl.auto" value=""/>
+                        <entry key="hibernate.show_sql" value="false"/>
+                        <entry key="hibernate.jdbc.batch_size" value="16"/>
+                        <entry key="hibernate.default_batch_fetch_size" value="16"/>
+                        <entry key="hibernate.max_fetch_depth" value="3"/>
+                        <entry key="hibernate.query.substitutions" value="true 1, false 0"/>
+                        <entry key="hibernate.generate_statistics" value="false"/>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean class="org.jahia.params.valves.AuthPipelineInitializer" lazy-init="true">
+        <property name="authPipeline" ref="authPipeline"/>
+    </bean>
+</beans>

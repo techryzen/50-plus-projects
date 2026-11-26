@@ -1,0 +1,1190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean id="studiomode" class="org.jahia.services.uicomponents.bean.editmode.EditConfiguration">
+        <property name="requiredPermission" value="studioModeAccess"/>
+        <property name="nodeCheckPermission" value="/modules"/>
+        <property name="forceHeaders" value="true"/>
+        <property name="supportChannelsDisplay" value="false"/>
+        <property name="dragAndDropBehavior" value="#{jahiaProperties['jahia.ui.dragAndDrop.studio'] != null ? jahiaProperties['jahia.ui.dragAndDrop.studio'] : (jahiaProperties['jahia.ui.dragAndDrop'] != null ? jahiaProperties['jahia.ui.dragAndDrop'] : 'ENABLED')}"/>
+        <property name="componentsPaths">
+            <list>
+                <value>/modules/*</value>
+            </list>
+        </property>
+
+        <property name="bypassModeForTypes">
+            <set>
+                <value>jnt:globalSettings</value>
+                <value>jnt:modules</value>
+                <value>jnt:virtualsite</value>
+                <value>jnt:file</value>
+                <value>jnt:nodeType</value>
+            </set>
+        </property>
+
+        <property name="visibleTypes">
+            <set>
+                <value>jmix:studioLayout</value>
+                <value>jmix:layoutComponentContent</value>
+                <value>jmix:list</value>
+            </set>
+        </property>
+        <property name="excludedNodeTypes">
+            <set>
+                <value>jmix:hiddenType</value>
+            </set>
+        </property>
+        <!--<property name="nonEditableTypes">-->
+            <!--<set>-->
+                <!--<value>jmix:layoutComponentContent</value>-->
+            <!--</set>-->
+        <!--</property>-->
+        <property name="skipMainModuleTypesDomParsing">
+            <set>
+                <value>jnt:editableFile</value>
+            </set>
+        </property>
+        <property name="defaultUrlMapping" value="/cms/studio"/>
+        <property name="defaultLocation" value="/settings.manageModules.html"/>
+        <property name="sitesLocation" value="/modules/*"/>
+        <property name="topToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="layout" value="button-label"/>
+                <property name="items">
+                    <list>
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Item" scope="prototype">
+                            <property name="actionItem">
+                                <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.GoToActionItem">
+                                    <property name="path" value="/settings"/>
+                                    <property name="template" value="manageModules"/>
+                                </bean>
+                            </property>
+                            <property name="titleKey" value="label.modulesList"/>
+                            <property name="icon" value="modulesList"/>
+                        </bean>
+
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Item" scope="prototype">
+                            <property name="actionItem">
+                                <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.GoToModuleHomeActionItem"/>
+                            </property>
+                            <property name="titleKey" value="label.moduleHome"/>
+                            <property name="icon" value="moduleHome"/>
+                        </bean>
+
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Menu" id="Studiomode.Menu.Module">
+                            <property name="titleKey" value="label.new"/>
+                            <property name="items">
+                                <list>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewModuleActionItem">
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newModule"/>
+                                        <property name="icon" value="newModule"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.FetchModuleActionItem">
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.fetchModule"/>
+                                        <property name="icon" value="fetchModule"/>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+
+                        <ref bean="Toolbar.Item.Separator"/>
+
+                        <ref bean="Studiomode.Menu.Cache"/>
+                        <ref bean="Toolbar.Item.ClipBoard"/>
+                        <ref bean="Toolbar.Item.Separator"/>
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Menu" id="Studiomode.Menu.User">
+                            <property name="icon" value="start"/>
+                            <property name="titleKey" value="label.user.loggedAs"/>
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.Documentation"/>
+                                    <ref bean="Toolbar.Item.Logout"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="sidePanelToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="items">
+                    <list>
+
+                        <bean id="Toolbar.ItemsGroup.SitesSwitcher"
+                              class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                            <property name="actionItem">
+                                <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.SiteSwitcherActionItem">
+                                    <property name="root" value="/modules/*"/>
+                                    <property name="filterOnAvailableSources" value="true"/>
+                                </bean>
+                            </property>
+                            <property name="titleKey" value="label.modules"/>
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="mainModuleToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="layout" value="button-label"/>
+                <property name="items">
+                    <list>
+                        <ref bean="Toolbar.Item.SwitchConfigActionToStudio"/>
+                        <ref bean="Toolbar.Item.SwitchConfigActionToStudioVisual"/>
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Menu" id="Studiomode.Menu.Edit">
+                            <property name="titleKey" value="label.edit"/>
+                            <property name="icon" value="editAction"/>
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.EditContent"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.EditSourceContent"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.PasteReference"/>
+                                    <ref bean="Toolbar.Item.TranslateMenu"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.Export"/>
+                                    <ref bean="Toolbar.Item.Import"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.Lock"/>
+                                    <ref bean="Toolbar.Item.Unlock"/>
+                                    <ref bean="Toolbar.Item.ClearLock"/>
+                                    <ref bean="Toolbar.Item.ClearAllLocks"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.OpenInContentManager"/>
+                                </list>
+                            </property>
+                        </bean>
+
+                        <ref bean="Toolbar.ItemsGroup.LanguageSwitcher"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="contextMenu">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="items">
+                    <list>
+                        <ref bean="Toolbar.Item.EditContent"/>
+                        <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                        <ref bean="Toolbar.Item.EditSourceContent"/>
+                        <ref bean="Toolbar.Item.Copy"/>
+                        <ref bean="Toolbar.Item.Cut"/>
+                        <ref bean="Toolbar.Item.Paste"/>
+                        <ref bean="Toolbar.Item.PasteReference"/>
+                        <ref bean="Toolbar.Item.TranslateMenu"/>
+                        <ref bean="Toolbar.Item.Export"/>
+                        <ref bean="Toolbar.Item.Import"/>
+                        <ref bean="Toolbar.Item.Lock"/>
+                        <ref bean="Toolbar.Item.Unlock"/>
+                        <ref bean="Toolbar.Item.ClearLock"/>
+                        <ref bean="Toolbar.Item.ClearAllLocks"/>
+                        <ref bean="Toolbar.Item.OpenInContentManager"/>
+                        <ref bean="Toolbar.Item.GoToViewDefinition"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <!-- edit engine -->
+        <property name="engineConfigurations">
+            <map>
+                <entry key="nt:base" value-ref="studioBaseEngineConfiguration"/>
+                <entry key="jnt:viewFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean id="Engine.Tab.CodeEditor" class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="stubType" value="jsp" />
+                                        </bean>
+                                    </property>
+                                </bean>
+                                <bean id="Engine.Tab.PropertiesView" class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="propertiesView"/>
+                                    <property name="titleKey" value="label.engineTab.propertiesView"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.PropertiesTabItem">
+                                            <property name="dataType">
+                                                <list>
+                                                    <value>propertiesView</value>
+                                                </list>
+                                            </property>
+                                            <property name="viewCopyToAllLangs" value="false"/>
+                                            <property name="multiLang" value="false"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <ref bean="Engine.Button.SaveAsNewView" />
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                                <ref bean="Engine.Button.SaveAsNewView" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:templateFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="stubType" value="jsp" />
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <ref bean="Engine.Button.SaveAsNewView" />
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                                <ref bean="Engine.Button.SaveAsNewView" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:cssFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="stubType" value="css" />
+                                            <property name="codeMirrorMode" value="css"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="css"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:lessFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="codeMirrorMode" value="text/x-less"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="less"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:editableFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="availableCodeMirrorModes" ref="availableCodeMirrorModes"/>
+                                            <property name="codeMirrorMode" value="null"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem"/>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:javaSourceFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="codeMirrorMode" value="text/x-java"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="java"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:xmlFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="codeMirrorMode" value="xml"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="xml"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:propertiesFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="codeMirrorMode" value="properties"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="properties"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:javascriptFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="codeEditor"/>
+                                    <property name="titleKey" value="label.engineTab.codeEditor"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CodeEditorTabItem">
+                                            <property name="codePropertyName" value="sourceCode" />
+                                            <property name="stubType" value="javascript" />
+                                            <property name="codeMirrorMode" value="javascript"/>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateResourceButtonItem" >
+                                    <property name="fileExtension" value="js"/>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="editionButtons">
+                            <list>
+                                <ref bean="Engine.Button.Update" />
+                            </list>
+                        </property>
+                        <property name="commonButtons">
+                            <list>
+                                <ref bean="Engine.Button.Cancel" />
+                            </list>
+                        </property>
+                    </bean>
+
+                </entry>
+                <entry key="jnt:resourceBundleFolder">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <ref bean="Engine.Tab.ResourceBundle"/>
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:resourceBundleFile">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <ref bean="Engine.Tab.ResourceBundle"/>
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:nodeType">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="baseProperties"/>
+                                    <property name="titleKey" value="label.engineTab.definitions.baseAttributes"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.contentengine.NamespaceTabItem"/>
+                                    </property>
+                                </bean>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="properties"/>
+                                    <property name="titleKey" value="label.engineTab.definitions.properties"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.definitionsmodeler.ChildItemsTabItem">
+                                            <property name="type" value="jnt:propertyDefinition"/>
+                                            <property name="columnsConfig">
+                                                <list>
+                                                    <value>name,*,label.name</value>
+                                                    <value>j:requiredType,100</value>
+                                                    <value>j:defaultValues,100</value>
+                                                    <value>j:isInternationalized,100</value>
+                                                    <value>j:mandatory,100</value>
+                                                    <value>j:protected,100</value>
+                                                    <value>j:isHidden,100</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </property>
+                                </bean>
+                                <bean class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+                                    <property name="id" value="childItems"/>
+                                    <property name="titleKey" value="label.engineTab.definitions.nodes"/>
+                                    <property name="tabItem">
+                                        <bean class="org.jahia.ajax.gwt.client.widget.definitionsmodeler.ChildItemsTabItem">
+                                            <property name="type" value="jnt:childNodeDefinition"/>
+                                            <property name="columnsConfig">
+                                                <list>
+                                                    <value>name,*,label.name</value>
+                                                    <value>j:requiredPrimaryTypes,200</value>
+                                                    <value>j:mandatory,100</value>
+                                                </list>
+                                            </property>
+                                        </bean>
+                                    </property>
+                                </bean>
+                            </list>
+                        </property>
+                        <property name="creationButtons">
+                            <list>
+                                <bean class="org.jahia.ajax.gwt.client.widget.contentengine.CreateButtonItem">
+                                    <property name="forceCreation" value="false"/>
+                                </bean>
+                                <bean id="Engine.Button.CreateAndNew" class="org.jahia.ajax.gwt.client.widget.contentengine.CreateAndNewButtonItem">
+                                    <property name="forceCreation" value="false"/>
+                                </bean>
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+                <entry key="jnt:namespaceDefinition">
+                    <bean parent="studioBaseEngineConfiguration">
+                        <property name="engineTabs">
+                            <list>
+                                <ref bean="Engine.Tab.Content" />
+                            </list>
+                        </property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+
+        <!-- tabs-->
+        <property name="tabs">
+            <list value-type="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                <bean class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="filesystem"/>
+                    <property name="icon" value="tab-filesystem"/>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.ModulesTabItem">
+                            <property name="paths">
+                                <list>
+                                    <value>$site/sources</value>
+                                </list>
+                            </property>
+                            <property name="folderTypes">
+                                <list>
+                                    <value>jnt:folder</value>
+                                    <value>jnt:file</value>
+                                    <value>jnt:nodeType</value>
+                                    <value>jnt:definitionFile</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="treeColumns">
+                        <list>
+                            <value>displayName,*,label.title</value>
+                            <value>scmStatus,20</value>
+                        </list>
+                    </property>
+                    <property name="treeContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.AddView"/>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:folder"/>
+                                                <property name="nodeTypes" value="jnt:editableFile"/>
+                                                <property name="includeSubTypes" value="false"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newFile"/>
+                                        <property name="icon" value="newContent"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewPackageActionItem">
+                                                <property name="allowedNodeTypes" value="jnt:javaPackageFolder"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newJavaPackage"/>
+                                        <property name="icon" value="newFolder"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:cssFolder"/>
+                                                <property name="nodeTypes" value="jnt:cssFile"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newCssFile"/>
+                                        <property name="icon" value="newContent"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:metaInfFolder"/>
+                                                <property name="nodeTypes" value="jnt:definitionFile"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newDefinitionFile"/>
+                                        <property name="icon" value="newContent"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:javascriptFolder"/>
+                                                <property name="nodeTypes" value="jnt:javascriptFile"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newJavascriptFile"/>
+                                        <property name="icon" value="newContent"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:definitionFile"/>
+                                                <property name="includeSubTypes" value="false"/>
+                                                <property name="nodeTypes" value="jnt:primaryNodeType jnt:mixinNodeType"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newDefinition"/>
+                                        <property name="icon" value="newDefinition"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="parentTypes" value="jnt:definitionFile"/>
+                                                <property name="includeSubTypes" value="false"/>
+                                                <property name="nodeTypes" value="jnt:namespaceDefinition"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newNamespaceDefinition"/>
+                                        <property name="icon" value="newNamespace"/>
+                                    </bean>
+                                    <ref bean="Toolbar.Item.NewFolder"/>
+                                    <ref bean="Toolbar.Item.Upload"/>
+                                    <ref bean="Toolbar.Item.Download"/>
+                                    <ref bean="Toolbar.Item.Rename"/>
+                                    <ref bean="Toolbar.Item.EditContentRootNodeEditable"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.Crop"/>
+                                    <ref bean="Toolbar.Item.Resize"/>
+                                    <ref bean="Toolbar.Item.AddToSourceControl"/>
+                                    <ref bean="Toolbar.Item.MarkConflictAsResolved"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="tableContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                            <property name="items">
+                                <list>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.CompileActionItem">
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value=""/>
+                                        <property name="descriptionKey" value="label.compileModule"/>
+                                        <property name="icon" value="compileModule"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Menu" id="Studiomode.Menu.SourceControl">
+                                        <property name="titleKey" value="label.sourceControl"/>
+                                        <property name="icon" value="sourceControl"/>
+                                        <property name="items">
+                                            <list>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.CommitModuleActionItem">
+                                                        </bean>
+                                                    </property>
+                                                    <property name="titleKey" value="label.commitModule"/>
+                                                    <property name="icon" value="saveModule"/>
+                                                </bean>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.UpdateModuleActionItem">
+                                                        </bean>
+                                                    </property>
+                                                    <property name="titleKey" value="label.updateModule"/>
+                                                    <property name="icon" value="updateModule"/>
+                                                </bean>
+                                            </list>
+                                        </property>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Menu" id="Studiomode.Menu.Distribution">
+                                        <property name="titleKey" value="label.distribution"/>
+                                        <property name="icon" value="releaseModule"/>
+                                        <property name="items">
+                                            <list>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.GenerateWarActionItem"/>
+                                                    </property>
+                                                    <property name="titleKey" value="label.exportWar"/>
+                                                    <property name="icon" value="templateExport"/>
+                                                </bean>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.ReleaseModuleActionItem"/>
+                                                    </property>
+                                                    <property name="titleKey" value="label.releaseWar"/>
+                                                    <property name="icon" value="releaseModule"/>
+                                                </bean>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.EditDistributionManagementActionItem"/>
+                                                    </property>
+                                                    <property name="titleKey" value="label.editDistributionManagement"/>
+                                                    <property name="icon" value="editDistributionManagement"/>
+                                                </bean>
+                                                <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                                    <property name="actionItem">
+                                                        <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.GoToForgeActionItem"/>
+                                                    </property>
+                                                    <property name="titleKey" value="label.goToForge"/>
+                                                    <property name="icon" value="goToForge"/>
+                                                </bean>
+
+                                            </list>
+                                        </property>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="templates"/>
+                    <property name="icon" value="tab-templates"/>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.TemplatesTabItem">
+                            <property name="paths">
+                                <list>
+                                    <value>$site/templates</value>
+                                </list>
+                            </property>
+                            <property name="folderTypes">
+                                <list>
+                                    <value>jnt:template</value>
+                                </list>
+                            </property>
+                            <property name="displayedDetailTypes">
+                                <list>
+                                    <value>jnt:content</value>
+                                    <value>jmix:layoutComponentContent</value>
+                                </list>
+                            </property>
+                            <property name="hiddenDetailTypes">
+                                <list>
+                                    <value>jnt:template</value>
+                                    <value>jnt:page</value>
+                                    <value>jnt:folder</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="treeColumns">
+                        <list>
+                            <value>displayName,*,label.title</value>
+                        </list>
+                    </property>
+                    <property name="treeContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar"
+                              id="org.jahia.toolbar.sidePanel.templates">
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.NewPage"/>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="nodeTypes" value="jnt:pageTemplate"/>
+                                                <property name="parentTypes"
+                                                          value="jnt:templatesFolder jnt:template"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newPageTemplate"/>
+                                        <property name="icon" value="newPageTemplate"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="nodeTypes" value="jnt:contentTemplate"/>
+                                                <property name="parentTypes"
+                                                          value="jnt:templatesFolder jnt:template"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newContentTemplate"/>
+                                        <property name="icon" value="newContentTemplate"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="nodeTypes" value="jnt:template"/>
+                                                <property name="includeSubTypes" value="false"/>
+                                                <property name="parentTypes"
+                                                          value="jnt:templatesFolder jnt:template"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newTemplate"/>
+                                        <property name="icon" value="newTemplate"/>
+                                    </bean>
+
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean
+                                                    class="org.jahia.ajax.gwt.client.widget.toolbar.action.ExecuteActionItem">
+                                                <property name="allowedNodeTypes" value="jnt:templatesFolder"/>
+                                                <property name="action" value="createBoard" />
+                                                <property name="parameters">
+                                                    <map>
+                                                        <entry key="applyOn" value="jnt:globalSettings" />
+                                                        <entry key="view" value="serverSettings" />
+                                                        <entry key="boardType" value="server-settings-base" />
+                                                        <entry key="contentTemplateName" value="settings-panel" />
+                                                    </map>
+                                                </property>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newServerSettingsBaseTemplate" />
+                                        <property name="icon" value="serverSettings" />
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean class="org.jahia.ajax.gwt.client.widget.toolbar.action.NewContentActionItem">
+                                                <property name="nodeTypes" value="jnt:templateLink"/>
+                                                <property name="includeSubTypes" value="false"/>
+                                                <property name="parentTypes"
+                                                          value="jnt:templatesFolder jnt:template"/>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="jnt_templateLink"/>
+                                        <property name="icon" value="newInternalLink"/>
+                                    </bean>
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean
+                                                    class="org.jahia.ajax.gwt.client.widget.toolbar.action.ExecuteActionItem">
+                                                <property name="allowedNodeTypes" value="jnt:templatesFolder"/>
+                                                <property name="action" value="createBoard" />
+                                                <property name="parameters">
+                                                    <map>
+                                                        <entry key="applyOn" value="jnt:virtualsite" />
+                                                        <entry key="view" value="siteSettings" />
+                                                        <entry key="boardType" value="site-settings-base" />
+                                                        <entry key="contentTemplateName" value="settings-panel" />
+                                                    </map>
+                                                </property>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newSiteSettingsBaseTemplate" />
+                                        <property name="icon" value="siteSettings" />
+                                    </bean>
+
+                                    <bean class="org.jahia.services.uicomponents.bean.toolbar.Item">
+                                        <property name="actionItem">
+                                            <bean
+                                                    class="org.jahia.ajax.gwt.client.widget.toolbar.action.ExecuteActionItem">
+                                                <property name="allowedNodeTypes" value="jnt:templatesFolder"/>
+                                                <property name="action" value="createBoard" />
+                                                <property name="parameters">
+                                                    <map>
+                                                        <entry key="applyOn" value="jnt:user" />
+                                                        <entry key="view" value="dashboard" />
+                                                        <entry key="boardType" value="dashboard-modules-base" />
+                                                        <entry key="contentTemplateName" value="dashboard" />
+                                                    </map>
+                                                </property>
+                                            </bean>
+                                        </property>
+                                        <property name="titleKey" value="label.newDashboardBaseTemplate" />
+                                        <property name="icon" value="start" />
+                                    </bean>
+
+                                    <ref bean="Toolbar.Item.EditContentRootNodeEditable"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.Separator"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.PasteReference"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="tableContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.EditContent"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.EditSourceContent"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.PasteReference"/>
+                                    <ref bean="Toolbar.Item.TranslateMenu"/>
+                                    <ref bean="Toolbar.Item.Export"/>
+                                    <ref bean="Toolbar.Item.Import"/>
+                                    <ref bean="Toolbar.Item.Lock"/>
+                                    <ref bean="Toolbar.Item.Unlock"/>
+                                    <ref bean="Toolbar.Item.ClearLock"/>
+                                    <ref bean="Toolbar.Item.ClearAllLocks"/>
+                                    <ref bean="Toolbar.Item.OpenInContentManager"/>
+                                    <ref bean="Toolbar.Item.GoToViewDefinition"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="requiredPermission" value="templatesSelector"/>
+                </bean>
+                <bean class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="content"/>
+                    <property name="icon" value="tab-content"/>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.ContentBrowseTabItem">
+                            <property name="paths">
+                                <list>
+                                    <value>$site</value>
+                                </list>
+                            </property>
+                            <property name="folderTypes">
+                                <list>
+                                    <value>jnt:contentFolder</value>
+                                    <value>jnt:templatesFolder</value>
+                                    <value>jnt:navMenuAvailableFolder</value>
+                                    <value>nt:folder</value>
+                                    <value>jmix:navMenuItem</value>
+                                    <value>jmix:visibleInPagesTree</value>
+                                </list>
+                            </property>
+                            <property name="excludedFolderTypes">
+                                <list>
+                                    <value>jnt:moduleVersionFolder</value>
+                                </list>
+                            </property>
+                            <property name="displayGridForTypes">
+                                <list>
+                                    <value>jnt:templatesFolder</value>
+                                    <value>jnt:folder</value>
+                                    <value>jnt:contentFolder</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="treeColumns">
+                        <list>
+                            <value>displayName,*,label.title</value>
+                        </list>
+                    </property>
+                    <property name="treeContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.NewPage"/>
+                                    <ref bean="Toolbar.Item.NewInternalLink"/>
+                                    <ref bean="Toolbar.Item.NewExternalLink"/>
+                                    <ref bean="Toolbar.Item.NavMenuText"/>
+                                    <ref bean="Toolbar.Item.NewContentFolder"/>
+                                    <ref bean="Toolbar.Item.NewContent"/>
+                                    <ref bean="Toolbar.Item.NewMenuAvailable"/>
+                                    <ref bean="Toolbar.Item.EditContent"/>
+                                    <ref bean="Toolbar.Item.NewFolder"/>
+                                    <ref bean="Toolbar.Item.Upload"/>
+                                    <ref bean="Toolbar.Item.Download"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.PasteReference"/>
+                                    <ref bean="Toolbar.Item.TranslateMenu"/>
+                                    <ref bean="Toolbar.Item.Export"/>
+                                    <ref bean="Toolbar.Item.Import"/>
+                                    <ref bean="Toolbar.Item.Lock"/>
+                                    <ref bean="Toolbar.Item.Unlock"/>
+                                    <ref bean="Toolbar.Item.ClearLock"/>
+                                    <ref bean="Toolbar.Item.ClearAllLocks"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="tableContextMenu">
+                        <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                            <property name="items">
+                                <list>
+                                    <ref bean="Toolbar.Item.NewFolder"/>
+                                    <ref bean="Toolbar.Item.Upload"/>
+                                    <ref bean="Toolbar.Item.Download"/>
+                                    <ref bean="Toolbar.Item.EditContent"/>
+                                    <ref bean="Toolbar.Item.DeletePermanentlyNoMarkForDeletion"/>
+                                    <ref bean="Toolbar.Item.Copy"/>
+                                    <ref bean="Toolbar.Item.Cut"/>
+                                    <ref bean="Toolbar.Item.Paste"/>
+                                    <ref bean="Toolbar.Item.PasteReference"/>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+
+                <bean class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="createContent"/>
+                    <property name="icon" value="tab-createcontent"/>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.CreateContentTabItem">
+                            <property name="baseType" value="jmix:droppableContent"/>
+                            <property name="paths">
+                                <list>
+                                    <!--<value>$site/components/*</value>-->
+                                    <value>/modules/*</value>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="treeColumns">
+                        <list>
+                            <value>label,*,label.title</value>
+                            <value>dependency,50</value>
+                        </list>
+                    </property>
+                </bean>
+
+                <bean class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="dependencies"/>
+                    <property name="icon" value="tab-dependencies"/>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.DependenciesTabItem" />
+                    </property>
+                    <property name="requiredPermission" value="dependenciesSelector"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="studioBaseEngineConfiguration" class="org.jahia.services.uicomponents.bean.editmode.EngineConfiguration">
+        <property name="engineTabs">
+            <list>
+                <ref bean="Engine.Tab.Content" />
+                <ref bean="Engine.Tab.ListOrdering" />
+                <ref bean="Engine.Tab.Layout" />
+                <ref bean="Engine.Tab.Options" />
+                <ref bean="Engine.Tab.RequiredPermissions" />
+                <ref bean="Engine.Tab.Usages" />
+                <ref bean="Engine.Tab.ContributeMode" />
+            </list>
+        </property>
+        <property name="creationButtons">
+            <list>
+                <ref bean="Engine.Button.Create" />
+                <ref bean="Engine.Button.CreateAndNew" />
+            </list>
+        </property>
+        <property name="editionButtons">
+            <list>
+                <ref bean="Engine.Button.Update" />
+            </list>
+        </property>
+        <property name="commonButtons">
+            <list>
+                <ref bean="Engine.Button.Cancel" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Engine.Tab.ResourceBundle" class="org.jahia.services.uicomponents.bean.editmode.EngineTab">
+        <property name="id" value="resourceBundleEditor" />
+        <property name="titleKey" value="label.engineTab.resourceBundleEditor" />
+        <property name="tabItem">
+            <bean
+                class="org.jahia.ajax.gwt.client.widget.contentengine.ResourceBundleEditorTabItem" />
+        </property>
+    </bean>
+
+    <util:map id="availableCodeMirrorModes">
+        <entry key="null" value=""/>
+        <entry key="css" value="CSS"/>
+        <entry key="text/x-less" value="Less"/>
+        <entry key="text/x-java" value="Java"/>
+        <entry key="javascript" value="JavaScript"/>
+        <entry key="jsp" value="JavaServer Pages"/>
+        <entry key="properties" value="Properties file"/>
+        <entry key="xml" value="XML"/>
+    </util:map>
+</beans>

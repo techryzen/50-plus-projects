@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="dashboardmode-jahia-anthracite" parent="dashboardmode">
+        <property name="topToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="layout" value="button-label"/>
+                <property name="items">
+                    <list>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="sidePanelToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="items">
+                    <list>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="mainModuleToolbar">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="items">
+                    <list>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="contextMenu">
+            <bean class="org.jahia.services.uicomponents.bean.toolbar.Toolbar">
+                <property name="items">
+                    <list>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <!-- tabs-->
+        <property name="tabs">
+            <list value-type="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                <bean id="sidePanelTab.dashboardModules" class="org.jahia.services.uicomponents.bean.editmode.SidePanelTab">
+                    <property name="key" value="dashboardModules"/>
+                    <property name="icon" value="start"/>
+                    <property name="treeColumns">
+                        <list>
+                            <value>displayName,*,label.title</value>
+                        </list>
+                    </property>
+                    <property name="tabItem">
+                        <bean class="org.jahia.ajax.gwt.client.widget.edit.sidepanel.SettingsTabItem">
+                            <property name="settingsTemplateRoot" value="dashboard-modules-base"/>
+                            <property name="label" value="userDashboardSettings.tab.title"/>
+                            <property name="settingPath" value="$user"/>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+</beans>

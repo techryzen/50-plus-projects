@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+    <bean class="org.jahia.services.render.RenderService$RenderServiceBeanPostProcessor"/>
+
+    <bean id="org.jahia.services.render.scripting.RequestDispatcherScriptFactory"
+          class="org.jahia.services.render.scripting.RequestDispatcherScriptFactory"/>
+
+    <bean id="org.jahia.services.render.scripting.JSR223ScriptFactory"
+          class="org.jahia.services.render.scripting.JSR223ScriptFactory"/>
+    <bean id="BundleJSR223ScriptFactory" class="org.jahia.services.render.scripting.bundle.BundleJSR223ScriptFactory"/>
+
+    <bean id="org.jahia.services.render.webflow.WebflowDispatcherScriptFactory"
+          class="org.jahia.services.render.webflow.WebflowDispatcherScriptFactory">
+          <property name="xssFilteringEnabled" value="${jahia.webflow.xssFiltering.enabled:true}"/>
+    </bean>
+
+    <bean id="RenderService" class="org.jahia.services.render.RenderService" factory-method="getInstance">
+        <property name="templateManagerService" ref="JahiaTemplateManagerService"/>
+        <property name="scriptResolvers">
+            <list>
+                <ref bean="BundleScriptResolver"/>
+            </list>
+        </property>
+        <property name="nodeTypesWithTheme">
+            <list>
+                <value>jnt:globalSettings</value>
+                <value>jnt:virtualsite</value>
+                <value>jnt:user</value>
+                <value>jmix:mountPointFactory</value>
+            </list>
+        </property>
+        <property name="cacheProvider" ref="ehCacheProvider"/>
+        <property name="channelService" ref="ChannelService"/>
+        <property name="renderTimeMonitor" ref="RenderTimeMonitor"/>
+        <property name="userManagerService" ref="JahiaUserManagerService"/>
+        <property name="settingsBean" ref="settingsBean"/>
+        <property name="templatesCacheLockTimeout" value="#{jahiaProperties['templatesCacheLockTimeout'] != null ? jahiaProperties['templatesCacheLockTimeout'] : (jahiaProperties['maxRequestRenderTime'] != null ? jahiaProperties['maxRequestRenderTime'] : '60000')}"/>
+    </bean>
+
+    <bean id="extensionObserverRegistry" class="org.jahia.osgi.ExtensionObserverRegistry" factory-method="getInstance"/>
+
+    <bean id="scriptEngineManager" class="org.jahia.services.render.scripting.bundle.BundleScriptEngineManager" factory-method="getInstance"/>
+
+    <bean id="BundleScriptResolver" class="org.jahia.services.render.scripting.bundle.BundleScriptResolver" factory-method="getInstance">
+        <property name="scriptFactoryMap">
+            <map>
+                <entry key="jsp" value-ref="org.jahia.services.render.scripting.RequestDispatcherScriptFactory"/>
+                <entry key="groovy" value-ref="BundleJSR223ScriptFactory"/>
+                <entry key="js" value-ref="BundleJSR223ScriptFactory"/>
+                <entry key="vm" value-ref="BundleJSR223ScriptFactory"/>
+                <entry key="flow" value-ref="org.jahia.services.render.webflow.WebflowDispatcherScriptFactory"/>
+            </map>
+        </property>
+        <property name="ignoredBundlePrefixes">
+            <set>
+                <value>org.apache</value>
+                <value>org.ops4j</value>
+                <value>assets</value>
+                <value>ckeditor</value>
+            </set>
+        </property>
+        <property name="templateManagerService" ref="JahiaTemplateManagerService"/>
+        <property name="bundleScriptFactory" ref="BundleJSR223ScriptFactory"/>
+        <property name="extensionObserverRegistry" ref="extensionObserverRegistry"/>
+    </bean>
+
+
+    <bean id="plutoProcessActionFilter" class="org.jahia.services.render.filter.portlet.PlutoProcessActionFilter">
+        <property name="priority" value="-3"/>
+        <property name="description" value="portlet rendering"/>
+        <property name="applyOnConfigurations" value="page"/>
+        <property name="renderOnAction" value="${jahia.portlets.renderingPolicy.renderOnAction:false}"/>
+    </bean>
+
+    <bean id="templateModuleInterceptorFilter" class="org.jahia.services.render.filter.TemplateModuleInterceptorFilter">
+        <property name="applyOnConfigurations" value="page"/>
+        <property name="description" value="Inject renderContext in TemplateModuleInterceptor."/>
+        <property name="priority" value="-2"/>
+    </bean>
+    <!--
+    <bean class="org.jahia.services.render.filter.SourceFormatterFilter">
+        <property name="priority" value="-2" />
+        <property name="description" value="HTML output formatting filter"/>
+        <property name="applyOnModes" value="live,preview" />
+        <property name="applyOnConfigurations" value="page" />
+        <property name="applyOnTemplateTypes" value="html,edit,html-iphone,html-ipad" />
+    </bean>
+    -->
+
+    <bean id="editModeFilter"  class="org.jahia.services.render.filter.EditModeFilter">
+        <property name="priority" value="-2"/>
+        <property name="description" value="Filter that embeds edit mode frame around content"/>
+        <property name="applyOnEditMode" value="true"/>
+        <property name="applyOnConfigurations" value="page"/>
+        <property name="blockableModes" value="edit,contribute"/>
+    </bean>
+
+    <bean id="externalizeHtmlFilter"  class="org.jahia.services.render.filter.ExternalizeHtmlFilter">
+        <property name="priority" value="-1"/>
+        <property name="description"
+                  value="Render filter that 'externalizes' the HTML document by converting all local URLs into absolute, inlining external CSS styles, and rewriting URLs in CSS."/>
+        <property name="applyOnModes" value="live,preview"/>
+        <property name="applyOnConfigurations" value="page"/>
+        <property name="htmlExternalizationService" ref="HtmlExternalizationService"/>
+    </bean>
+
+    <bean id="staticAssetsFilter" class="org.jahia.services.render.filter.StaticAssetsFilter">
+
+        <property name="priority" value="0"/>
+        <property name="description"
+                  value="Render filter that 'injects' the static assets into the HEAD section of the rendered HTML document."/>
+        <property name="applyOnConfigurations" value="page,gwt,preview"/>
+        <property name="applyOnTemplateTypes" value="html,edit,html-.*"/>
+        <property name="scriptEngineUtils" ref="scriptEngineUtils"/>
+        <property name="ajaxTemplate" value="/WEB-INF/scripts/ajaxResources.groovy"/>
+        <property name="template" value="/WEB-INF/scripts/resources.groovy"/>
+
+        <property name="aggregateAssets" value="${aggregateAssets:true}"/>
+        <property name="compressDuringAggregation" value="${compressAssetsDuringAggregation:false}"/>
+
+        <property name="excludesFromAggregateAndCompress" ref="excludesFromAggregateAndCompress"/>
+        <property name="forceLiveIEcompatiblity" value="${forceLiveIEcompatiblity:false}"/>
+        <property name="ieHeaderRecognitions">
+            <set>
+                <value>msie</value>
+                <value>trident/7</value>
+            </set>
+        </property>
+        <property name="addLastModifiedDate" value="${addLastModifiedDateInAssets:false}"/>
+        <property name="aggregateSupportedMedias" value="${aggregateSupportedMedias:screen,handled,print,aural,speech,braille,embossed,projection,tty,tv,all}"/>
+    </bean>
+
+    <util:list id="excludesFromAggregateAndCompress">
+    </util:list>
+
+    <bean id="formTokenFilter" class="org.jahia.services.render.filter.FormTokenFilter">
+        <property name="priority" value="11"/>
+        <property name="description" value="Inject form tokens inside the request."/>
+        <property name="applyOnConfigurations" value="page,gwt"/>
+        <property name="applyOnTemplateTypes" value="html,edit,html-.*"/>
+    </bean>
+
+    <bean id="areaResourceFilter" class="org.jahia.services.render.filter.AreaResourceFilter">
+        <property name="description" value="Set attributes areaListResource and areaResource in the request"/>
+        <property name="applyOnNodeTypes" value="jnt:area,jmix:list,jnt:mainResourceDisplay"/>
+        <property name="applyOnConfigurations" value="module,wrappedcontent"/>
+        <property name="applyOnModes" value="#{jahiaProperties['useNewAggregateAndCacheImplementation'] != null and !jahiaProperties['useNewAggregateAndCacheImplementation'] ? '' : 'contribute'}"/>
+        <property name="priority" value="4"/>
+    </bean>
+
+    <bean id="channelResolutionFilter" class="org.jahia.services.channels.filters.ChannelResolutionFilter">
+        <property name="priority" value="6"/>
+        <property name="description" value="Set channel depending of the user agent"/>
+        <property name="channelService" ref="ChannelService"/>
+        <property name="renderService" ref="RenderService"/>
+    </bean>
+
+    <bean id="channelPreviewFilter" class="org.jahia.services.channels.filters.ChannelPreviewFilter">
+        <property name="description" value="Adds channel device image decoration"/>
+        <property name="channelService" ref="ChannelService"/>
+        <property name="priority" value="2"/>
+        <property name="applyOnTemplateTypes" value="html,html-.+"/>
+        <property name="applyOnModes" value="preview"/>
+        <property name="applyOnConfigurations" value="page"/>
+    </bean>
+
+
+   <bean id="markedForDeletionFilter" class="org.jahia.services.render.filter.MarkedForDeletionFilter">
+        <property name="priority" value="10"/>
+        <property name="description" value="Filters out content in preview mode that is marked for deletion"/>
+        <property name="applyOnModes" value="preview"/>
+        <property name="template" value="/WEB-INF/scripts/markedForDeletionPreview.groovy"/>
+    </bean>
+
+    <bean id="baseAttributesFilter" class="org.jahia.services.render.filter.BaseAttributesFilter">
+        <property name="priority" value="15"/>
+        <property name="description"
+                  value="Stores the required request parameters before evaluating the template and restores original after."/>
+        <property name="configurationToSkipInResourceRenderedPath">
+            <set>
+                <value type="java.lang.String">option</value>
+                <value type="java.lang.String">wrapper</value>
+                <value type="java.lang.String">include</value>
+            </set>
+        </property>
+    </bean>
+
+    <bean class="org.jahia.services.render.filter.AggregateFilter">
+        <property name="disabled" value="#{jahiaProperties['useNewAggregateAndCacheImplementation'] != null ? !jahiaProperties['useNewAggregateAndCacheImplementation'] : false}"/>
+        <property name="priority" value="16.0"/>
+        <property name="description" value="Aggregate filter, aggregates contents by resolving sub fragments"/>
+        <property name="skipOnTemplateTypes" value="json"/>
+        <property name="skipOnConfigurations" value="include,wrapper,option"/>
+        <property name="keyGenerator" ref="cacheKeyGenerator"/>
+    </bean>
+
+    <bean id="metricsLoggingFilter" class="org.jahia.services.render.filter.MetricsLoggingFilter">
+        <property name="priority" value="16.1"/>
+        <property name="description"
+                  value="Calls the logging service to log the display of a resource. Also initializes profiling information"/>
+        <property name="loggingService" ref="loggingService"/>
+        <property name="skipOnConfigurations" value="include,wrapper"/>
+    </bean>
+
+    <bean id="nodeAttributesFilter" class="org.jahia.services.render.filter.NodeAttributesFilter">
+        <property name="priority" value="16.8"/>
+        <property name="description" value="Sets request parameters related to the JCR node; separated from the BaseAttributesFilter in order to avoid reading the node from JCR before the cache filter"/>
+    </bean>
+
+    <bean id="urlSystemAttributesAppenderFilter" class="org.jahia.services.render.filter.URLSystemAttributesAppenderFilter">
+        <property name="priority" value="15.5"/>
+        <property name="description"
+                  value="Defines attributes to keep in the links of a rendering when met in the urls"/>
+        <property name="applyOnConfigurations" value="page"/>
+        <property name="applyOnTemplateTypes" value="html,edit,html-.*"/>
+        <property name="skipOnModes" value="live"/>
+        <property name="skipOnAjaxRequest" value="true"/>
+        <property name="attributesToKeep">
+            <list>
+                <value type="java.lang.String">v</value>
+                <value type="java.lang.String">l</value>
+                <value type="java.lang.String">alias</value>
+                <value type="java.lang.String">channel</value>
+                <value type="java.lang.String">variant</value>
+                <value type="java.lang.String">noembed</value>
+                <value type="java.lang.String">prevdate</value>
+            </list>
+        </property>
+        <property name="traverser" ref="org.jahia.services.render.filter.SystemURLTraverser"/>
+    </bean>
+
+    <bean id="urlFilter" class="org.jahia.services.render.filter.URLFilter">
+        <constructor-arg ref="org.jahia.services.render.filter.URLTraverser"/>
+        <property name="priority" value="21"/>
+        <property name="description"
+                  value="Traverses the content and searches for URLs in the configured elements. Executes the list of configured visitors (ContextPlaceholdersReplacer, VanityUrlSetter and SiteParameterAdder) to modify the URL value."/>
+        <property name="applyOnConfigurations" value="page,gwt,module,wrappedcontent"/>
+        <property name="applyOnTemplateTypes" value="html,html-.+"/>
+        <property name="handlers">
+            <list>
+                <bean class="org.jahia.services.render.filter.SiteParameterAdder">
+                    <property name="vanityUrlService" ref="org.jahia.services.seo.jcr.VanityUrlService"/>
+                </bean>
+                <bean class="org.jahia.services.seo.urlrewrite.UrlRewriteVisitor">
+                    <property name="urlRewriteService" ref="UrlRewriteService"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="templateNodeFilter" class="org.jahia.services.render.filter.TemplateNodeFilter">
+        <property name="priority" value="22"/>
+        <property name="description"
+                  value=" Looks for all registered wrappers in the resource and calls the associated scripts around the output. Output is made available to the wrapper script through the 'wrappedContent' request attribute."/>
+        <property name="applyOnConfigurations" value="wrappedcontent,page,gwt"/>
+        <property name="applyOnTemplateTypes" value="html,html-.+"/>
+    </bean>
+
+    <bean id="templatePermissionCheckFilter" class="org.jahia.services.render.filter.TemplatePermissionCheckFilter">
+        <property name="priority" value="21"/>
+        <property name="description" value="Handles permissions set on the template"/>
+        <property name="userManagerService" ref="JahiaUserManagerService"/>
+    </bean>
+
+    <bean id="forceUILocaleFilter" class="org.jahia.services.render.filter.ForceUILocaleFilter">
+        <property name="priority" value="29"/>
+        <property name="description"
+                  value="Forces the usage of the UI locale when the template has jmix:useUILocale mixin"/>
+        <property name="applyOnNodeTypes" value="jmix:useUILocale"/>
+        <property name="applyOnConfigurations" value="wrapper,page"/>
+    </bean>
+
+    <bean id="templateAttributesFilter" class="org.jahia.services.render.filter.TemplateAttributesFilter">
+        <property name="priority" value="30"/>
+        <property name="description" value="Module filter for parameter resolution."/>
+    </bean>
+
+    <bean id="wrapperFilter" class="org.jahia.services.render.filter.WrapperFilter">
+        <property name="priority" value="40"/>
+        <property name="description" value="Adds a wrapper to a content"/>
+        <property name="skipOnConfigurations" value="include,wrapper"/>
+    </bean>
+
+    <bean id="templateScriptFilter" class="org.jahia.services.render.filter.TemplateScriptFilter">
+        <property name="priority" value="99"/>
+        <property name="description" value="Executes the template script associated to the current resource. This is a final filter, subsequent filters will not be chained."/>
+    </bean>
+
+    <bean id="org.jahia.services.render.filter.URLTraverser" class="org.jahia.services.render.filter.HtmlTagAttributeTraverser">
+        <constructor-arg>
+            <map>
+                <entry key="a">
+                    <set>
+                        <value>href</value>
+                    </set>
+                </entry>
+                <entry key="embed">
+                    <set>
+                        <value>src</value>
+                    </set>
+                </entry>
+                <entry key="form">
+                    <set>
+                        <value>action</value>
+                    </set>
+                </entry>
+                <entry key="img">
+                    <set>
+                        <value>src</value>
+                        <value>srcset</value>
+                        <value>data-src</value>
+                        <value>data-srcset</value>
+                    </set>
+                </entry>
+                <entry key="source">
+                    <set>
+                        <value>srcset</value>
+                    </set>
+                </entry>
+                <entry key="link">
+                    <set>
+                        <value>href</value>
+                    </set>
+                </entry>
+                <entry key="param">
+                    <set>
+                        <value>value</value>
+                    </set>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="org.jahia.services.render.filter.SystemURLTraverser" class="org.jahia.services.render.filter.HtmlTagAttributeTraverser">
+        <constructor-arg>
+            <map>
+                <entry key="a">
+                    <set>
+                        <value>href</value>
+                    </set>
+                </entry>
+                <!--<entry key="embed">-->
+                <!--<set>-->
+                <!--<value>src</value>-->
+                <!--</set>-->
+                <!--</entry>-->
+                <!--<entry key="form">-->
+                <!--<set>-->
+                <!--<value>action</value>-->
+                <!--</set>-->
+                <!--</entry>-->
+                <!--<entry key="img">-->
+                <!--<set>-->
+                <!--<value>src</value>-->
+                <!--</set>-->
+                <!--</entry>-->
+                <!--<entry key="link">-->
+                <!--<set>-->
+                <!--<value>href</value>-->
+                <!--</set>-->
+                <!--</entry>-->
+                <!--<entry key="param">-->
+                <!--<set>-->
+                <!--<value>value</value>-->
+                <!--</set>-->
+                <!--</entry>-->
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="GWTResourceConfig" class="org.jahia.ajax.gwt.utils.GWTResourceConfig">
+        <property name="cssStyles">
+            <list>
+                <value>/gwt/resources/css/gwt.min.css</value>
+                <value>/modules/assets/javascript/codemirror/lib/codemirror.css</value>
+                <value>/modules/assets/css/codemirror/theme/elegant.css</value>
+                <!--
+                we compress those files into gwt.min.css
+                <value>/gwt/resources/css/jahia-ext-all.css</value>
+                <value>/gwt/resources/css/xtheme-jahia.css</value>
+                <value>/gwt/resources/css/edit.css</value>
+                <value>/gwt/resources/css/jahia-gwt-engines.css</value>
+                <value>/gwt/resources/css/diff.css</value>
+                -->
+            </list>
+
+        </property>
+        <property name="cssStylesForFrame">
+            <list>
+                <value>/gwt/resources/css/edit.css</value>
+            </list>
+        </property>
+        <property name="javaScripts">
+            <list>
+                <value>/modules/ckeditor/javascript/ckeditor.js</value>
+                <!--
+                <value>/modules/assets/javascript/codemirror/lib/codemirror.js</value>
+                <value>/modules/assets/javascript/codemirror/addon/edit/matchbrackets.js</value>
+                <value>/modules/assets/javascript/codemirror/addon/edit/closetag.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/xml/xml.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/javascript/javascript.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/css/css.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/less/less.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/clike/clike.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/htmlmixed/htmlmixed.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/htmlembedded/htmlembedded.js</value>
+                <value>/modules/assets/javascript/codemirror/mode/properties/properties.js</value>
+                <value>/modules/assets/javascript/codemirror.mode.jsp.js</value>
+                -->
+                <value>/modules/assets/javascript/codemirror.jahia.min.js</value>
+                <value>/modules/assets/javascript/atmosphere-min-2.2.12.js</value>
+            </list>
+        </property>
+        <property name="detectCustomCKEditorConfig" value="${detectCustomCKEditorConfig:true}"/>
+    </bean>
+
+    <bean id="urlResolverFactory" class="org.jahia.services.render.URLResolverFactory">
+        <property name="cacheService" ref="ehCacheProvider"/>
+        <property name="urlResolverListener" ref="urlResolverListener"/>
+    </bean>
+
+    <bean id="visibilityFilter" class="org.jahia.services.visibility.filters.VisibilityFilter">
+        <property name="description"
+                  value="Content visibility filter that conditionally filters out the content depending on the configured rules."/>
+        <property name="visibilityService" ref="visibilityService"/>
+        <property name="applyOnModes" value="preview"/>
+        <property name="priority" value="29"/>
+    </bean>
+
+    <bean name="abstractRender" class="org.jahia.bin.Render">
+        <property name="loggingService" ref="loggingService"/>
+        <property name="templateService" ref="JahiaTemplateManagerService"/>
+        <property name="defaultPostAction">
+            <bean class="org.jahia.bin.DefaultPostAction">
+                <property name="loggingService" ref="loggingService"/>
+            </bean>
+        </property>
+        <property name="defaultPutAction">
+            <bean class="org.jahia.bin.DefaultPutAction">
+                <property name="loggingService" ref="loggingService"/>
+                <property name="requiredMethods" value="POST,PUT"/>
+            </bean>
+        </property>
+        <property name="defaultDeleteAction">
+            <bean class="org.jahia.bin.DefaultDeleteAction">
+                <property name="requiredMethods" value="POST,DELETE"/>
+            </bean>
+        </property>
+        <property name="webflowAction">
+            <bean class="org.jahia.services.render.webflow.WebflowAction">
+                <property name="renderService" ref="RenderService"/>
+                <property name="requireAuthenticatedUser" value="false"/>
+            </bean>
+        </property>
+        <property name="settingsBean" ref="settingsBean"/>
+        <property name="renderService" ref="RenderService"/>
+        <property name="jcrSessionFactory" ref="jcrSessionFactory"/>
+        <property name="cookieExpirationInDays" value="1"/>
+        <property name="urlResolverFactory" ref="urlResolverFactory"/>
+        <property name="defaultContentType" ref="renderer.defaultContentType"/>
+    </bean>
+
+    <util:map id="renderer.defaultContentType">
+        <entry key="csv" value="text/csv; charset=UTF-8"/>
+        <entry key="ics" value="text/calendar; charset=UTF-8"/>
+        <entry key="json" value="application/json; charset=UTF-8"/>
+        <entry key="html" value="text/html; charset=UTF-8"/>
+        <entry key="rss" value="application/rss+xml; charset=UTF-8"/>
+        <entry key="text" value="text/plain; charset=UTF-8"/>
+        <entry key="vcf" value="text/vcard; charset=UTF-8"/>
+        <entry key="xml" value="text/xml; charset=UTF-8"/>
+        <entry key="js" value="text/javascript; charset=UTF-8"/>
+    </util:map>
+
+    <bean id="jahiaBundleFlowRegistry" class="org.jahia.services.render.webflow.BundleFlowRegistry"/>
+
+    <bean id="RenderTimeMonitor" class="org.jahia.services.render.monitoring.DefaultRenderTimeMonitor">
+        <property name="maxRequestRenderTime" value="${maxRequestRenderTime:60000}"></property>
+        <property name="skipOnModes" value="admin,studio"/>
+        <property name="skipOnWebflowRequest" value="true"/>
+    </bean>
+
+    <bean id="JahiaMappingJackson2HttpMessageConverter" class="org.jahia.utils.spring.http.converter.json.JahiaMappingJackson2HttpMessageConverter"/>
+</beans>

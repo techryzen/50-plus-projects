@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="JahiaUserManagerService" class="org.jahia.services.usermanager.JahiaUserManagerService" parent="jahiaServiceTemplate" factory-method="getInstance">
+        <property name="userSplittingRule">
+            <bean class="org.jahia.services.usermanager.DefaultJahiaUserSplittingRuleImpl">
+                <property name="usersRootNode" value="/users"/>
+                <property name="nonSplittedUsers">
+                    <list value-type="java.lang.String">
+                        <!-- System users are not split -->
+                        <value>guest</value>
+                        <value>root</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+        <property name="cacheHelper">
+            <bean class="org.jahia.services.usermanager.UserCacheHelper">
+                <property name="ehCacheProvider" ref="ehCacheProvider"/>
+            </bean>
+        </property>
+        <property name="passwordService" ref="PasswordService"/>
+    </bean>
+
+    <bean id="JahiaUserManagerProvider" class="org.jahia.services.usermanager.JahiaUserManagerProvider" parent="jahiaServiceTemplate" abstract="true">
+        <property name="userManagerService" ref="JahiaUserManagerService"/>
+    </bean>
+
+</beans>

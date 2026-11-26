@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    ==========================================================================================
+    =                   JAHIA'S DUAL LICENSING - IMPORTANT INFORMATION                       =
+    ==========================================================================================
+
+                                    http://www.jahia.com
+
+        Copyright (C) 2002-2020 Jahia Solutions Group SA. All rights reserved.
+
+        THIS FILE IS AVAILABLE UNDER TWO DIFFERENT LICENSES:
+        1/GPL OR 2/JSEL
+
+        1/ GPL
+        ==================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE GPL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program. If not, see <http://www.gnu.org/licenses />.
+
+
+        2/ JSEL - Commercial and Supported Versions of the program
+        ===================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE JSEL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        Alternatively, commercial and supported versions of the program - also known as
+        Enterprise Distributions - must be used in accordance with the terms and conditions
+        contained in a separate written agreement between you and Jahia Solutions Group SA.
+
+        If you are unsure which license is appropriate for your use,
+        please contact the sales department at sales@jahia.com.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.jahia.server</groupId>
+        <artifactId>jahia-root</artifactId>
+        <version>8.0.2.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>jahia-war</artifactId>
+    <name>Jahia WAR</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <felix.framework.version>5.6.12</felix.framework.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>eclipse-integration</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-eclipse-plugin</artifactId>
+                        <version>${eclipse.plugin.version}</version>
+                        <configuration>
+                            <wtpversion>1.5</wtpversion>
+                            <additionalProjectnatures>
+                                <projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+                                <projectnature>org.eclipse.wst.common.modulecore.ModuleCoreNature</projectnature>
+                                <projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+                            </additionalProjectnatures>
+                            <additionalBuildcommands>
+                                <buildCommand>
+                                    <name>org.eclipse.wst.common.project.facet.core.builder</name>
+                                    <arguments />
+                                </buildCommand>
+                                <buildCommand>
+                                    <name>org.eclipse.wst.validation.validationbuilder</name>
+                                    <arguments />
+                                </buildCommand>
+                            </additionalBuildcommands>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>generate-ddl</id>
+            <activation>
+                <property>
+                    <name>jahia.generate.ddl</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.jahia.server</groupId>
+                                            <artifactId>jahia-impl</artifactId>
+                                            <version>${project.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/hibernate-entities</outputDirectory>
+                                            <includes>org/jahia/hibernate/model/JahiaDbTest.class,org/jahia/services/history/HistoryEntry.class,org/jahia/services/content/nodetypes/NodeTypesDBProvider.class</includes>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>de.juplo</groupId>
+                        <artifactId>hibernate4-maven-plugin</artifactId>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/hibernate-entities</outputDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>ddl-derby-drop</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.derby}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/derby/00-drop-jahia-schema.sql</outputFile>
+                                    <type>DROP</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-derby-create</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.derby}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/derby/01-create-jahia-schema.sql</outputFile>
+                                    <type>CREATE</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mssql-drop</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mssql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mssql/00-drop-jahia-schema.sql</outputFile>
+                                    <type>DROP</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mssql-create</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mssql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mssql/01-create-jahia-schema.sql</outputFile>
+                                    <type>CREATE</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mysql-drop</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mysql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mysql/00-drop-jahia-schema.sql</outputFile>
+                                    <type>DROP</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mysql-create</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mysql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mysql/01-create-jahia-schema.sql</outputFile>
+                                    <type>CREATE</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-oracle-drop</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.oracle}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/oracle/00-drop-jahia-schema.sql</outputFile>
+                                    <type>DROP</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-oracle-create</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.oracle}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/oracle/01-create-jahia-schema.sql</outputFile>
+                                    <type>CREATE</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-postgresql-drop</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.postgresql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/postgresql/00-drop-jahia-schema.sql</outputFile>
+                                    <type>DROP</type>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-postgresql-create</id>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.postgresql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/postgresql/01-create-jahia-schema.sql</outputFile>
+                                    <type>CREATE</type>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>generate-jbpm-ddl</id>
+            <activation>
+                <property>
+                    <name>jahia.generate.jbpm.ddl</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jahia.server</groupId>
+                        <artifactId>jahia-hibernate-maven-plugin</artifactId>
+                        <configuration>
+                            <persistenceFileName>jahia-persistence.xml</persistenceFileName>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>ddl-derby-drop</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.derby}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/derby/00-drop-jbpm-schema.sql</outputFile>
+                                    <statementType>DROP</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-derby-create</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.derby}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/derby/01-create-jbpm-schema.sql</outputFile>
+                                    <statementType>CREATE</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mssql-drop</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mssql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mssql/00-drop-jbpm-schema.sql</outputFile>
+                                    <statementType>DROP</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mssql-create</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mssql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mssql/01-create-jbpm-schema.sql</outputFile>
+                                    <statementType>CREATE</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mysql-drop</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mysql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mysql/00-drop-jbpm-schema.sql</outputFile>
+                                    <statementType>DROP</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-mysql-create</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.mysql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/mysql/01-create-jbpm-schema.sql</outputFile>
+                                    <statementType>CREATE</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-oracle-drop</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.oracle}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/oracle/00-drop-jbpm-schema.sql</outputFile>
+                                    <statementType>DROP</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-oracle-create</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.oracle}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/oracle/01-create-jbpm-schema.sql</outputFile>
+                                    <statementType>CREATE</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-postgresql-drop</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.postgresql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/postgresql/00-drop-jbpm-schema.sql</outputFile>
+                                    <statementType>DROP</statementType>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>ddl-postgresql-create</id>
+                                <goals>
+                                    <goal>jpa-schema-export</goal>
+                                </goals>
+                                <configuration>
+                                    <hibernateDialect>${hibernateDialect.postgresql}</hibernateDialect>
+                                    <outputFile>${basedir}/src/data/resources/db/sql/schema/postgresql/01-create-jbpm-schema.sql</outputFile>
+                                    <statementType>CREATE</statementType>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-impl</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-api</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-taglib</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-gwt</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <type>war</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-compiler</artifactId>
+            <version>${drools.version}</version>
+            <classifier>nocdi</classifier>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.drools</groupId>
+                    <artifactId>drools-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.0.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>apache-log4j-extras</artifactId>
+            <version>${log4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Pluto 2.0 shared lib-->
+        <dependency>
+            <groupId>org.apache.portals</groupId>
+            <artifactId>portlet-api_2.0_spec</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-container-api</artifactId>
+            <version>${pluto.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-container-driver-api</artifactId>
+            <version>${pluto.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-taglib</artifactId>
+            <version>${pluto.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Pluto 2.0-->
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-container</artifactId>
+            <version>${pluto.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.stream</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-portal-driver</artifactId>
+            <version>${pluto.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-portal-driver-impl</artifactId>
+            <version>${pluto.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xerces</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.portals.pluto</groupId>
+            <artifactId>pluto-util</artifactId>
+            <version>${pluto.version}</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-cli</artifactId>
+                    <groupId>commons-cli</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>stax</groupId>
+            <artifactId>stax</artifactId>
+            <version>1.2.0</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>stax</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.0</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+
+        <dependency>
+            <!-- Required for Eclipse Gemini Blueprint when proxying classes rather then interfaces -->
+            <artifactId>cglib-nodep</artifactId>
+            <groupId>cglib</groupId>
+            <version>2.2.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <!-- Felix HTTP bridge -->
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.http.proxy</artifactId>
+            <version>${felix.http.version}</version>
+        </dependency>
+
+        <dependency>
+            <!-- Karaf dependency -->
+            <groupId>org.apache.karaf.diagnostic</groupId>
+            <artifactId>org.apache.karaf.diagnostic.boot</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>jahia</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-karaf</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.apache.karaf</groupId>
+                                    <artifactId>apache-karaf</artifactId>
+                                    <version>${karaf.version}</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF</outputDirectory>
+                                    <includes>apache-karaf-${karaf.version}/data/**,apache-karaf-${karaf.version}/deploy,apache-karaf-${karaf.version}/etc/**,apache-karaf-${karaf.version}/system/**</includes>
+                                    <excludes>apache-karaf-${karaf.version}/lib/org*,**/demos/**,apache-karaf-${karaf.version}/etc/custom.properties,**/README, **/org.eclipse.osgi-*.jar, **/org.apache.karaf.wrapper.core-*.jar, **/org/apache/felix/org.apache.felix.fileinstall/**, **/org/apache/felix/org.apache.felix.framework/**, **/${karaf.version}/org.apache.karaf.jaas.config-${karaf.version}.jar</excludes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-bundles-to-karaf-system</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <useBaseVersion>true</useBaseVersion>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jahia.bundles</groupId>
+                                    <artifactId>org.jahia.bundles.pax.logging.bridging.appender</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}/system/org/jahia/bundles/org.jahia.bundles.pax.logging.bridging.appender/${project.version}</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.karaf.jaas</groupId>
+                                    <artifactId>org.apache.karaf.jaas.config</artifactId>
+                                    <version>${karaf.jaas.config.version}</version>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}/system/org/apache/karaf/jaas/org.apache.karaf.jaas.config/${karaf.jaas.config.version}</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.felix</groupId>
+                                    <artifactId>org.apache.felix.framework</artifactId>
+                                    <version>${felix.framework.version}</version>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}/system/org/apache/felix/org.apache.felix.framework/${felix.framework.version}</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.felix</groupId>
+                                    <artifactId>org.apache.felix.fileinstall</artifactId>
+                                    <version>${felix.fileinstall.version}</version>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}/system/org/apache/felix/org.apache.felix.fileinstall/${felix.fileinstall.version}</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.ops4j.pax.logging</groupId>
+                                    <artifactId>pax-logging-service</artifactId>
+                                    <version>${pax.logging.version}</version>
+                                    <outputDirectory>${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}/system/org/ops4j/pax/logging/pax-logging-service/${pax.logging.version}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-karaf</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <move todir="${project.build.directory}/jahia/WEB-INF/karaf">
+                                    <fileset dir="${project.build.directory}/jahia/WEB-INF/apache-karaf-${karaf.version}" />
+                                </move>
+                                <move todir="${project.build.directory}/karaf/etc">
+                                    <fileset dir="${project.build.directory}/jahia/WEB-INF/karaf/etc" />
+                                </move>
+                                <move todir="${project.build.directory}/karaf/data">
+                                    <fileset dir="${project.build.directory}/jahia/WEB-INF/karaf/data" />
+                                </move>
+                                <move todir="${project.build.directory}/karaf/deploy">
+                                    <fileset dir="${project.build.directory}/jahia/WEB-INF/karaf/deploy" />
+                                </move>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>adjust-karaf-jaas-config-version</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replace file="${project.build.directory}/jahia/WEB-INF/karaf/system/org/apache/karaf/features/standard/${karaf.version}/standard-${karaf.version}-features.xml" failOnNoReplacements="true">
+                                    <replacetoken>org.apache.karaf.jaas.config/${karaf.version}</replacetoken>
+                                    <replacevalue>org.apache.karaf.jaas.config/${karaf.jaas.config.version}</replacevalue>
+                                </replace>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>merge-ddl-files</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <concat destfile="${project.build.directory}/ddl/derby/00-drop-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/derby" includes="00-drop-*" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/derby/01-create-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/derby" includes="01-create-*" excludes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/derby/01-create-jahia-core-schema.sql" append="yes" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/derby" includes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+
+                                <concat destfile="${project.build.directory}/ddl/mssql/00-drop-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mssql" includes="00-drop-*" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/mssql/01-create-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mssql" includes="01-create-*" excludes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/mssql/01-create-jahia-core-schema.sql" append="yes" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mssql" includes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+
+                                <concat destfile="${project.build.directory}/ddl/mysql/00-drop-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mysql" includes="00-drop-*" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/mysql/01-create-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mysql" includes="01-create-*" excludes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/mysql/01-create-jahia-core-schema.sql" append="yes" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/mysql" includes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+
+                                <concat destfile="${project.build.directory}/ddl/oracle/00-drop-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/oracle" includes="00-drop-*" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/oracle/01-create-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/oracle" includes="01-create-*" excludes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/oracle/01-create-jahia-core-schema.sql" append="yes" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/oracle" includes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+
+                                <concat destfile="${project.build.directory}/ddl/postgresql/00-drop-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/postgresql" includes="00-drop-*" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/postgresql/01-create-jahia-core-schema.sql" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/postgresql" includes="01-create-*" excludes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                                <concat destfile="${project.build.directory}/ddl/postgresql/01-create-jahia-core-schema.sql" append="yes" encoding="UTF-8" outputencoding="UTF-8" eol="lf" fixlastline="yes">
+                                    <fileset dir="${basedir}/src/data/resources/db/sql/schema/postgresql" includes="01-create-*-index.sql,01-create-*-triggers.sql" />
+                                </concat>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-add-to-repository</goal>
+                        </goals>
+                        <configuration>
+                            <addTransitiveFeatures>true</addTransitiveFeatures>
+                            <descriptors>
+                                <descriptor>mvn:org.jahia.features/dx-core/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.jahia.features/dx-gemini-blueprint/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.jahia.features/dx-jax-rs/${project.version}/xml/features</descriptor>
+                                <descriptor>mvn:org.jahia.features/dx-standard/${project.version}/xml/features</descriptor>
+                            </descriptors>
+                            <features>
+                                <feature>dx-standard</feature>
+                            </features>
+                            <repository>${project.build.directory}/jahia/WEB-INF/karaf/system</repository>
+                            <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                        <supportedProjectType>bundle</supportedProjectType>
+                        <supportedProjectType>war</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                        <Embed-Transitive>*</Embed-Transitive>
+                        <_nodefaultversion>true</_nodefaultversion>
+                        <_removeheaders>
+                            Include-Resource,
+                            Private-Package,
+                            Embed-Dependency,
+                            Embed-Transitive
+                        </_removeheaders>
+                    </instructions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-exports</id>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warSourceExcludes>*Resources*.properties,**/custom.properties</warSourceExcludes>
+                    <webResources>
+                        <resource>
+                            <directory>${project.build.directory}/native2ascii</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                        <resource>
+                            <directory>.</directory>
+                            <targetPath>META-INF</targetPath>
+                            <includes>
+                                <include>LICENSE</include>
+                                <include>NOTICE</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jahia.server</groupId>
+                <artifactId>jahia-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-package-export</id>
+                        <goals>
+                            <goal>build-framework-package-list</goal>
+                        </goals>
+                        <configuration>
+                            <extraPackageExcludes>
+                                <extraPackageExclude>com.fasterxml.jackson*</extraPackageExclude>
+                                <extraPackageExclude>org.springframework.http.converter*</extraPackageExclude>
+                                <extraPackageExclude>org.springframework.web.client*</extraPackageExclude>
+                            </extraPackageExcludes>
+                            <propertiesInputFile>
+                                ${project.build.directory}/filtered-resources/custom.properties
+                            </propertiesInputFile>
+                            <propertiesOutputFile>
+                                ${project.build.directory}/generated-resources/custom.properties
+                            </propertiesOutputFile>
+                            <propertyFilePropertyName>org.osgi.framework.system.packages.generated</propertyFilePropertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>generate-system-capabilities</id>
+                        <goals>
+                            <goal>dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <propertiesInputFile>
+                                ${project.build.directory}/generated-resources/custom.properties
+                            </propertiesInputFile>
+                            <propertiesOutputFile>
+                                ${project.build.directory}/generated-resources/custom.properties
+                            </propertiesOutputFile>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>native2ascii</id>
+                        <goals>
+                            <goal>native2ascii</goal>
+                        </goals>
+                        <configuration>
+                            <encoding>ISO-8859-1</encoding>
+                            <includes>*Resources*.properties</includes>
+                            <defaultPropertiesFileLocale>en</defaultPropertiesFileLocale>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>list-jars-with-no-tlds</id>
+                        <goals>
+                            <goal>list-jars-with-no-tlds</goal>
+                        </goals>
+                        <configuration>
+                            <dest>${project.build.directory}/jahia/WEB-INF/etc/config/jar-scanner.conf</dest>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gwt-dictionary</id>
+                        <goals>
+                            <goal>gwt-dictionary</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-jahia-data</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptor>src/data/assembly/src.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>nl.geodienstencentrum.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>2.24</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sassSourceDirectory>src/main/webapp/engines/jahia-anthracite/css</sassSourceDirectory>
+                    <destination>src/main/webapp/engines/jahia-anthracite/css</destination>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jruby</groupId>
+                        <artifactId>jruby-complete</artifactId>
+                        <version>9.1.12.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.8.0</version>
+                <executions>
+                    <execution>
+                        <id>npm install node and yarn</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v11.11.0</nodeVersion>
+                            <yarnVersion>v1.19.1</yarnVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>yarn post-install</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/data/resources/karaf/etc</directory>
+                <includes>
+                    <include>custom.properties</include>
+                </includes>
+                <filtering>true</filtering>
+                <targetPath>${project.build.directory}/filtered-resources</targetPath>
+            </resource>
+        </resources>
+
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${jxr.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

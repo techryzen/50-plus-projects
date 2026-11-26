@@ -1,0 +1,155 @@
+
+.toolbar-item-sitehome,
+.toolbar-item-sitecontent,
+.toolbar-item-sitefiels {
+    background: _theme($SWITCH--RAIL, $APP);
+    padding: 2px 0px;
+    margin-top: 3px;
+    opacity: 1 !important;
+
+    &:hover {
+        &::after {
+            color: _theme($SWITCH--COLOR--OFF---HOVER, $APP) !important;
+        }
+    }
+
+    &::after {
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 11px !important;
+        opacity: 1 !important;
+        color: _theme($SWITCH--COLOR--OFF, $APP) !important;
+    }
+
+    > tbody {
+        display: none;
+    }
+}
+
+// Home page
+.toolbar-item-sitehome {
+    margin-left: 60px;
+    border-radius: 3px 0 0 3px;
+
+    &::after {
+        content: _dictionary("site");
+        padding-left: 10px;
+
+        body[data-contribute-mode="site"] & {
+            background: _theme($SWITCH--BG--ON, $APP);
+            color: _theme($SWITCH--COLOR--ON, $APP) !important;
+            border-radius: 3px;
+            box-shadow: _theme($SWITCH--SHADOW--ON, $APP);
+            padding: 5px 10px;
+            font-weight: 600;
+        }
+    }
+
+
+}
+
+// Content
+.toolbar-item-sitecontent {
+
+    &::after {
+        content: _dictionary("content");
+
+        body[data-contribute-mode="content"] & {
+            background: _theme($SWITCH--BG--ON, $APP);
+            color: _theme($SWITCH--COLOR--ON, $APP) !important;
+            border-radius: 3px;
+            box-shadow: _theme($SWITCH--SHADOW--ON, $APP);
+            padding: 5px 10px;
+            font-weight: 600;
+        }
+    }
+}
+
+// Files and images
+.toolbar-item-sitefiels {
+    border-radius: 0 3px 3px 0;
+
+    &::after {
+        content: _dictionary("files");
+        padding-right: 10px;
+
+        body[data-contribute-mode="files"] & {
+            background: _theme($SWITCH--BG--ON, $APP);
+            color: _theme($SWITCH--COLOR--ON, $APP) !important;
+            border-radius: 3px;
+            box-shadow: _theme($SWITCH--SHADOW--ON, $APP);
+            padding: 5px 10px;
+            font-weight: 600;
+        }
+    }
+
+
+}
+
+// Publication
+// Used to display page name
+.toolbar-item-publicationstatus {
+    position: absolute;
+    top: 20px;
+
+    &::before {
+        content: attr(data-PAGE-NAME);
+        background: url(_icon("pages", "white")) no-repeat top 1px left;
+
+        body[data-contribute-mode="files"] & {
+            background: url(_icon("folder", "white")) no-repeat left center;
+            background-size: 23px;
+        }
+
+        body[data-contribute-mode="content"] & {
+            background: url(_icon("folder", "white")) no-repeat left center;
+            background-size: 23px;
+        }
+
+        body[data-contribute-mode="content"][data-contribute-displaying-node="true"] & {
+            background: url( _icon("displayThumbs", "white")) no-repeat left center;
+        }
+
+        background-size: 21px;
+        padding-left: 25px;
+        @include text(_size("medium"), _color("secondary"), _weight("semilight"));
+
+        display: block;
+        max-width: 19vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    table {
+        display: none;
+    }
+}
+
+// Small positional fix for publication menu
+.menu-edit-menu-publication {
+    .x-menu-list {
+        top: -38px;
+    }
+
+    &::before {
+        top: -27px;
+    }
+}
+
+// Small positional fix for clipboard "menu"
+.clipboard-info-menu {
+    .x-menu-list {
+        top: -46px;
+    }
+
+    .x-item-disabled {
+        display: block !important;
+        color: _theme($TOOL-BUTTON--COLOR, $APP) !important;
+        font-style: normal;
+    }
+}
+
+// Information stuff
+.toolbar-item-publicationstatuswithtext {
+    display: none;
+}

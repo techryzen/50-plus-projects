@@ -1,0 +1,43 @@
+{
+  "id": 84,
+  "name": "Jahia",
+  "upstream_url": "https://github.com/Jahia",
+  "origin_as_reported": "2002",
+  "domain": "Enterprise digital experience",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Jahia/jahia",
+  "selected_upstream_commit": "ced2d04e2223485c33bdecd2fe07dd133a271f46",
+  "selected_commit_date": "2020-12-31T15:22:09Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-3.0-or-later option",
+    "evidence_path": "header.txt; license/DUAL-LICENSING-IMPORTANT-README.txt",
+    "scope": "Historical dual-license permits GPL option. Preserve all copyright notices and licenses."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 84,
+    "branch": "project/084-jahia",
+    "upstream_commit": "ced2d04e2223485c33bdecd2fe07dd133a271f46",
+    "import_commit": "534bb1fdea059f93f5fac7a0053876655304a37b",
+    "files": 5063,
+    "archive_sha256": "58d6db9920e08b2a70f7ae1f5e8b40133521dc7904ab6b9ce96e866531b3e02e",
+    "source_bytes": 58461927,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "3a31e1c8ff6665bf73fcd5502ef0193468b93c28",
+    "provenance_added": true
+  },
+  "folder": "projects/084-jahia"
+}

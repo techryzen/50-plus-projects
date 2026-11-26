@@ -1,0 +1,181 @@
+
+// PAGES
+#JahiaGxtPagesTab {
+    .x-grid3 .x-grid3-scroller {
+        height: calc(100% - 109px) !important;
+    }
+
+    .marked-for-deletion {
+        .x-grid3-col-locked {
+            background-color: _color("status", error);
+        }
+    }
+
+    .x-grid3-col-locked {
+        background: url(../images/icons_light/lock.svg) _color("quaternary", normal) no-repeat center; /* OPTIMISE URL ::: css/app/side-panel/_tab-pages.scss ::: 9 */
+        width: 12px;
+        height: 12px !important;
+        border-radius: 2px;
+        background-size: 16px;
+        padding: 3px !important;
+
+        > img {
+            display: none;
+        }
+
+        &:empty {
+            background: none;
+        }
+    }
+
+    .notPublished {
+        font-style: italic;
+    }
+
+    // Deal with icons here ...
+    .x-tree3-node-icon {
+
+        background-size: 23px 23px;
+        background-repeat: no-repeat;
+        padding-left: 18px;
+        width: 12px;
+        height: 27px;
+        opacity: 0.8;
+        background-position: center top 3px;
+        display: _theme($TAB--ICONS---DISPLAY);
+
+        // Default
+        &:not([src$="/jnt_page.png"]):not([src$="/jnt_virtualsite.png"]):not([src$="/jnt_nodeLink.png"]):not([src$="/jnt_externalLink.png"]):not([src$="/jnt_navMenuText.png"]) { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 1 */
+            width: 16px !important;
+            height: 16px !important;
+            padding-left: 0;
+            opacity: 1;
+            padding-top: 0;
+        }
+
+        &[src$="/jnt_page.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 2 */
+            display: inline-block !important;
+            padding: 0;
+            height: auto;
+            opacity: 1;
+        }
+
+        &[src$="/jnt_virtualsite.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 3 */
+            background-image: url(_theme($SIDE-PANEL-TAB--VIRTUALSITES-ICON--UP, $SIDE-PANEL)); /* OPTIMISE URL ::: css/app/side-panel/_tab-pages.scss ::: 1 */
+        }
+
+        // Internal link
+        &[src$="jnt_nodeLink.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 4 */
+            display: inline-block !important;
+            padding: 0;
+            height: auto;
+            opacity: 1;
+        }
+
+        // External link
+        &[src$="jnt_externalLink.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 5 */
+            display: inline-block !important;
+            padding: 0;
+            height: auto;
+            opacity: 1;
+        }
+
+        // Menu link
+        &[src$="jnt_navMenuText.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 6 */
+            display: inline-block !important;
+            padding: 0;
+            height: auto;
+            opacity: 1;
+        }
+    }
+
+    .x-grid3-row-selected {
+        .x-tree3-node-icon {
+            &[src$="/jnt_page.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 7 */
+                opacity: 1;
+                background-position: center;
+            }
+
+            &[src$="/jnt_virtualsite.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 8 */
+                background-image: url(../images/icons/tabs-site-white@X2.png); /* OPTIMISE URL ::: css/app/side-panel/_tab-pages.scss ::: 5 */
+                opacity: 1;
+            }
+
+            &[src$="jnt_nodeLink.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 9 */
+                opacity: 1;
+            }
+
+            &[src$="jnt_externalLink.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 10 */
+                opacity: 1;
+            }
+
+            &[src$="jnt_navMenuText.png"] { /* OPTIMISE SELECTOR ::: css/app/side-panel/_tab-pages.scss ::: 11 */
+                opacity: 1;
+            }
+        }
+    }
+
+    .x-grid3 {
+        .x-grid3-row {
+            height: 32px !important;
+
+            table {
+                height: 32px !important;
+
+                tbody {
+                    height: 32px !important;
+
+                    tr {
+                        height: 32px !important;
+
+                        td.x-grid3-cell {
+                            height: 32px !important;
+                            display: inline-block !important;
+
+                            &.x-grid3-td-locked {
+                                height: auto !important;
+                                width: auto !important;
+                                padding: 7px !important;
+                                position: static !important;
+                                top: 0 !important;
+                                right: 0 !important;
+                            }
+
+                            div.x-grid3-cell-inner:not(.x-grid3-col-locked) {
+                                height: 32px !important;
+                            }
+
+                            &.x-grid3-td-displayName {
+                                position: relative !important;
+                                width: calc(100% - 32px) !important;
+
+                                div.x-grid3-cell-inner {
+                                    div.x-tree3-node {
+                                        div.x-tree3-el {
+                                            img.x-tree3-node-icon {
+                                                width: 16px !important;;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.x-grid3-row-over:not(.x-grid3-row-selected) {
+                .x-grid3-td-displayName {
+                    &:after {
+                        background-image: url("../images/icon-more-options-white-50@X2.png") !important;
+                    }
+                }
+            }
+        }
+    }
+
+    &::before {
+        /* Tab Content Header Label */
+        content: _dictionary("pages") !important;
+    }
+}

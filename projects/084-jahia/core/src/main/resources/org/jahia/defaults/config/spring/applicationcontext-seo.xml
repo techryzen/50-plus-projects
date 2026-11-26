@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="org.jahia.services.render.StaticAssetMappingRegistry"
+          class="org.springframework.beans.factory.config.MapFactoryBean">
+        <property name="sourceMap">
+            <!-- Map minified jQuery to the full one for debugging -->
+            <!--entry key="/modules/jquery/javascript/jquery.min.js"
+                value="/modules/jquery/javascript/jquery.js"/-->
+            <map/>
+        </property>
+    </bean>
+
+    <bean id="UrlRewriteService" class="org.jahia.services.seo.urlrewrite.UrlRewriteService">
+        <property name="confReloadCheckIntervalSeconds" value="${urlRewriteReloadCheckInterval:300}" />
+        <property name="configurationResources">
+            <list>
+                <value>classpath*:org/jahia/services/seo/urlrewrite/urlrewrite.xml</value>
+                <!-- these are core rules that should not be removed -->
+                <value>WEB-INF/etc/config/urlrewrite*.xml</value>
+            </list>
+        </property>
+        <property name="seoRulesEnabled" value="${urlRewriteSeoRulesEnabled}"/>
+        <property name="seoRemoveCmsPrefix" value="${urlRewriteRemoveCmsPrefix}"/>
+        <property name="seoConfigurationResources">
+            <list>
+                <value>WEB-INF/etc/config/seo-urlrewrite*.xml</value>
+            </list>
+        </property>
+        <property name="lastConfigurationResources">
+            <list>
+                <value>classpath*:org/jahia/services/seo/urlrewrite/last-urlrewrite.xml</value>
+                <!-- these are core rules that should not be removed -->
+                <value>WEB-INF/etc/config/last-urlrewrite*.xml</value>
+            </list>
+        </property>
+        <property name="vanityUrlService" ref="org.jahia.services.seo.jcr.VanityUrlService"/>
+        <property name="urlResolverFactory" ref="urlResolverFactory"/>
+        <property name="siteService" ref="JahiaSitesService"/>
+        <property name="settingsBean" ref="settingsBean"/>
+        <property name="reservedUrlPrefixes"
+                  value="${seoReservedUrlPrefixesInternal:administration,jahia,atmosphere,gwtAtmosphere,cms,error,files,flow,generated-resources,gwt,initializationCompleted,PlutoInvoker,repository,start,tools,validateTicket,welcome,css,javascript,engines,errors,favicon.ico,icons,iphone,modules,ping.jsp,tools,server},${seoReservedUrlPrefixes:}"/>
+    </bean>
+
+    <bean id="UrlRewriteFilter" class="org.jahia.services.seo.urlrewrite.UrlRewriteFilter">
+        <property name="enabled" value="true"/>
+        <property name="outboundRulesEnabled" value="true"/>
+        <property name="urlRewriteService" ref="UrlRewriteService"/>
+    </bean>
+
+
+    <bean id="ResourceChecksumCalculator" class="org.jahia.services.seo.urlrewrite.ResourceChecksumCalculator"/>
+</beans>

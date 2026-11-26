@@ -1,0 +1,408 @@
+.engine-panel:not(.trashboardengine-ctn),
+div.engine-window {
+
+    #JahiaGxtEditEnginePanel-visibility {
+        // Deals with status of visibility and publication
+
+        img {
+            // For non styled image status ...
+            width: 12px;
+            height: 12px;
+            margin-top: 3px;
+
+            // Styled image status ...
+            &[src$="/visibilityStatusRed.png"], /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 1 */
+            &[src$="/visibilityStatusUnknown.png"], /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 2 */
+            &[src$="/visibilityStatusGreen.png"], /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 3 */
+            &[src$="/published.png"] { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 4 */
+                width: 20px;
+                height: 20px;
+                padding-left: 20px;
+                overflow: hidden;
+                box-sizing: border-box;
+                background-size: 22px;
+                opacity: .67;
+                margin-top: 0;
+            }
+
+            &.x-form-trigger {
+                padding-left: 0 !important;
+            }
+
+            &[src$="/visibilityStatusRed.png"] { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 5 */
+                background: url(../images/icons_dark/visibilityoff.svg) no-repeat center center; /* OPTIMISE URL ::: css/app/edit-engine/_panel-visibility.scss ::: 1 */
+            }
+
+            &[src$="/visibilityStatusUnknown.png"] { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 6 */
+                background: url(../images/icons_dark/unknown.svg) no-repeat center center; /* OPTIMISE URL ::: css/app/edit-engine/_panel-visibility.scss ::: 2 */
+            }
+
+            &[src$="/visibilityStatusGreen.png"] { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 7 */
+                background: url(../images/icons_dark/visibility.svg) no-repeat center center; /* OPTIMISE URL ::: css/app/edit-engine/_panel-visibility.scss ::: 3 */
+            }
+
+            &[src$="/publication/published.png"] { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 8 */
+                background: url(../images/icons_dark/published.svg) no-repeat center center; /* OPTIMISE URL ::: css/app/edit-engine/_panel-visibility.scss ::: 4 */
+            }
+
+        }
+
+        > .x-component {
+
+            .x-panel-footer {
+                text-align: right;
+            }
+
+            // Custom look and feel for the timezone header
+            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 9 */
+                background: _theme($FIELDSET--BG, $EDIT-ENGINE);
+                border: 1px solid _theme($FIELDSET--BORDER, $EDIT-ENGINE) !important;
+                padding: 20px 10px 15px 29px;
+                box-sizing: border-box;
+                height: auto !important;
+                position: relative;
+                width: 100% !important;
+                margin: 0px 0 10px 0 !important;
+                overflow: visible !important;
+
+                > .x-component {
+                    height: auto !important;
+
+                    &:nth-child(1) {
+                        > table > tbody > tr > td > .x-component {
+                            padding: 0 !important;
+                            font-weight: _weight("light");
+                            font-size: _size("medium");
+                            color: _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE);
+                        }
+                    }
+                }
+            }
+
+            // Visibility Zone
+            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 10 */
+                background: _theme($FIELDSET--BG, $EDIT-ENGINE);
+                border: 1px solid _theme($FIELDSET--BORDER, $EDIT-ENGINE) !important;
+                padding: 43px 10px 20px 29px;
+                box-sizing: border-box;
+                height: 10rem !important;
+                position: relative;
+                width: 100% !important;
+                margin: 0 0 10px 0 !important;
+                overflow: visible !important;
+                display: flex;
+
+                .gwt-HTML {
+                    @include text(_size("small"), _theme($LABEL--COLOR, $EDIT-ENGINE) !important, _weight("extralight"))
+                }
+
+                &:before {
+                    content: _dictionary("visibility_visibility");
+                    @include _label("legend");
+                }
+
+                > .x-component {
+                    &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 11 */
+                        width: 100% !important;
+                        height: 5rem !important;
+                        > table > tbody > tr > td {
+
+                            // https://jira.jahia.org/browse/QA-12611?focusedCommentId=103626&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-103626
+                            // Francois ask that this option (Publish conditions on save) should be hide, so be it
+                            &:nth-child(7) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 12 */
+                                display: none;
+                            }
+                            &:nth-child(8) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 13 */
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 14 */
+                        width: 100% !important;
+                        height: 5rem !important;
+                        > table > tbody > tr > td {
+                            // All conditions should match label
+                            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 16 */
+                                position: relative;
+                                top: 0;
+                                right: 0;
+                                z-index: 98;
+
+                                div {
+                                    @include text(_size("small"), _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE) !important, _weight("extralight"))
+                                }
+
+                            }
+
+                            // All conditions should match checkbox
+                            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 17 */
+                                position: relative;
+                                right: 0;
+                                top: 0;
+                                z-index: 98;
+                                left: 5px;
+                            }
+
+                            // Add New Condition Label
+                            &:nth-child(3) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 18 */
+                                display: none;
+                            }
+
+                            // Selector
+                            &:nth-child(4) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 19 */
+                                // Arrow
+
+                                input {
+                                    display: none;
+                                }
+
+                                img.x-form-trigger {
+                                    background: url( _icon("add", "white")) no-repeat center center !important;
+                                    width: 15px !important;
+                                    height: 15px !important;
+                                    position: relative !important;
+                                    top: 2px;
+                                    right: 0;
+                                    z-index: 98;
+                                    background-size: 14px !important;
+                                    background-color: _theme($BUTTON--BG, $EDIT-ENGINE) !important;
+                                    opacity: 1;
+                                    padding-left: 15px;
+                                    border: none;
+
+                                }
+                            }
+
+                            // Add button
+                            &:nth-child(5) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 20 */
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Conditions List
+            &:nth-child(3) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 21 */
+                .x-grid-empty {
+                    padding: 0;
+
+                    &:before {
+                        content: _dictionary("visibility_no_conditions");
+                        display: block;
+                        @include text(_size("small"), _theme($LABEL--COLOR, $EDIT-ENGINE), _weight("extralight"));
+                    }
+                }
+
+                background: _theme($FIELDSET--BG, $EDIT-ENGINE);
+                border: 1px solid _theme($FIELDSET--BORDER, $EDIT-ENGINE) !important;
+                padding: 43px 10px 20px 29px;
+                box-sizing: border-box;
+                height: auto !important;
+
+                &:before {
+                    content: _dictionary("visibility_conditions");
+                    @include _label("legend");
+                }
+
+                .x-grid3 {
+                    height: auto !important;
+                    .x-grid3-row-table > tbody > tr {
+                        display: flex;
+                        height: 100%;
+                        position: relative;
+                    }
+                }
+
+                .x-grid3-scroller {
+                    overflow: hidden;
+                }
+
+                .x-grid3-row {
+                    background: none !important;
+                    pointer-events: none;
+                }
+
+                .x-grid3-col-status {
+                    position: absolute;
+                    left: -3px;
+                    top: -2px;
+                }
+
+                .x-grid-cell {
+                    line-height: normal;
+                }
+
+                .x-grid3-col-name {
+                    color: _theme($LIST-BOX--ROW--COLOR, $EDIT-ENGINE) !important;
+                    padding: 5px 10px 5px 23px;
+                }
+
+
+                .x-grid3-td-remove {
+                    width: 55px !important;
+                    height: 20px !important;
+                    position: relative;
+                    right: 0;
+                    top: 0;
+                    pointer-events: all;
+                    background: url(../images/icons_dark/edit.svg) right 5px center no-repeat !important; /* OPTIMISE URL ::: css/app/edit-engine/_panel-visibility.scss ::: 5 */
+                    background-size: 16px 16px !important;
+                    opacity: 0.8;
+
+                    &:hover {
+                        opacity: 1;
+                        cursor: pointer;
+                    }
+                }
+
+                .x-grid3-col-remove {
+                    width: 20px;
+                    height: 20px !important;
+                    background: transparent;
+                    background: url("../images/icons_dark/deleted.svg") no-repeat center center;
+                    background-size: 21px;
+                    top: 0;
+
+                    > table {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+
+                        > tbody {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            // Condition settings
+            &:nth-child(4) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 22 */
+                height: 100% !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                background: _theme($MODAL-SOLID--BG, $EDIT-ENGINE);
+                z-index: 999;
+                display: none;
+
+                &.indigo-show {
+                    display: block;
+                    background: radial-gradient(ellipse at bottom right, rgba(38, 38, 38, 0.5) 0%, rgba(38, 38, 38, 0.71) 50%);
+                }
+
+                .x-panel-footer {
+                    menu {
+                        padding: 0 6px 0 0;
+
+                        button {
+                            border: none;
+                            display: inline-block;
+                            padding: 5px 10px;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+
+                            &.save-new-condition,
+                            &.done-with-condition {
+                                background: _theme($ACTION-SUGGESTED--BG, $EDIT-ENGINE);
+                                box-shadow: _theme($ACTION-SUGGESTED--SHADOW, $EDIT-ENGINE);
+                                margin-left: 3px;
+                                @include text(16px, _theme($ACTION-SUGGESTED--COLOR, $EDIT-ENGINE), _weight("extralight"));
+
+                                &:hover {
+                                    background: _theme($ACTION-SUGGESTED--BG---HOVER, $EDIT-ENGINE);
+                                    box-shadow: _theme($ACTION-SUGGESTED--SHADOW---HOVER, $EDIT-ENGINE);
+                                    color: _theme($ACTION-SUGGESTED--COLOR---HOVER, $EDIT-ENGINE);
+                                }
+                            }
+
+                            &.cancel-new-condition {
+                                background: _theme($ACTION-DEFAULT--BG, $EDIT-ENGINE);
+                                box-shadow: _theme($ACTION-DEFAULT--SHADOW, $EDIT-ENGINE);
+                                @include text(16px, _theme($ACTION-DEFAULT--COLOR, $EDIT-ENGINE), _weight("extralight"));
+
+                                &:hover {
+                                    background: _theme($ACTION-DEFAULT--BG---HOVER, $EDIT-ENGINE);
+                                    box-shadow: _theme($ACTION-DEFAULT--SHADOW---HOVER, $EDIT-ENGINE);
+                                    color: _theme($ACTION-DEFAULT--COLOR---HOVER, $EDIT-ENGINE);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                > .x-panel {
+                    // Use to vertically align
+                    &:before {
+                        display: block;
+                        height: calc(50vh - 200px);
+                        min-height: 0;
+                        content: " ";
+                    }
+
+                    .x-panel-bwrap {
+                        &:before {
+                            content: _dictionary("visibility_edit_condition");
+
+                            body[data-indigo-editing-condition="new"] & {
+                                content: _dictionary("visibility_new_condition");
+                            }
+
+                            display: block;
+                            margin-bottom: 10px;
+                            @include text(_size("big"), _theme($TITLE--COLOR, $EDIT-ENGINE), _weight("extralight"), _font("raleway"));
+                        }
+
+                        .x-form-field-wrap {
+                            width: 100% !important;
+                        }
+                    }
+
+                    width: 460px !important;
+                    margin: 0 auto;
+
+                    > .x-panel-bwrap {
+                        background: #f4f4f4;
+                        padding: 19px;
+                        box-shadow: 1px 1px 2px 0px rgba(38, 38, 38, 0.4);
+                    }
+
+                    // Hide occasional duplication of the window
+                    &:nth-child(2), /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 23 */
+                    &:nth-child(3) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-visibility.scss ::: 24 */
+                        display: none;
+                    }
+
+                    fieldset {
+                        padding: 43px 10px 20px 19px !important;
+                        background: transparent !important;
+
+                        legend {
+                            .x-fieldset-header-text {
+                                left: 19px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// add new condition menu
+body[data-indigo-add-visibility-condition="new"] {
+    > .x-combo-list {
+        background: transparent !important;
+        width: auto !important;
+
+        > div {
+            position: relative;
+            top: 5px;
+            right: 0;
+        }
+    }
+}

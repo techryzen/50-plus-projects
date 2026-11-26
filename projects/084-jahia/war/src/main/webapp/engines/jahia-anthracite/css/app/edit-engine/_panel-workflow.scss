@@ -1,0 +1,341 @@
+.engine-panel:not(.trashboardengine-ctn),
+div.engine-window {
+
+#JahiaGxtEditEnginePanel-workflow {
+
+    // Main container
+    > div {
+        width: 100% !important;
+        height: 100% !important;
+
+        > div {
+            // Workflow settings block
+            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-workflow.scss ::: 1 */
+                height: 250px !important;
+                top: auto !important;
+                padding: 46px 10px 20px 29px !important;
+                margin: 0 23px 10px 0 !important;
+                position: relative;
+                background: _theme($FIELDSET--BG, $EDIT-ENGINE);
+                border: 1px solid _theme($FIELDSET--BORDER, $EDIT-ENGINE) !important;
+                box-sizing: border-box;
+
+                // List of Workflow types
+                > .x-grid-panel {
+                    // background: purple;
+                    position: relative !important;
+                    top: auto !important;
+                    left: auto !important;
+                    display: inline-block;
+                    width: 250px !important;
+
+                    // List
+                    > .x-grid3 {
+                        background: _theme($LIST-BOX--BG, $EDIT-ENGINE) !important;
+                    }
+
+                    &:before {
+                        content: "Workflow Settings";
+                        text-transform: uppercase;
+                        position: absolute;
+                        top: -30px;
+                        @include text(11px, _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("semibold"));
+                    }
+
+                    .x-grid3-row-over {
+                        // More info - not needed
+                        background: _theme($LIST-BOX--ROW--BG---HOVER, $EDIT-ENGINE) !important;
+
+                        &.x-grid3-row-selected {
+                            background-color: _theme($LIST-BOX--ROW--BG---SELECTED, $EDIT-ENGINE) !important;
+
+                            .x-grid3-td-displayName {
+                                color: _theme($LIST-BOX--ROW--COLOR---SELECTED, $EDIT-ENGINE) !important;
+                            }
+                        }
+
+                        .x-grid3-td-displayName {
+                            color: _theme($LIST-BOX--ROW--COLOR---HOVER, $EDIT-ENGINE) !important;
+                        }
+                    }
+
+                    .x-grid3-row-selected {
+                        background-color: _theme($LIST-BOX--ROW--BG---SELECTED, $EDIT-ENGINE) !important;
+                        background-image: url( _icon("navNext", "white")) !important; /* OPTIMISE URL ::: css/app/edit-engine/_panel-workflow.scss ::: 1 */
+                        background-position: right 5px center !important;
+                        background-repeat: no-repeat !important;
+                        background-size: 13px !important;
+                        color: _theme($LIST-BOX--ROW--COLOR---SELECTED, $EDIT-ENGINE) !important;
+                    }
+
+                    .x-grid3-scroller {
+                        width: 100% !important;
+                    }
+
+                    // More info buttons - not needed
+                    .x-grid3-td-displayName {
+                        color: _theme($LIST-BOX--ROW--COLOR, $EDIT-ENGINE);
+
+                        &:hover {
+                            color: _theme($LIST-BOX--ROW--COLOR---HOVER, $EDIT-ENGINE) !important;
+                        }
+
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+
+                // Settings for selected workflow type
+                > .x-panel {
+                    position: relative !important;
+                    top: auto !important;
+                    left: auto !important;
+                    display: inline-block;
+                    width: calc(100% - 250px) !important;
+                    vertical-align: top;
+
+                    form {
+                        > div.x-form-item {
+                            // Same as parent
+                            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-workflow.scss ::: 2 */
+                                label {
+                                    width: auto !important;
+                                    margin-left: 20px !important;
+                                    float: left !important;
+                                    margin-right: 10px !important;
+                                    text-transform: none;
+                                    @include text(_size("small"), _theme($LABEL--COLOR, $EDIT-ENGINE), _weight("semilight"));
+                                }
+
+                                .x-form-check-wrap {
+                                    width: auto !important;
+                                    margin-top: 9px;
+                                }
+
+                                &:before {
+                                    content: attr(data-indigo-workflow-type);
+                                    text-transform: uppercase;
+                                    margin-bottom: 5px;
+                                    margin-left: 19px;
+                                    display: block;
+                                    @include text(10px, _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("semibold"));
+                                }
+                            }
+
+                            // Workflow selector
+                            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-workflow.scss ::: 3 */
+                                label {
+                                    display: none !important;
+                                }
+                            }
+
+                        }
+                    }
+
+                    .x-form-field-wrap {
+
+                        &:before {
+                            content: attr(data-indigo-workflow-type);
+                            text-transform: uppercase;
+                            margin-bottom: 5px;
+                            margin-top: 20px;
+                            margin-right: 12px;
+                            display: block;
+                            @include text(10px, _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("semibold"));
+                        }
+
+                        img {
+                            top: 19px;
+                        }
+
+                        margin: 0 20px;
+                    }
+                }
+            }
+
+            // Workflow history
+            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-workflow.scss ::: 4 */
+                height: auto !important;
+                max-height: calc(100% - 250px) !important;
+                top: 251px !important;
+                position: relative !important;
+
+                padding: 46px 10px 20px 29px !important;
+                margin: 0 23px 10px 0 !important;
+                background: _theme($FIELDSET--BG, $EDIT-ENGINE);
+                border: 1px solid _theme($FIELDSET--BORDER, $EDIT-ENGINE) !important;
+                box-sizing: border-box;
+
+                &:before {
+                    content: "Workflow History";
+                    text-transform: uppercase;
+                    position: absolute;
+                    top: 17px;
+                    @include text(11px, _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("semibold"));
+                }
+
+                .x-grid3-scroller {
+                    overflow-x: hidden;
+                }
+
+                .x-grid-empty {
+                    &:before {
+                        content: _dictionary("no_results");
+                        display: block;
+                        @include text(_size("small"), _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("extralight"));
+                    }
+                }
+
+                .x-grid-panel {
+                    width: auto !important;
+                    height: auto !important;
+
+                    .x-grid3-row {
+
+                        &.x-grid3-row-selected {
+                            background: transparent !important;
+                        }
+                    }
+
+                    .x-grid3 {
+                        width: auto !important;
+                        height: auto !important;
+
+                        .x-grid3-viewport {
+                            width: auto !important;
+                            height: auto !important;
+
+                            > .x-grid3-header {
+                                display: block;
+                                width: calc(100% - 10px) !important;
+                                background: transparent;
+
+                                .x-grid3-header {
+                                    display: inline-block;
+                                }
+
+                                .x-grid3-header-inner {
+                                    width: 100% !important;
+
+                                    .x-grid3-header-offset {
+                                        padding-left: 0;
+                                        width: 100% !important;
+                                    }
+                                }
+
+                                .x-grid3-cell {
+
+                                    &.x-grid3-hd-over,
+                                    &.x-grid3-hd-menu-open {
+
+                                        div {
+                                            background: _theme($MENU-CLOSED--BG---HOVER, $APP) !important;
+                                        }
+
+                                        a {
+                                            background: url(_theme($MENU-CLOSED--ARROW---HOVER, $APP)) no-repeat center center;
+                                        }
+
+                                        span {
+                                            text-transform: uppercase;
+                                            color: _theme($MENU-CLOSED--COLOR---HOVER, $APP);
+                                        }
+                                    }
+
+                                    span {
+                                        text-transform: uppercase;
+                                        @include text(10px, _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("semibold"));
+                                    }
+
+                                    .sort-asc {
+                                        .x-grid3-sort-icon {
+                                            background: url(_icon("arrowSortAsc", "white")) no-repeat center center;
+                                        }
+                                    }
+
+                                    .sort-desc {
+                                        .x-grid3-sort-icon {
+                                            background: url(_icon("arrowSortDesc", "white")) no-repeat center center;
+                                        }
+                                    }
+
+                                    .x-grid3-sort-icon {
+                                        opacity: 0.5;
+                                    }
+
+                                }
+
+
+                                .x-grid3-hh {
+                                    width: auto !important;
+
+                                    > table {
+                                        display: block;
+                                        width: 100% !important;
+
+                                        > tbody {
+                                            width: 100% !important;
+                                            display: block;
+
+                                            > tr {
+                                                display: block;
+                                                width: 100% !important;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .x-grid3-cell {
+                    width: calc(10% - 10px) !important;
+                    margin-right: 10px;
+                    display: inline-block;
+                    border: none;
+                    background: transparent;
+
+                    > div {
+                        width: 100% !important;
+                    }
+
+                    &.x-grid3-td-displayName {
+                        width: calc(32% - 10px) !important;
+                        pointer-events: all !important;
+
+                        &:after {
+                            display: none;
+                        }
+                    }
+
+                    &.x-grid3-td-locale {
+                        width: calc(5% - 10px) !important;
+                    }
+
+                    &.x-grid3-td-user {
+                        width: calc(6% - 10px) !important;
+                    }
+
+                    &.x-grid3-td-duration {
+                        width: calc(13% - 10px) !important;
+                    }
+
+                    &.x-grid3-td-startDate,
+                    &.x-grid3-td-endDate {
+                        width: calc(12% - 10px) !important;
+                    }
+
+                    .x-grid3-cell-inner,
+                    .x-grid3-cell-inner label {
+                        text-transform: none;
+                        @include text(_size("small"), _theme($ROW--COLOR, $EDIT-ENGINE), _weight("semilight"));
+                    }
+                }
+            }
+        }
+    }
+}
+
+}

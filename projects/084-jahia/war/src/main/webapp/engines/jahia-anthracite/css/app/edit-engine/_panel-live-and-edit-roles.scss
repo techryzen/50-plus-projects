@@ -1,0 +1,121 @@
+.engine-panel:not(.trashboardengine-ctn),
+div.engine-window {
+    #JahiaGxtEditEnginePanel-liveroles,
+    #JahiaGxtEditEnginePanel-editroles {
+
+        @include button("FORM_SMALL", "remove-icons");
+
+        .x-item-disabled {
+            display: none;
+        }
+
+        .x-panel-tbar {
+            .x-toolbar-cell {
+                margin: 1rem !important;
+                display: inline-block;
+            }
+
+            .x-btn {
+                margin:0;
+            }
+        }
+
+        .x-panel-header {
+            display: none !important;
+        }
+        .x-toolbar {
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+        .x-grid3-row-selected {
+            background-color: transparent !important;
+
+            .x-grid3-td-displayName,
+            .x-grid3-td-inheritedFrom {
+                color: _theme($ROW--COLOR, $EDIT-ENGINE) !important;
+                opacity: 1;
+            }
+
+            &.x-grid3-row-over {
+                background-color: _theme($ROW--BG, $EDIT-ENGINE) !important;
+            }
+        }
+
+        .x-grid3-row-over {
+            background-color: _theme($ROW--BG, $EDIT-ENGINE) !important;
+
+            .x-grid3-td-displayName,
+            .x-grid3-td-inheritedFrom {
+                color: _theme($ROW--COLOR, $EDIT-ENGINE) !important;
+                opacity: 1;
+            }
+        }
+
+        // Icon for user / group (width 28px)
+        .x-grid3-td-type {
+            width: 28px !important;
+            display: inline-block;
+        }
+
+        // Main label (50% of remainder )
+        .x-grid3-td-displayName {
+            width: calc(50% - 28px - 28px) !important;
+            display: inline-block;
+            color: _theme($ROW--COLOR, $EDIT-ENGINE) !important;
+
+        }
+
+        // Delete button (width 28)
+        .x-grid3-td-removed {
+            display: inline-block;
+
+            width: 28px !important;
+            height: 25px !important;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            opacity: 0.8;
+
+            // Button container
+            .x-grid3-col-removed {
+                padding: 0;
+            }
+
+            .x-btn {
+                width: 100% !important;
+                height: 25px !important;
+
+                button {
+                    height: 25px !important;
+                }
+            }
+
+            .x-btn-image {
+                top: 4px !important
+            }
+        }
+
+        // Inheritance label (50% of remainder )
+        .x-grid3-td-inheritedFrom {
+            width: calc(50% - 28px - 28px) !important;
+            display: inline-block;
+
+            @include text(_size("small"), _theme($ROW--COLOR, $EDIT-ENGINE), _weight("extralight"));
+        }
+
+        // Header
+        .x-panel-tbar {
+            pointer-events: all;
+            height: auto !important;
+        }
+
+        .x-panel-bwrap .x-panel-body {
+            height: calc(100% - 40px) !important;
+        }
+    }
+
+}

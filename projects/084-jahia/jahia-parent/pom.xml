@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    ==========================================================================================
+    =                   JAHIA'S DUAL LICENSING - IMPORTANT INFORMATION                       =
+    ==========================================================================================
+
+                                    http://www.jahia.com
+
+        Copyright (C) 2002-2020 Jahia Solutions Group SA. All rights reserved.
+
+        THIS FILE IS AVAILABLE UNDER TWO DIFFERENT LICENSES:
+        1/GPL OR 2/JSEL
+
+        1/ GPL
+        ==================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE GPL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program. If not, see <http://www.gnu.org/licenses />.
+
+
+        2/ JSEL - Commercial and Supported Versions of the program
+        ===================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE JSEL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        Alternatively, commercial and supported versions of the program - also known as
+        Enterprise Distributions - must be used in accordance with the terms and conditions
+        contained in a separate written agreement between you and Jahia Solutions Group SA.
+
+        If you are unsure which license is appropriate for your use,
+        please contact the sales department at sales@jahia.com.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>jahia-parent</artifactId>
+    <name>Jahia Common Project Parent</name>
+    <groupId>org.jahia</groupId>
+    <version>8.0.2.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2004</inceptionYear>
+    <!--
+   <licenses>
+       <license>
+         <name>GNU General Public License</name>
+         <url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+         <distribution>repo</distribution>
+         <comments>Jahia Community Edition is licensed under the terms of the GNU General Public License v2</comments>
+       </license>
+   </licenses>
+    -->
+    <organization>
+        <name>Jahia Solutions Group SA</name>
+        <url>http://www.jahia.com</url>
+    </organization>
+    <!--logo>/images/jahia.gif</logo-->
+    <description>Jahia Commons Parent Project</description>
+    <url>http://www.jahia.com</url>
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+    <properties>
+        <year>2020</year>
+        <!-- general encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <pluto.version>2.0.2</pluto.version>
+        <spring.version>3.2.18.RELEASE_OSGI</spring.version>
+        <springwebflow-version>2.4.1.RELEASE</springwebflow-version>
+        <jackrabbit.version>2.18.4-jahia1</jackrabbit.version>
+        <jackson.core.version>2.9.9</jackson.core.version>
+        <jackson-databind.core.version>2.9.9.3</jackson-databind.core.version>
+        <jackson.osgi.version>2.9.9</jackson.osgi.version>
+        <jackson-databind.osgi.version>2.9.9.3</jackson-databind.osgi.version>
+        <lucene.version>3.6.2</lucene.version>
+        <jbpm.version>6.0.0.Final</jbpm.version>
+        <jbpm.version.jahia>${jbpm.version}-jahia</jbpm.version.jahia>
+        <drools.version>${jbpm.version}</drools.version>
+        <hibernate.version>4.2.7.SP1</hibernate.version>
+        <hibernate.core.version>4.2.7.SP1-jahia1</hibernate.core.version>
+        <hibernate.validator.version>5.0.1.Final</hibernate.validator.version>
+        <camel.version>2.25.2</camel.version>
+        <gwt.version.base>2.8.2</gwt.version.base>
+        <gwt.version>${gwt.version.base}</gwt.version>
+        <jgroups.version>3.4.8.Final</jgroups.version>
+        <!--Atmosphere javascript is defined as a static resource in Jahia and has to be update manually-->
+        <atmosphere.version>2.5.4-jahia</atmosphere.version>
+        <atmosphere.gwt.version>2.5.2</atmosphere.gwt.version>
+        <ant.version>1.8.2</ant.version>
+        <junit.version>4.12</junit.version>
+        <junit.addons.version>1.4</junit.addons.version>
+        <testng.version>6.9.10</testng.version>
+        <mockito.version>1.10.19</mockito.version>
+        <jmockit.version>1.26</jmockit.version>
+        <assertj.version>2.6.0</assertj.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <awaitility.version>2.0.0</awaitility.version>
+        <xmlunit.version>1.6</xmlunit.version>
+        <izpack.version>4.3.5-jahia11</izpack.version>
+        <launch4j.version>3.12</launch4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <jahia.tomcat.version>9.0.37</jahia.tomcat.version>
+
+        <driver.derby.version>10.12.1.1</driver.derby.version>
+        <driver.mssql.version>6.4.0.jre8</driver.mssql.version>
+        <driver.mysql.version>5.1.48</driver.mysql.version>
+        <driver.oracle.version>12.2.0.1</driver.oracle.version>
+        <driver.postgresql.version>42.2.9</driver.postgresql.version>
+        <driver.mariadb.version>2.4.1</driver.mariadb.version>
+
+        <hibernateDialect.derby>org.hibernate.dialect.DerbyTenSevenDialect</hibernateDialect.derby>
+        <hibernateDialect.mssql>org.hibernate.dialect.SQLServer2008Dialect</hibernateDialect.mssql>
+        <hibernateDialect.mysql>org.hibernate.dialect.MySQL5InnoDBDialect</hibernateDialect.mysql>
+        <hibernateDialect.oracle>org.hibernate.dialect.Oracle10gDialect</hibernateDialect.oracle>
+        <hibernateDialect.postgresql>org.hibernate.dialect.PostgreSQL82Dialect</hibernateDialect.postgresql>
+
+        <!-- Meta information -->
+        <jahia.manifest.vendor.name>Jahia Solutions Group SA</jahia.manifest.vendor.name>
+        <jahia.manifest.vendor.id>org.jahia</jahia.manifest.vendor.id>
+        <jahia.manifest.vendor.url>http://www.jahia.com</jahia.manifest.vendor.url>
+        <jahia.manifest.vendor.email>info@jahia.com</jahia.manifest.vendor.email>
+        <jahia.svn.base.url>https://devtools.jahia.com/svn/jahia/trunk</jahia.svn.base.url>
+        <jahia.license.header>header.txt</jahia.license.header>
+        <jahia.license.style>style.xml</jahia.license.style>
+        <jahia.sign.storepass>password</jahia.sign.storepass>
+        <jahia.sign.keystore>${user.home}/.codesign/jahia-code-signing-certificate.p12</jahia.sign.keystore>
+
+        <!-- plugin versions -->
+        <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+        <assembly.plugin.version>2.5.2</assembly.plugin.version>
+        <site.plugin.version>3.4</site.plugin.version>
+        <war.plugin.version>2.5</war.plugin.version>
+        <enforcer.plugin.version>1.1.1</enforcer.plugin.version>
+        <compiler.plugin.version>3.7.0</compiler.plugin.version>
+        <buildnumber.plugin.version>1.0</buildnumber.plugin.version>
+        <source.plugin.version>2.4</source.plugin.version>
+        <release.plugin.version>2.5.3-jahia1</release.plugin.version>
+        <project.info.reports.plugin.version>2.7</project.info.reports.plugin.version>
+        <jxr.plugin.version>2.3</jxr.plugin.version>
+        <antrun.plugin.version>1.8</antrun.plugin.version>
+        <surefire.plugin.version>2.19.1</surefire.plugin.version>
+        <failsafe.plugin.version>2.19.1</failsafe.plugin.version>
+        <eclipse.plugin.version>2.9</eclipse.plugin.version>
+        <nexus.maven.plugin.version>1.5.1</nexus.maven.plugin.version>
+        <dependency.plugin.version>2.8</dependency.plugin.version>
+
+        <!-- OSGi versions -->
+        <felix.configadmin.version>1.9.16</felix.configadmin.version>
+        <felix.coordinator.version>1.0.2</felix.coordinator.version>
+        <felix.fileinstall.version>3.6.4-jahia2-SNAPSHOT</felix.fileinstall.version>
+        <felix.http.version>2.2.1</felix.http.version>
+        <felix.metatype.version>1.2.2</felix.metatype.version>
+        <felix.utils.version>1.11.2</felix.utils.version>
+        <felix.webconsole.version>4.3.16-jahia1</felix.webconsole.version>
+        <gemini.blueprint.version>1.0.2.RELEASE</gemini.blueprint.version>
+        <gemini.blueprint.core.version>1.0.2.RELEASE-jahia2-SNAPSHOT</gemini.blueprint.core.version>
+        <jansi.version>1.18</jansi.version>
+        <slf4j.version>1.7.26</slf4j.version>
+        <osgi.version>6.0.0</osgi.version>
+        <osgi.compendium.version>6.0.0</osgi.compendium.version>
+        <pax.logging.version>1.11.2</pax.logging.version>
+        <pax.swissbox.version>1.8.3</pax.swissbox.version>
+        <pax.url.version>2.6.1</pax.url.version>
+        <pax.web.api.version>7.3.7</pax.web.api.version>
+        <pax.web.jsp.version>7.3.7</pax.web.jsp.version>
+        <karaf.version>4.2.7</karaf.version>
+        <karaf.jaas.config.version>${karaf.version}</karaf.jaas.config.version>
+        <!-- End of OSGi versions -->
+
+        <jahia.commons.version>1.0.8</jahia.commons.version>
+        <jahia.plugin.version>5.10-SNAPSHOT</jahia.plugin.version>
+        <jahia.archivers.version>${jahia.plugin.version}</jahia.archivers.version>
+        <jahia.configurators.version>${jahia.plugin.version}</jahia.configurators.version>
+        <jahia.deployers.version>${jahia.plugin.version}</jahia.deployers.version>
+        <jahia.installers.version>${jahia.plugin.version}</jahia.installers.version>
+
+        <!-- Releases properties -->
+        <jahia.nexus.staging.repository.id>64277f72646358</jahia.nexus.staging.repository.id>
+
+        <jahia.modules.importPackage>
+            org.apache.naming.java,
+            org.jahia.defaults.config.spring,
+            org.jahia.exceptions,
+            org.jahia.services
+        </jahia.modules.importPackage>
+
+        <jahia.modules.bundle.removeheaders>
+            Include-Resource,
+            Private-Package,
+            Embed-Dependency,
+            Embed-Transitive,
+            Jahia-Depends-Skip-Require-Capability
+        </jahia.modules.bundle.removeheaders>
+        <custom.modules.bundle.removeheaders>${jahia.modules.bundle.removeheaders}</custom.modules.bundle.removeheaders>
+
+        <graphql-java.version>11.0</graphql-java.version>
+        <graphql-java-annotations.version>6.1</graphql-java-annotations.version>
+        <graphql-java-servlet.version>4.7.0-jahia3</graphql-java-servlet.version>
+    </properties>
+
+    <developers>
+        <developer>
+            <name>Alexander Karmanov</name>
+            <email>alexander.karmanov@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Anna Afshar</name>
+            <email>anna.afshar@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Benjamin Papež</name>
+            <email>benjamin.papez@jahia.com</email>
+            <organization>Jahia Solutions GmbH</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Cédric Mailleux</name>
+            <email>cedric.mailleux@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Christophe Laprun</name>
+            <email>christophe.laprun@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Clément Egger</name>
+            <email>clement.egger@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Damien Gaillard</name>
+            <email>damien.gaillard@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Damien Saulnier</name>
+            <email>damien.saulnier@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Darcy Carrié</name>
+            <email>darcy.carrie@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>David Griffon</name>
+            <email>david.griffon@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Fabrice Aissah</name>
+            <email>fabrice.aissah@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>François Pral</name>
+            <email>francois.pral@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Jonathan Sinovassin-naïk</name>
+            <email>jsinovassinnaik@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Julian Maurel</name>
+            <email>julian.maurel@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Kevan Jahanshahi</name>
+            <email>kevan.jahanshahi@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Philippe Vollenweider</name>
+            <email>philippe.vollenweider@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Quentin Lamerand</name>
+            <email>quentin.lamerand@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Régis Mora</name>
+            <email>regis.mora@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Rizak Ahmed</name>
+            <email>rizak.ahmed@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Serge Huber</name>
+            <email>serge.huber@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Sergiy Shyrkov</name>
+            <email>sergiy.shyrkov@jahia.com</email>
+            <organization>Jahia Solutions GmbH</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Stéphanie Rouaud</name>
+            <email>stephanie.rouaud@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Thomas Draier</name>
+            <email>thomas.draier@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Wanda Egger</name>
+            <email>wanda.egger@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>Werner Assek</name>
+            <email>werner.assek@jahia.com</email>
+            <organization>Jahia Solutions Group SA</organization>
+            <organizationUrl>http://www.jahia.com/</organizationUrl>
+        </developer>
+	    <developer>
+	        <name>Xiang Yu He</name>
+	        <email>xhe@jahia.com</email>
+	        <organization>Jahia Solutions Group SA</organization>
+	        <organizationUrl>http://www.jahia.com/</organizationUrl>
+	    </developer>
+    </developers>
+    <contributors>
+        <!-- List of contributors and former developers. Thanks to all of you guys! -->
+        <contributor>
+            <name>Charles Flond</name>
+        </contributor>
+        <contributor>
+            <name>Fabrice Cantegrel</name>
+        </contributor>
+        <contributor>
+            <name>Frédéric Pierre</name>
+        </contributor>
+        <contributor>
+            <name>Guillaume Lucazeau</name>
+        </contributor>
+        <contributor>
+            <name>Islam El-Sayed</name>
+        </contributor>
+        <contributor>
+            <name>Khaled Tlili</name>
+        </contributor>
+        <contributor>
+            <name>Khue Nguyen</name>
+        </contributor>
+        <contributor>
+            <name>Romain Felden</name>
+        </contributor>
+        <contributor>
+            <name>Sophia Batata</name>
+        </contributor>
+        <contributor>
+            <name>Xavier Lawrence</name>
+        </contributor>
+    </contributors>
+
+    <issueManagement>
+        <system>Jira</system>
+        <url>https://jira.jahia.org/</url>
+    </issueManagement>
+
+    <repositories>
+        <repository>
+            <id>jahia-public</id>
+            <name>Jahia Public Repository</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jahia-public</id>
+            <name>Jahia Public Repository</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <profiles>
+        <profile>
+            <id>license</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <version>2.6</version>
+                        <configuration>
+                            <header>${jahia.license.header}</header>
+                            <quiet>false</quiet>
+                            <failIfMissing>true</failIfMissing>
+                            <aggregate>true</aggregate>
+                            <includes>
+                                <include>src/**/*.java</include>
+                                <include>pom.xml</include>
+                                <!--
+                                <include>src/**/*.tag</include>
+                                <include>src/**/*.jsp</include>
+                                <include>src/**/*.jspf</include>
+                                <include>src/**/*.inc</include>
+                                <include>src/main/webapp/WEB-INF/web.xml</include>
+                                 -->
+                            </includes>
+                            <excludes>
+                                <exclude>src/main/java/name/fraser/**</exclude>
+                                <exclude>src/main/java/org/apache/catalina/**</exclude>
+                                <exclude>src/main/java/org/springframework/core/serializer/**</exclude>
+                            </excludes>
+                            <useDefaultExcludes>true</useDefaultExcludes>
+                            <mapping>
+                                <tag>DYNASCRIPT_STYLE</tag>
+                                <inc>DYNASCRIPT_STYLE</inc>
+                                <jspf>DYNASCRIPT_STYLE</jspf>
+                                <java>SLASHSTAR_STYLE</java>
+                            </mapping>
+                            <useDefaultMapping>true</useDefaultMapping>
+                            <encoding>UTF-8</encoding>
+                            <headerDefinitions>
+                                <headerDefinition>${jahia.license.style}</headerDefinition>
+                            </headerDefinitions>
+                            <properties>
+                                <year>${year}</year>
+                            </properties>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>format</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>do-attach-javadocs</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>aggregate-javadocs</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>aggregate-javadocs</id>
+                                <goals>
+                                    <goal>aggregate-jar</goal>
+                                </goals>
+                                <configuration>
+                                    <attach>false</attach>
+                                    <finalName>${project.artifactId}-${project.version}-aggregate</finalName>
+                                    <additionalDependencies>
+                                        <additionalDependency>
+                                            <groupId>com.google.gwt</groupId>
+                                            <artifactId>gwt-dev</artifactId>
+                                            <version>${gwt.version}</version>
+                                        </additionalDependency>
+                                    </additionalDependencies>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release-to-staging-repository</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.maven.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <nexusUrl>https://devtools.jahia.com/nexus/</nexusUrl>
+                            <serverId>staging-repository</serverId>
+                            <stagingProfileId>${jahia.nexus.staging.repository.id}</stagingProfileId>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>coverage-per-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.7.9</version>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                                <configuration>
+                                    <append>true</append>
+                                    <destFile>${sonar.jacoco.reportPath}</destFile>
+                                </configuration>
+                            </execution>
+                    </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>checkstyle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>2.13</version>
+                        <executions>
+                            <execution>
+                                <id>verify-style</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                            <logViolationsToConsole>true</logViolationsToConsole>
+                            <checkstyleRules>
+                                <module name="Checker">
+                                    <module name="TreeWalker">
+                                        <module name="JavadocType" />
+                                        <module name="JavadocMethod">
+                                            <property name="scope" value="public" />
+                                            <property name="allowMissingPropertyJavadoc" value="true" />
+                                        </module>
+                                        <module name="UnusedImports" />
+                                        <module name="ConstantName">
+                                            <property name="applyToProtected" value="false" />
+                                            <property name="applyToPackage" value="false" />
+                                            <property name="applyToPrivate" value="false" />
+                                        </module>
+                                        <module name="EmptyBlock">
+                                            <property name="option" value="text" />
+                                        </module>
+                                        <module name="NeedBraces" />
+                                        <module name="EqualsHashCode" />
+                                        <module name="MagicNumber">
+                                            <property name="ignoreNumbers" value=" -1, 0, 1, 2, 17, 31, 37" />
+                                        </module>
+                                        <module name="SimplifyBooleanReturn" />
+                                        <module name="IllegalCatch">
+                                            <property name="illegalClassNames" value=" java.lang.Throwable" />
+                                        </module>
+                                        <module name="MultipleVariableDeclarations" />
+                                        <module name="OneStatementPerLine" />
+                                        <module name="RedundantModifier" />
+                                    </module>
+                                </module>
+                            </checkstyleRules>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>no-source-folders</id>
+            <activation>
+                <property>
+                    <name>env.JAHIA_DISABLE_SOURCE_FOLDERS</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <jahia.modules.bundle.removeheaders>
+                    Include-Resource,
+                    Private-Package,
+                    Embed-Dependency,
+                    Embed-Transitive,
+                    Jahia-Source-Folders
+                </jahia.modules.bundle.removeheaders>
+            </properties>
+        </profile>
+        <profile>
+            <id>unit-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${surefire.plugin.version}</version>
+                        <configuration>
+                            <argLine>-Xmx2048m</argLine>
+                            <skipTests>false</skipTests>
+                            <threadCount>1</threadCount>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>integration-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${failsafe.plugin.version}</version>
+                        <configuration>
+                            <argLine>-Xmx2048m</argLine>
+                            <skipTests>false</skipTests>
+                            <threadCount>1</threadCount>
+                            <includes>
+                                <include>**/*IT.java</include>
+                            </includes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify</id>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+    <distributionManagement>
+        <repository>
+            <id>jahia-releases</id>
+            <url>https://devtools.jahia.com/nexus/content/repositories/jahia-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>jahia-snapshots</id>
+            <url>https://devtools.jahia.com/nexus/content/repositories/jahia-snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>jahia.website</id>
+            <url>file://${jahia.site.path}</url>
+        </site>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>2.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Apache Karaf -->
+            <dependency>
+                <groupId>org.apache.karaf</groupId>
+                <artifactId>apache-karaf</artifactId>
+                <version>${karaf.version}</version>
+                <type>zip</type>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf</groupId>
+                <artifactId>org.apache.karaf.main</artifactId>
+                <version>${karaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.diagnostic</groupId>
+                <artifactId>org.apache.karaf.diagnostic.boot</artifactId>
+                <version>${karaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.jaas</groupId>
+                <artifactId>org.apache.karaf.jaas.boot</artifactId>
+                <version>${karaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.shell</groupId>
+                <artifactId>org.apache.karaf.shell.console</artifactId>
+                <version>${karaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.features</groupId>
+                <artifactId>framework</artifactId>
+                <version>${karaf.version}</version>
+                <type>kar</type>
+            </dependency>
+            <!-- End of Apache Karaf -->
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${antrun.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${assembly.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${war.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jahia.server</groupId>
+                    <artifactId>jahia-maven-plugin</artifactId>
+                    <version>${jahia.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-package-export</id>
+                            <phase>prepare-package</phase>
+                            <configuration>
+                                <failBuildOnSplitPackages>false</failBuildOnSplitPackages>
+                                <outputPackagesWithNoVersions>true</outputPackagesWithNoVersions>
+                                <artifactExcludes>
+                                    <artifactExclude>org.jahia.modules:*</artifactExclude>
+                                    <artifactExclude>org.jahia.templates:*</artifactExclude>
+                                    <artifactExclude>org.jahia.test:*</artifactExclude>
+                                    <artifactExclude>*.jahia.modules</artifactExclude>
+                                    <artifactExclude>com.google.gwt:gwt-user</artifactExclude>
+                                </artifactExcludes>
+                                <packageExcludes>
+                                    <packageExclude>java.*</packageExclude>
+                                    <packageExclude>org.jahia.taglibs*</packageExclude>
+                                    <packageExclude>org.apache.taglibs*</packageExclude>
+                                    <packageExclude>javax.servlet.jsp*</packageExclude>
+                                    <packageExclude>org.codehaus.groovy.ast*</packageExclude>
+                                    <packageExclude>junit*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.config*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.i18n*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.resource*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.support*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.tags*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.theme*</packageExclude>
+                                    <packageExclude>org.springframework.web.servlet.view*</packageExclude>
+                                    <packageExclude>org.springframework.web.util*</packageExclude>
+                                    <packageExclude>org.osgi.service.cm</packageExclude>
+                                    <packageExclude>org.eclipse*</packageExclude>
+                                    <packageExclude>org.apache.sshd*</packageExclude>
+                                    <packageExclude>org.bouncycastle*</packageExclude>
+                                    <packageExclude>org.apache.felix*</packageExclude>
+                                    <packageExclude>org.fusesource.jansi*</packageExclude>
+                                    <packageExclude>rest-management-private-classpath*</packageExclude>
+                                    <packageExclude>repackage*</packageExclude>
+                                    <packageExclude>resources*</packageExclude>
+                                    <packageExclude>schemaorg_apache_xmlbeans*</packageExclude>
+                                    <packageExclude>schemas*</packageExclude>
+                                    <packageExclude>shaded*</packageExclude>
+                                    <packageExclude>org.slf4j*</packageExclude>
+                                    <packageExclude>org.apache.log4j*</packageExclude>
+                                    <packageExclude>org.knopflerfish.service.log</packageExclude>
+                                    <packageExclude>org.apache.karaf*</packageExclude>
+                                    <packageExclude>jline*</packageExclude>
+                                    <packageExclude>org.jledit*</packageExclude>
+                                </packageExcludes>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>generate-system-capabilities</id>
+                            <phase>prepare-package</phase>
+                            <configuration>
+                                <propertiesInputFile>
+                                    ${project.build.directory}/generated-resources/config.properties
+                                </propertiesInputFile>
+                                <propertiesOutputFile>
+                                    ${project.build.directory}/generated-resources/config.properties
+                                </propertiesOutputFile>
+                                <artifactExcludes>
+                                    <exclude>org.jahia.modules:*</exclude>
+                                    <exclude>org.jahia.templates:*</exclude>
+                                    <exclude>org.jahia.test:*</exclude>
+                                    <exclude>*.jahia.modules</exclude>
+                                </artifactExcludes>
+                                <excludedJarEntries>
+                                    <entry>org/jahia/migration/legacyDefinitions/.*</entry>
+                                </excludedJarEntries>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <groupId>org.apache.felix</groupId>
+                    <version>2.5.3</version>
+                    <!-- QA-10988 We didn't manage to upgrade to 2.5.4 because of bugs https://issues.apache.org/jira/browse/FELIX-4556 and https://issues.apache.org/jira/browse/FELIX-4882 -->
+                    <dependencies>
+                        <dependency>
+                            <groupId>biz.aQute.bnd</groupId>
+                            <artifactId>bndlib</artifactId>
+                            <version>2.4.0</version> <!-- Using version 2.4.0 as recommended in https://issues.apache.org/jira/browse/FELIX-4556?focusedCommentId=14213575&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-14213575 -->
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${site.plugin.version}</version>
+                    <configuration>
+                        <relativizeDecorationLinks>true</relativizeDecorationLinks>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.8</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>de.juplo</groupId>
+                    <artifactId>hibernate4-maven-plugin</artifactId>
+                    <version>1.0.2</version>
+                    <configuration>
+                        <target>SCRIPT</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.jahia.server</groupId>
+                    <artifactId>jahia-hibernate-maven-plugin</artifactId>
+                    <version>${jahia.plugin.version}</version>
+                    <configuration>
+                        <persistenceUnitName>org.jahia.services.workflow.jbpm</persistenceUnitName>
+                        <hibernateNamingStrategy>org.jahia.hibernate.JahiaNamingStrategy</hibernateNamingStrategy>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jarsigner-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <configuration>
+                        <archive>${project.build.directory}/${installer.filename}.jar</archive>
+                        <keystore>${jahia.sign.keystore}</keystore>
+                        <storetype>pkcs12</storetype>
+                        <storepass>${jahia.sign.storepass}</storepass>
+                        <alias>jahia</alias>
+                        <sigfile>jahia</sigfile>
+                        <tsa>http://tsa.starfieldtech.com/</tsa>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>${karaf.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${release.plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>external.atlassian.jgitflow</groupId>
+                    <artifactId>jgitflow-maven-plugin</artifactId>
+                    <version>1.0-m5.jahia1</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.jcraft</groupId>
+                            <artifactId>jsch</artifactId>
+                            <version>0.1.54</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <flowInitContext>
+                            <masterBranchName>production</masterBranchName>
+                            <developBranchName>master</developBranchName>
+                            <featureBranchPrefix>feature-</featureBranchPrefix>
+                            <releaseBranchPrefix>release-</releaseBranchPrefix>
+                            <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                            <versionTagPrefix>blither-</versionTagPrefix>
+                        </flowInitContext>
+                        <allowSnapshots>true</allowSnapshots>
+                        <allowUntracked>true</allowUntracked>
+                        <enableFeatureVersions>true</enableFeatureVersions>
+                        <pushFeatures>true</pushFeatures>
+                        <noFeatureBuild>true</noFeatureBuild>
+                        <scmCommentPrefix>[jgitflow-maven-plugin] </scmCommentPrefix>
+                        <versionChangeFilesPath>..</versionChangeFilesPath>
+                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${javadoc.plugin.version}</version>
+                    <configuration>
+                        <detectOfflineLinks>false</detectOfflineLinks>
+                        <minmemory>128m</minmemory>
+                        <maxmemory>1g</maxmemory>
+                        <failOnError>true</failOnError>
+                        <quiet>true</quiet>
+                        <additionalparam>-Xdoclint:none --allow-script-in-comments</additionalparam>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[3.3.0,)</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>[1.8,)</version>
+                                </requireJavaVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${source.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <goals>deploy</goals>
+                    <preparationGoals>clean install</preparationGoals>
+                    <releaseProfiles>do-attach-javadocs,aggregate-javadocs,attach-taglibdoc,gwt-production,installer,sign-installer-jar,windows-installer,sign-installer-exe,no-source-folders</releaseProfiles>
+		    <scmCommentPrefix>[skip ci] [maven-release-plugin]</scmCommentPrefix>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${project.info.reports.plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>project-team</report>
+                            <report>mailing-list</report>
+                            <report>cim</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>scm</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

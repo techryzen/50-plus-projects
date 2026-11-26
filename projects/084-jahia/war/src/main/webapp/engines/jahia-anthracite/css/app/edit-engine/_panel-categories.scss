@@ -1,0 +1,134 @@
+.engine-panel:not(.trashboardengine-ctn),
+div.engine-window {
+    // Personalised COntent Window
+    #JahiaGxtEditEnginePanel-categories {
+        height: auto !important;
+        box-sizing: border-box;
+        padding-bottom: 1px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        max-height: 100%;
+        max-width: calc(100% - 7px);
+
+        .x-grid3-header {
+            display: none;
+        }
+
+        .x-panel-header {
+            display: block;
+            background: transparent !important;
+            border: none !important;
+            padding: 14px 0 0 25px !important;
+
+            .x-panel-header-text {
+                @include text(_size("medium"), _color("primary", normal), _weight("light"));
+            }
+
+        }
+
+        .x-form-check-wrap {
+            pointer-events: all;
+        }
+
+        > div {
+            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-categories.scss ::: 1 */
+                // Selected categories
+                position: relative !important;
+                height: auto !important;
+
+                .x-column {
+                    margin: 0 5px 5px 0;
+                }
+
+                .x-column-inner {
+                    > :only-child {
+                        height: 30px;
+
+                        &:before {
+                            content: _dictionary("select_category_from_list");
+                            display: block;
+                            position: relative;
+                            padding-top: 5px;
+                            font-style: italic;
+
+                            @include text(_size("small"), _theme($TITLE--COLOR, $EDIT-ENGINE), _weight("normal"));
+                        }
+                    }
+                }
+
+                .x-panel-bwrap {
+                    padding: 20px 30px 20px 26px !important;
+                }
+
+
+                button {
+                    font-size: 12px;
+                    padding: 5px 25px 5px 10px;
+
+                    img {
+                        right: 0 !important;
+                        left: auto !important;
+                        top: 2px !important;
+                        background: url(_icon("closeLarge", "white")) no-repeat center center !important;
+                        background-size: 10px !important;
+                        box-sizing: border-box;
+                        width: 23px !important;
+                        height: 23px !important;
+                    }
+
+                }
+
+            }
+
+            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-categories.scss ::: 2 */
+                // All Categories
+                &::before {
+                    content: _dictionary("available_categories");
+                    display: block;
+                    @include text(_size("small"), _theme($FIELDSET--TITLE-COLOR, $EDIT-ENGINE), _weight("extralight"));
+                }
+
+                position: relative !important;
+                top: auto !important;
+                background: whitesmoke !important;
+                width: calc(100% - 20px) !important;
+                margin: 0 25px !important;
+                padding: 15px 20px 20px 20px;
+                box-sizing: border-box;
+
+                .x-grid3-scroller {
+                    width: auto !important;
+                    overflow: hidden;
+
+                    .x-tree3-node-joint[style*='-66px'] {
+                        // Closed
+                        background: url( _icon("navNext", "grey")) no-repeat top 1px center!important;
+                        background-size: 10px!important;
+                    }
+
+                    .x-tree3-node-joint[style*='-34px'] {
+                        // Opened
+                        background: url( _icon("arrowDown", "grey")) no-repeat top -3px center!important;
+                        background-size: 19px !important;
+                    }
+                }
+
+                .x-grid3-td-displayName {
+                    &::after {
+                        display: none;
+                    }
+
+                    label {
+                        color: _theme($LIST-BOX--ROW--COLOR, $EDIT-ENGINE);
+                    }
+                }
+
+                .x-grid3-row-selected,
+                .x-grid3-row-over {
+                    background-color: inherit !important;
+                }
+            }
+        }
+    }
+
+}

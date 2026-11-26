@@ -1,0 +1,461 @@
+.engine-panel:not(.trashboardengine-ctn),
+div.engine-window {
+
+    .hide-headers #JahiaGxtEditEnginePanel-history > .x-component .x-panel:nth-child(1) .x-panel-bwrap .x-grid3-viewport .x-grid3-scroller .x-grid3-body { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 1 */
+        left: 0;
+    }
+
+    #JahiaGxtEditEnginePanel-history {
+
+        // User has clicked on the details button, so set flag to display the panel
+        &[data-indigo-details="open"] {
+            // Details panel
+            > .x-component .x-panel:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 2 */
+                display: block;
+            }
+
+            // Make Pager look like it is behind the mask
+            .x-panel-bbar {
+                opacity: 0.7;
+                pointer-events: none;
+            }
+        }
+
+        // Only one page of results, so hide the pager
+        &[indigo-results-multiple-pages="false"] {
+
+            // Pager
+            .x-panel-bbar {
+                display: none;
+            }
+
+        }
+
+        // No results to display so hide the pager
+        &[indigo-results="false"] {
+
+            // Pager
+            .x-panel-bbar {
+                display: none;
+            }
+        }
+
+        > .x-component {
+            width: 100% !important;
+            height: 100% !important;
+            display: flex;
+            flex-direction: column;
+
+            .x-hsplitbar {
+                display: none !important;
+            }
+
+            .x-panel {
+
+                // History List Container
+                &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 3 */
+                    position: relative !important;
+                    flex-shrink: 1;
+                    flex-grow: 1;
+                    height: 50% !important;
+                    .x-panel-bwrap {
+                        width: 100%;
+                        height: 75%;
+
+                        .x-panel-ml,
+                        .x-panel-mr,
+                        .x-panel-body {
+                            height: 100%;
+                            width: 100% !important;
+                        }
+
+                        .x-grid3-viewport {
+
+                            > .x-grid3-header {
+                                width: 100% !important;
+                                .x-grid3-header-inner {
+                                    width: 100% !important;
+                                    .x-grid3-hh {
+                                        width: 100% !important;
+                                        > table {
+                                            width: 100% !important;
+
+                                            > tbody {
+                                                width: 100% !important;
+
+                                                > tr {
+                                                    width: 100% !important;
+                                                    display: flex;
+                                                    flex-direction: row;
+                                                    td {
+                                                        display: block;
+                                                        flex-grow: 1;
+                                                        flex-shrink: 1;
+                                                        width: 100% !important;
+                                                        > div {
+                                                            width: 100% !important;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .x-grid3-scroller {
+                                width: 100% !important;
+
+                                .x-grid3-body {
+                                    background: _color("white", normal) !important;
+                                    height: calc(100%) !important;
+                                    position: relative !important;
+                                    width: calc(100%) !important;
+                                    overflow-y: scroll !important;
+                                    right: 0 !important;
+                                    padding: 0 !important;
+                                    margin-top: 0 !important;
+
+                                    .x-grid3-row {
+                                        width: 100% !important;
+                                        // Selected, Selected & hover
+                                        &.x-grid3-row-selected,
+                                        &.x-grid3-row-selected:hover {
+                                            .action-menu {
+                                                background: _theme($ROW--BG---SELECTED, $BACKGROUND-JOBS) !important;
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                .info-button {
+                                                    background-image: url(../images/icons/ic_info_outline@2x.png); /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 3 */
+                                                }
+                                            }
+
+                                            background: _theme($ROW--BG---SELECTED, $BACKGROUND-JOBS) !important;
+
+                                            .x-grid3-cell-inner,
+                                            .x-grid3-cell-inner label {
+                                                color: _theme($ROW--COLOR---SELECTED, $BACKGROUND-JOBS) !important;
+                                            }
+
+                                        }
+
+                                        // Hover
+                                        &:hover {
+                                            .action-menu {
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+
+                                                background: _color("secondary", d) !important;
+                                            }
+
+                                            background: _color("secondary", d) !important;
+
+                                            .x-grid3-cell-inner,
+                                            .x-grid3-cell-inner label {
+                                                color: _color("primary", a) !important;
+                                            }
+
+                                        }
+                                        .x-grid3-row-table {
+                                            width: 100% !important;
+                                            > tbody {
+                                                width: 100% !important;
+                                                > tr {
+                                                    width: 100% !important;
+                                                    display: flex;
+                                                    flex-direction: row;
+                                                    td {
+                                                        display: flex;
+                                                        justify-content: flex-start;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .x-grid-empty {
+                                    &:before {
+                                        content: _dictionary("no_results");
+                                        display: block;
+                                        @include text(_size("small"), _theme($PARAGRAPH--COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+                                    }
+                                }
+                            }
+
+                            > .x-grid3-header {
+                                display: block;
+                                background: none !important;
+                                margin-bottom: 20px;
+
+                                .x-grid3-header {
+                                    display: table-cell;
+                                    background: none !important;
+                                    border: none;
+
+                                    &.x-grid3-hd-over,
+                                    &.x-grid3-hd-menu-open {
+
+                                        .x-grid3-hd-inner {
+                                            background: _color("secondary", b) !important;
+
+                                            a {
+                                                background: url(../images/icons/icon-toggle-expanded-small-normal.png) no-repeat center center; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 1 */
+                                                margin-right: 5px;
+                                            }
+
+                                            span {
+                                                color: _color("primary");
+                                            }
+                                        }
+                                    }
+
+                                    .x-grid3-hd-inner {
+                                        padding: 4px 0 3px 10px;
+
+                                        span {
+                                            text-transform: uppercase;
+                                            @include text(10px, _theme($LABEL--COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .x-panel-mc {
+                            padding: 43px 19px 20px 19px;
+                            box-sizing: border-box;
+                            background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                            border: 1px solid _theme($FIELDSET--BORDER, $BACKGROUND-JOBS) !important;
+                            box-shadow: inset 0 67px 0 0 #f6f6f6, inset 0 68px 0 0 _color("secondary", b);
+
+                            position: relative !important;
+                            left: auto !important;
+                            width: 100% !important;
+                            top: auto !important;
+                            height: auto !important;
+
+                            &:before {
+                                content: _dictionary("history");
+                                text-transform: uppercase;
+                                position: absolute;
+                                top: 12px;
+                                left: 28px;
+                                @include text(26px, _theme($TITLE--COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+                            }
+                        }
+
+                        .x-grid3-row {
+                            position: relative;
+
+                            // Delete more info buttons
+                            .action-menu {
+                                position: absolute;
+                                right: 15% !important;
+                                top: 0;
+                                margin: 0;
+                                padding: 0;
+                                display: none;
+                                height: 100% !important;
+
+                                button {
+                                    width: 20px;
+                                    height: 20px;
+                                    display: inline-block;
+                                    border: none;
+
+                                    &:hover {
+                                        cursor: pointer;
+                                    }
+                                }
+
+                                .info-button {
+                                    background: url(../images/icons/ic_info_outline-DARK@2x.png) right center no-repeat; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 2 */
+                                    background-size: 18px;
+                                }
+                            }
+
+
+
+                            .x-grid3-cell-inner,
+                            .x-grid3-cell-inner label {
+                                padding: 5px 0 0 10px;
+                                text-transform: none !important;
+                                @include text(_size("small"), _theme($ROW--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+                            }
+                        }
+                    }
+                }
+
+                // Pager Holder
+                .x-panel-bbar {
+                    width: 100% !important;
+
+                    .x-toolbar-layout-ct {
+                        position: relative;
+                        z-index: 9999999;
+                        background: _color("primary", a);
+                        width: 100% !important;
+                        padding: 2px 11px;
+                        box-sizing: border-box;
+                        margin-top: 2px;
+
+                        .x-toolbar-left .x-toolbar-cell {
+                            margin: 0 2px;
+                            opacity: 0.8;
+                            width: 25px;
+                            display: none !important;
+
+                            > table {
+                                width: 100% !important;
+                            }
+
+                            .x-btn-mc img {
+                                display: none;
+                            }
+
+                            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 4 */
+                                display: inline-block !important;
+                                background: url( _icon("navFirst", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 4 */
+                                margin-left: 0px;
+                            }
+
+                            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 5 */
+                                display: inline-block !important;
+                                background: url(../images/icons/icon_arrow_left_single_grey@X2.png) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 5 */
+                                margin-left: 5px;
+                            }
+
+                            // Text input and label
+                            &:nth-child(4), /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 6 */
+                            &:nth-child(5), /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 7 */
+                            &:nth-child(6) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 8 */
+                                display: inline-block !important;
+                            }
+
+                            &:nth-child(8) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 9 */
+                                display: inline-block !important;
+                                background: url( _icon("navNext", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 6 */
+                                margin-right: 5px;
+                            }
+
+                            &:nth-child(9) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 10 */
+                                display: inline-block !important;
+                                background: url( _icon("navLast", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 7 */
+                                margin-right: 5px;
+                            }
+
+                            &:nth-child(11) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 11 */
+                                display: inline-block !important;
+                                background: url( _icon("refresh", "grey")) no-repeat center center/16px 12px; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 8 */
+                            }
+
+                            .my-paging-display {
+                                font-family: "Nunito Sans", sans-serif;
+                                font-size: 12px;
+                                color: _color("secondary"); /* TO THEME */
+                                font-weight: 100;
+                            }
+
+                            .gwt-TextBox {
+                                font-family: "Nunito Sans", sans-serif;
+                                font-size: 12px;
+                                color: _color("primary", g); /* TO THEME */
+                                font-weight: 100;
+                                background: rgba(241, 241, 241, 0.7); /* TO THEME */
+                                padding: 3px;
+                                border: none;
+                            }
+                        }
+                    }
+                }
+
+                // Selected Items Details Container
+                &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/edit-engine/_panel-history.scss ::: 12 */
+                    position: relative !important;
+                    flex-shrink: 1;
+                    flex-grow: 1;
+                    display: none;
+                    width: 100% !important;
+                    height: 50% !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    padding: 0;
+                    box-sizing: border-box;
+                    z-index: 9;
+                    border-top: 1px solid _color("secondary", d) !important;
+                    // Header
+                    .x-panel-header {
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 19px 30px 10px;
+                        margin: 0;
+                        width: 100% !important;
+                        border: none !important;
+
+                        // Contains minimise button
+                        .x-panel-toolbar {
+                            background: url( _icon("closeLarge", "grey")) no-repeat center bottom; /* OPTIMISE URL ::: css/app/edit-engine/_panel-history.scss ::: 9 */
+                            background-size: 10px;
+                            width: 20px;
+                            height: 20px;
+                            opacity: 0.8;
+                            display: block;
+
+                            &:hover {
+                                opacity: 1;
+                                cursor: pointer;
+                            }
+
+                            > table {
+                                display: none;
+                            }
+                        }
+
+                        // Text
+                        .x-panel-header-text {
+                            @include text(26px, _theme($TITLE--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+                        }
+                    }
+
+                    // Body
+                    .x-panel-bwrap {
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 0 30px;
+                        margin: 0 auto;
+                        width: 100% !important;
+
+
+                        form {
+                            height: auto !important;
+                        }
+
+                        .x-form-item {
+                            > label {
+                                display: inline-block !important;
+                                width: 150px !important;
+                            }
+
+                            > .x-form-element {
+                                display: inline-block;
+                                width: calc(100% - 150px);
+
+                                .x-form-field-wrap {
+                                    width: 100% !important;
+
+                                    .x-form-text {
+                                        background: transparent;
+                                        box-shadow: none;
+                                        color: _theme($PARAGRAPH--COLOR, $BACKGROUND-JOBS);;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

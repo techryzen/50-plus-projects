@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="loginUrl" value="/cms/login"/>
+        <property name="unauthorizedUrl" value="/cms/unauthorized"/>
+        <property name="securityManager" ref="securityManager"/>
+        <property name="filters">
+            <map>
+                <entry key="authcJahia">
+                    <bean class="org.jahia.services.security.shiro.JahiaAuthenticationFilter">
+                        <property name="authPipeline" ref="authPipeline"/>
+                        <property name="sessionFactory" ref="jcrSessionFactory"/>
+                    </bean>
+                </entry>
+                <entry key="invalidRequest">
+                    <bean class="org.apache.shiro.web.filter.InvalidRequestFilter">
+                        <property name="blockSemicolon" value="false"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /modules/*/tools/developer/*.jsp = authcJahia, perms[/:developerToolsAccess]
+                /modules/**/configs/*.jsp = authcJahia, perms[/:jcr_read]
+                /modules/**/*.jsp = authcJahia, perms[/tools:systemToolsAccess]
+                /**/*.raw = authcJahia, perms[/tools:systemToolsAccess]
+                /**/*.raw.ajax = authcJahia, perms[/tools:systemToolsAccess]
+                /cms/serverStats = authcJahia, perms[/tools:systemToolsAccess]
+                /cms/serverStats/** = authcJahia, perms[/tools:systemToolsAccess]
+                /cms/text-extract = authcJahia, perms[/tools:systemToolsAccess]
+                /cms/text-extract/** = authcJahia, perms[/tools:systemToolsAccess]
+                /tools/** = authcJahia, perms[/tools:systemToolsAccess]
+                /modules/tools/** = authcJahia, perms[/tools:systemToolsAccess]
+            </value>
+        </property>
+    </bean>
+
+    <bean name="jahiaRealm" class="org.jahia.services.security.shiro.JahiaAccountRealm">
+        <property name="name" value="Jahia"/>
+        <property name="authenticationTokenClass" value="org.jahia.services.security.shiro.JahiaUserToken"/>
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.AllowAllCredentialsMatcher"/>
+        </property>
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="jahiaRealm"/>
+        <property name="rememberMeManager"><null/></property>
+    </bean>
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean id="jahiaLoginConfig" class="org.jahia.params.valves.LoginConfig" factory-method="getInstance"/>
+    <bean id="jahiaLogoutConfig" class="org.jahia.params.valves.LogoutConfig" factory-method="getInstance"/>
+
+    <bean id="PasswordService" class="org.jahia.services.pwd.PasswordService" factory-method="getInstance">
+        <property name="defaultDigester" ref="${jahia.passwordService.defaultDigester:pwdDigesterSHA256RandomSalt32x4096}"/>
+        <property name="strongDigester" ref="${jahia.passwordService.strongDigester:pwdDigesterPBKDF2RandomSalt64Key32x8192}"/>
+        <property name="digesters">
+            <list>
+                <ref bean="pwdDigesterSHA1RandomSalt32x4096"/>
+                <ref bean="pwdDigesterSHA256RandomSalt32x4096"/>
+                <ref bean="pwdDigesterSHA512RandomSalt32x4096"/>
+                <ref bean="pwdDigesterPBKDF2RandomSalt64Key32x8192"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pwdDigesterSHA1Legacy" class="org.jahia.services.pwd.JasyptPasswordDigester">
+        <constructor-arg index="0" value=""/>
+        <constructor-arg index="1">
+            <bean class="org.jahia.services.pwd.ProccessorAwarePooledStringDigester">
+                <property name="algorithm" value="SHA-1"/>
+                <property name="saltSizeBytes" value="0"/>
+                <property name="iterations" value="1"/>
+                <property name="unicodeNormalizationIgnored" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="pwdDigesterSHA1RandomSalt32x4096" class="org.jahia.services.pwd.JasyptPasswordDigester">
+        <constructor-arg index="0" value="s1"/>
+        <constructor-arg index="1">
+            <bean class="org.jahia.services.pwd.ProccessorAwarePooledStringDigester">
+                <property name="algorithm" value="SHA-1"/>
+                <property name="saltSizeBytes" value="32"/>
+                <property name="iterations" value="4096"/>
+                <property name="unicodeNormalizationIgnored" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="pwdDigesterSHA256RandomSalt32x4096" class="org.jahia.services.pwd.JasyptPasswordDigester">
+        <constructor-arg index="0" value="s2"/>
+        <constructor-arg index="1">
+            <bean class="org.jahia.services.pwd.ProccessorAwarePooledStringDigester">
+                <property name="algorithm" value="SHA-256"/>
+                <property name="saltSizeBytes" value="32"/>
+                <property name="iterations" value="4096"/>
+                <property name="unicodeNormalizationIgnored" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="pwdDigesterSHA512RandomSalt32x4096" class="org.jahia.services.pwd.JasyptPasswordDigester">
+        <constructor-arg index="0" value="s5"/>
+        <constructor-arg index="1">
+            <bean class="org.jahia.services.pwd.ProccessorAwarePooledStringDigester">
+                <property name="algorithm" value="SHA-512"/>
+                <property name="saltSizeBytes" value="32"/>
+                <property name="iterations" value="4096"/>
+                <property name="unicodeNormalizationIgnored" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="pwdDigesterPBKDF2RandomSalt64Key32x8192" class="org.jahia.services.pwd.JasyptPasswordDigester">
+        <constructor-arg index="0" value="p"/>
+        <constructor-arg index="1">
+            <bean class="org.jahia.commons.encryption.PBKDF2Digester">
+                <property name="saltSizeBytes" value="64"/>
+                <property name="hashSizeBytes" value="32"/>
+                <property name="iterations" value="8192"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

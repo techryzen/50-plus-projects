@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    ==========================================================================================
+    =                   JAHIA'S DUAL LICENSING - IMPORTANT INFORMATION                       =
+    ==========================================================================================
+
+                                    http://www.jahia.com
+
+        Copyright (C) 2002-2020 Jahia Solutions Group SA. All rights reserved.
+
+        THIS FILE IS AVAILABLE UNDER TWO DIFFERENT LICENSES:
+        1/GPL OR 2/JSEL
+
+        1/ GPL
+        ==================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE GPL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this program. If not, see <http://www.gnu.org/licenses />.
+
+
+        2/ JSEL - Commercial and Supported Versions of the program
+        ===================================================================================
+
+        IF YOU DECIDE TO CHOOSE THE JSEL LICENSE, YOU MUST COMPLY WITH THE FOLLOWING TERMS:
+
+        Alternatively, commercial and supported versions of the program - also known as
+        Enterprise Distributions - must be used in accordance with the terms and conditions
+        contained in a separate written agreement between you and Jahia Solutions Group SA.
+
+        If you are unsure which license is appropriate for your use,
+        please contact the sales department at sales@jahia.com.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>jahia-modules</artifactId>
+        <groupId>org.jahia.modules</groupId>
+        <version>8.0.2.0-SNAPSHOT</version>
+        <relativePath>../../modules</relativePath>
+    </parent>
+    <groupId>org.jahia.test</groupId>
+    <artifactId>jahia-test-module</artifactId>
+    <name>Jahia Test Module</name>
+    <packaging>bundle</packaging>
+
+    <repositories>
+      <repository>
+        <releases>
+          <enabled>true</enabled>
+          <updatePolicy>never</updatePolicy>
+        </releases>
+        <snapshots>
+          <enabled>true</enabled>
+        </snapshots>
+        <id>jahia-public</id>
+        <name>Jahia Public Repository</name>
+        <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+      </repository>
+    </repositories>
+
+    <properties>
+        <embed-dependency>*;scope=compile;type=!pom;inline=false;artifactId=!spring-core</embed-dependency>
+        <export-package>!org.jahia.services.*,org.jahia.test.*,bsh.*,junit.*,org.hamcrest.*,org.junit.*,org.junit.internal,org.testng.*,com.beust.*,org.yaml.snakeyaml.*</export-package>
+        <jahia-depends>default</jahia-depends>
+        <jahia-deploy-on-site>all</jahia-deploy-on-site>
+        <jahia-module-type>system</jahia-module-type>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>eclipse-integration</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-eclipse-plugin</artifactId>
+                        <version>${eclipse.plugin.version}</version>
+                        <configuration>
+                            <wtpversion>1.5</wtpversion>
+                            <additionalProjectnatures>
+                                <projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+                                <projectnature>org.eclipse.wst.common.modulecore.ModuleCoreNature</projectnature>
+                                <projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+                            </additionalProjectnatures>
+                            <additionalBuildcommands>
+                                <buildCommand>
+                                    <name>org.eclipse.wst.common.project.facet.core.builder</name>
+                                    <arguments />
+                                </buildCommand>
+                                <buildCommand>
+                                    <name>org.eclipse.wst.validation.validationbuilder</name>
+                                    <arguments />
+                                </buildCommand>
+                            </additionalBuildcommands>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-impl</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>javax.servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>icu4j</artifactId>
+                    <groupId>com.ibm.icu</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>concurrent</artifactId>
+                    <groupId>concurrent</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>activation</artifactId>
+                    <groupId>javax.activation</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>oro</artifactId>
+                    <groupId>oro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mail</artifactId>
+                    <groupId>javax.mail</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-gwt</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>${ant.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>jackrabbit-jcr-tests</artifactId>
+            <version>${jackrabbit.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>concurrent</artifactId>
+                    <groupId>concurrent</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit-addons</groupId>
+            <artifactId>junit-addons</artifactId>
+            <version>${junit.addons.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xmlParserAPIs</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>${xmlunit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>2.5.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Nutch and its dependencies -->
+        <dependency>
+            <groupId>org.apache.nutch</groupId>
+            <artifactId>nutch</artifactId>
+            <version>1.5.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>oro</artifactId>
+                    <groupId>oro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>tika-core</artifactId>
+                    <groupId>org.apache.tika</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xmlParserAPIs</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>icu4j</artifactId>
+                    <groupId>com.ibm.icu</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mahout.hadoop</groupId>
+            <artifactId>hadoop-core</artifactId>
+            <version>0.19.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ant</artifactId>
+                    <groupId>ant</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-cli</artifactId>
+                    <groupId>commons-cli</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-el</artifactId>
+                    <groupId>commons-el</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-httpclient</artifactId>
+                    <groupId>commons-httpclient</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsp-2.1</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsp-api-2.1</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api-2.5</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>oro</artifactId>
+                    <groupId>oro</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- End of Nutch and its dependencies -->
+        <dependency>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.7.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.server</groupId>
+            <artifactId>jahia-taglib</artifactId>
+            <version>8.0.2.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.core</artifactId>
+            <version>${osgi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-aether</artifactId>
+            <version>2.4.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- Template sets, required by tests -->
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>bootstrap-acme-space-templates</artifactId>
+            <version>4.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>templates-web</artifactId>
+            <version>3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>templates-web-blue</artifactId>
+            <version>3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.modules</groupId>
+            <artifactId>templates-web-space</artifactId>
+            <version>3.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Prepackaged sites, required by tests -->
+        <dependency>
+            <groupId>org.jahia.prepackagedsites</groupId>
+            <artifactId>acmespaceelektra</artifactId>
+            <version>2.0.6</version>
+            <type>zip</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jahia.prepackagedsites</groupId>
+            <artifactId>acme</artifactId>
+            <version>2.0.1</version>
+            <type>zip</type>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jahia.modules</groupId>
+                                    <artifactId>dummy1</artifactId>
+                                    <version>2.0.0</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.jahia.modules</groupId>
+                                    <artifactId>dummy1</artifactId>
+                                    <version>2.1.0</version>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/wars</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Category>jahia-module</Bundle-Category>
+
+                        <Implementation-Title>${project.name}</Implementation-Title>
+                        <Implementation-Version>${project.version}</Implementation-Version>
+                        <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+                        <Implementation-URL>${project.organization.url}</Implementation-URL>
+                        <Specification-Title>${project.name}</Specification-Title>
+                        <Specification-Version>${project.version}</Specification-Version>
+                        <Specification-Vendor>${project.organization.name}</Specification-Vendor>
+
+                        <!-- Jahia manifest attributes -->
+                        <Jahia-Depends>${jahia-depends}</Jahia-Depends>
+                        <Jahia-Module-Type>${jahia-module-type}</Jahia-Module-Type>
+                        <Jahia-GroupId>${project.groupId}</Jahia-GroupId>
+                        <Jahia-Source-Folders>${project.basedir}</Jahia-Source-Folders>
+                        <Jahia-Source-Control-Connection>${project.scm.connection}</Jahia-Source-Control-Connection>
+                        <Jahia-Source-Control-DeveloperConnection>${project.scm.developerConnection}</Jahia-Source-Control-DeveloperConnection>
+                        <Jahia-Source-Control-Tag>${project.scm.tag}</Jahia-Source-Control-Tag>
+                        <Jahia-Download-Sources-Available>${jahia-download-sources-available}</Jahia-Download-Sources-Available>
+                        <Jahia-Required-Version>${jahia.version}</Jahia-Required-Version>
+                        <Jahia-Static-Resources>${jahia-static-resources}</Jahia-Static-Resources>
+                        <Jahia-Private-App-Store>${jahia-private-app-store}</Jahia-Private-App-Store>
+                        <Jahia-Deploy-On-Site>${jahia-deploy-on-site}</Jahia-Deploy-On-Site>
+                        <Jahia-Block-Edit-Mode>${jahia-block-edit-mode}</Jahia-Block-Edit-Mode>
+                        <Export-Package>${export-package}</Export-Package>
+                        <Import-Package>
+                            com.sun.org.apache.xerces.internal.xni;resolution:=optional,
+                            org.apache.html.dom,
+                            org.apache.tika.config,
+                            org.apache.tika.metadata,
+                            org.apache.tika.parser,
+                            org.apache.xerces.xni,
+                            org.apache.xerces.xni.parser,
+                            ${jahia.plugin.projectPackageImport},
+                            *
+                        </Import-Package>
+                        <Provide-Capability>${jahia.plugin.providedNodeTypes}${jahia.plugin.providedModulesCapabilities}</Provide-Capability>
+                        <Require-Capability>osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)",${jahia.plugin.requiredNodeTypes}${jahia.plugin.requiredModulesCapabilities}</Require-Capability>
+                        <Embed-Dependency>${embed-dependency}</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Dynamic-ImportPackage>*</Dynamic-ImportPackage>
+                        <_removeheaders>${jahia.modules.bundle.removeheaders}</_removeheaders>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jahia.server</groupId>
+                <artifactId>jahia-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-package-dependencies</id>
+                        <goals>
+                            <goal>dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <excludeFromDirectoryScan>
+                                <exclude>imports/import.xml</exclude>
+                                <exclude>imports/importIndexOptionNodes.xml</exclude>
+                            </excludeFromDirectoryScan>
+                        </configuration>
+                        <phase>prepare-package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

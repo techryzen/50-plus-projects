@@ -1,0 +1,990 @@
+.job-list-window {
+    @if ($MODAL-STYLE == "fullscreen") {
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        background: _theme($BODY--BG, $BACKGROUND-JOBS);
+
+        .indigo-background-jobs-filters {
+            position: fixed !important;
+            top: 150px;
+            left: 72px;
+            z-index: 999 !important;
+            width: 280px;
+        }
+
+        .x-window-tl {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            width: 300px;
+            position: fixed !important;
+            top: 55px;
+            left: 72px;
+            z-index: 999 !important;
+        }
+
+        // Window title
+        .x-window-header-text {
+            display: block!important;
+            @include text(_size("big"), _theme($TITLE--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+        }
+
+        .x-window-bwrap .x-panel:nth-child(1) .x-panel-bwrap .x-panel-mc {
+            position: fixed;
+            top: 50px;
+            left: 410px;
+            width: calc(100% - 470px);
+            padding: 43px 19px 20px 19px;
+            box-sizing: border-box;
+            background: _theme($FIELDSET--BG, $BACKGROUND-JOBS);
+            border: 1px solid _theme($FIELDSET--BORDER, $BACKGROUND-JOBS) !important;
+            box-shadow: inset 0 67px 0 0 #f6f6f6, inset 0 68px 0 0 _color("secondary", b);
+        }
+
+        // Close holder - mimick bottom action bar
+        .x-panel-toolbar {
+
+            // Footer action bar
+            display: block;
+            position: fixed;
+            background: _theme($FOOTER--BG, $EDIT-ENGINE);
+            border-top: 1px solid _color("primary", g);
+            box-shadow: _theme($FOOTER--SHADOW, $EDIT-ENGINE);
+            box-sizing: border-box;
+            left: -30px;
+            width: calc(100% + 60px) !important;
+            bottom: -30px;
+            padding: 20px 0px 30px 50px;
+            height: 109px;
+
+
+            // Button
+            .x-tool-close {
+                position: absolute;
+                right: 51px;
+                background: blue;
+                width: auto;
+                height: auto;
+                pointer-events: all;
+
+                &:before {
+                    content: _dictionary("done");
+                    display: block;
+
+                    @extend %BUTTON--ICON---ACTIONBAR---SUGGESTED;
+                }
+            }
+
+        }
+
+        .x-grid3-hd-inner {
+            padding: 4px 0 3px 10px;
+
+            span {
+                text-transform: uppercase;
+                @include text(10px, _theme($LABEL--COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+            }
+        }
+
+        .indigo-modal-mask {
+            display: none;
+        }
+
+
+    } @else if ($MODAL-STYLE == "floating") {
+        position: fixed !important;
+        width: calc(100% - 200px) !important;
+        height: calc(100% - 200px) !important;
+        left: 100px !important;
+        top: 100px !important;
+        background: _theme($BODY--BG, $BACKGROUND-JOBS);
+        box-shadow: 0px 0px 20px 20px _color("primary", b);
+
+        .indigo-background-jobs-filters {
+            position: absolute !important;
+            top: 100px;
+            left: 30px;
+            z-index: 999 !important;
+            width: 180px;
+        }
+
+        .x-window-header {
+            padding: 0 !important;
+            height: calc(100% - 66px);
+        }
+
+        .x-window-tl {
+            border: none !important;
+            background: transparent !important;
+            padding: 30px 30px 14px !important;
+            width: 100%!important;
+            border-bottom: 1px solid _theme($MODAL--DIVIDER, "LIGHT") !important;
+            z-index: 999 !important;
+            position: absolute!important;
+            pointer-events: none;
+
+
+            .x-window-header-text {
+                display: block;
+                @include text(_size("medium"), _color("primary"), _weight("semibold"));
+                text-transform: uppercase;
+            }
+
+        }
+
+
+
+        div.x-window-bwrap {
+            background: _color("secondary") !important;
+
+            .x-panel:nth-child(1) .x-panel-bwrap .x-panel-mc {
+                position: relative;
+                top: 68px;
+                left: 220px;
+                width: calc(100% - 220px);
+                padding: 28px 0px 0px;
+                box-sizing: border-box;
+                background: _theme($FIELDSET--BG, $BACKGROUND-JOBS);
+                border: 1px solid _theme($FIELDSET--BORDER, $BACKGROUND-JOBS) !important;
+                height: calc(100% - 110px);
+
+                .x-panel-tbar {
+                    overflow: visible;
+                    position: relative;
+
+                    &::before {
+                        content: none!important;
+                    }
+
+                    > .x-toolbar {
+                        position: absolute!important;
+                        top: -70px !important;
+                        right: 0px!important;
+                        width: auto !important;
+                        left: auto!important;
+                    }
+                }
+
+                .x-panel-bbar {
+                    position: absolute;
+                    bottom: 0;
+                }
+            }
+        }
+
+        // Close holder - mimick bottom action bar
+        .x-panel-toolbar {
+
+            // Footer action bar
+            display: block;
+            position: fixed;
+            border-top: 1px solid _theme($MODAL--DIVIDER, "LIGHT");
+            box-sizing: border-box;
+            left: 100px;
+            width: calc(100% - 200px) !important;
+            bottom: 100px;
+            padding: 10px;
+            height: auto;
+
+            > table {
+                float: right;
+            }
+
+
+            // Button
+            .x-tool-close {
+                width: auto;
+                height: auto;
+                pointer-events: all;
+                position: relative;
+
+                &:before {
+                    content: _dictionary("done");
+                    display: block;
+
+                    @extend %BUTTON--ICON---ACTIONBAR---SUGGESTED;
+                }
+            }
+
+        }
+
+        .x-grid3-hd-inner {
+            padding: 0;
+
+            span {
+                @include text(_size("small") !important, _theme($MODAL--COLULMN---HEADER), _weight("light") !important);
+                text-transform: none;
+            }
+        }
+
+        .indigo-modal-mask {
+            display: block;
+            background: _theme($MODAL-MASK--BG) !important;
+        }
+
+
+
+    }
+
+
+
+    &[data-indigo-details="open"] {
+        // Details panel
+        .x-window-bwrap .x-panel:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 1 */
+            display: block;
+        }
+
+        // Window Header
+        .x-window-tl {
+            display: none;
+        }
+
+        .indigo-background-jobs-filters {
+            display: none;
+        }
+    }
+
+    &[indigo-results="false"] {
+
+        // Pager
+        .x-window-bwrap .x-panel:nth-child(1) .x-panel-bwrap .x-panel-mc .x-panel-bbar { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 2 */
+            display: none;
+        }
+
+        // Tool bar
+        .x-window-bwrap .x-panel:nth-child(1) .x-panel-bwrap .x-panel-mc .x-panel-tbar .x-toolbar-left .x-toolbar-cell:nth-child(8) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 3 */
+            display: none;
+        }
+
+    }
+
+    &[indigo-auto-refresh="true"] {
+        .x-window-bwrap .x-panel:nth-child(1) .x-panel-bwrap .x-panel-mc .x-panel-tbar .x-toolbar-left .x-toolbar-cell { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 4 */
+            &:nth-child(3) {
+                label {
+                    display: inline-block !important;
+                }
+
+                > div {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+
+            &:nth-child(4), /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 5 */
+            &:nth-child(5) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 6 */
+                display: inline-block;
+            }
+        }
+    }
+
+    .x-hsplitbar {
+        display: none;
+    }
+
+    .indigo-background-jobs-filters {
+
+        .indigo-background-jobs-filters-title {
+            font-size: 16px;
+        }
+
+        .indigo-switch {
+
+            position: relative;
+            margin-bottom: 10px;
+
+            &[data-indigo-switch-checked="true"] {
+                .indigo-switch--shuttle {
+                    margin-right: 0;
+                    background: _color("quinary", normal);
+                }
+
+                .indigo-switch--rail {
+                    background: rgba(0, 160, 227, 0.5);
+                }
+
+                &::before {
+                    color: _color("quinary", normal);
+                }
+
+            }
+
+            &::before {
+                content: attr(data-indigo-switch-label);
+                font-family: Nunito Sans;
+                font-size: 15px;
+                font-weight: 300;
+                top: -1px;
+                color: #6b7074;
+                width: calc(100% - 56px);
+                display: block;
+            }
+
+            .indigo-switch--shuttle {
+                width: 20px;
+                height: 20px;
+                background: #F1F1F1;
+                border-radius: 20px;
+                margin-right: 12px;
+                position: absolute;
+                z-index: 99;
+                right: 0;
+                top: 0px;
+                box-shadow: 0 1px 3px 1px _color("black", b);
+                transition: margin-left 0.3s ease, background 0.3s ease, box-shadow 0.1s ease;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .indigo-switch--rail {
+                width: 30px;
+                height: 15px;
+                background-color: rgba(80, 80, 80, 0.7);
+                border-radius: 15px;
+                position: absolute;
+                top: 3px;
+                right: 0;
+            }
+
+        }
+
+    }
+
+
+
+    // Header
+    .x-window-tl {
+        .x-window-header {
+            pointer-events: none;
+        }
+
+
+
+
+
+    }
+
+    // Body
+    .x-window-bwrap {
+
+        border: none !important;
+        background: transparent !important;
+
+        width: 100% !important;
+        height: 100%;
+
+        .x-window-ml,
+        .x-window-mr,
+        .x-window-mc {
+            height: 100%;
+        }
+
+        .x-window-body {
+            width: 100% !important;
+            height: 100% !important;
+
+            > .x-component {
+                width: 100% !important;
+                height: 100% !important;
+            }
+        }
+
+        .x-panel {
+
+            // Job List Container
+            &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 7 */
+
+                .x-panel-tl {
+                    display: none;
+                }
+
+                .x-panel-bwrap {
+                    height: 100%;
+
+                    .x-panel-ml,
+                    .x-panel-mr {
+                        height: 100%;
+                    }
+
+                    // Fieldset for List
+                    .x-panel-mc {
+
+                        // Controls
+                        .x-panel-tbar {
+                            width: 100% !important;
+
+                            &:before {
+                                content: attr(indigo-label);
+                                position: absolute;
+                                top: 14px;
+                                left: 30px;
+                                z-index: 99;
+                                text-transform: uppercase;
+
+                                @include text(11px, _theme($FIELDSET--TITLE-COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+                            }
+
+                            > .x-toolbar {
+                                box-sizing: border-box;
+                                border: none;
+                                background: none;
+
+                                position: fixed;
+                                top: 102px;
+                                left: 73px;
+                                width: auto !important;
+                            }
+
+                            .x-toolbar-left {
+
+                                > table {
+                                    float: right;
+                                }
+
+                                .x-toolbar-cell {
+                                    display: none;
+
+                                    .x-item-disabled {
+                                        display: none;
+                                    }
+
+                                    // Auto refresh checkbox
+                                    &:nth-child(3) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 8 */
+                                        display: inline-block;
+
+                                        label {
+                                            display: none !important;
+                                            text-transform: none;
+                                            font-size: 13px;
+                                            font-weight: 100;
+                                        }
+
+                                        > div {
+                                            &:after {
+                                                content: attr(indigo-label);
+                                                display: inline-block;
+                                                padding: 2px 0;
+
+                                                body.ext-gecko & {
+                                                    padding: 4px 0;
+                                                }
+
+                                                @include text(13px, _theme($LABEL--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+                                            }
+                                        }
+
+
+                                    }
+
+                                    // Auto refresh input
+                                    &:nth-child(4) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 9 */
+                                        input {
+                                            padding: 2px 4px !important;
+                                            margin: 0 6px !important;
+
+                                            @include text(11px, _color("secondary", e), _weight("normal"));
+                                        }
+                                    }
+
+                                    // Auto refresh seconds
+                                    &:nth-child(5) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 10 */
+
+                                        label {
+                                            text-transform: none;
+                                            font-size: 13px;
+                                            font-weight: 100;
+                                        }
+
+                                    }
+
+                                    // Delete selected
+                                    // Keep hidden and trigger click when user clicks the button-delete added to each row
+                                    &:nth-child(7) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 11 */
+                                        display: none;
+                                    }
+
+                                    // Delete all
+                                    &:nth-child(8) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 12 */
+                                        display: block;
+                                        position: fixed;
+                                        top: 62px;
+                                        right: 69px;
+
+
+                                        > table {
+                                            width: 25px;
+                                            height: 25px;
+                                            background: url(../images/icons/tabs-trash-black@X2.png) no-repeat left -2px top; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 1 */
+                                            background-size: 21px;
+
+                                            // Small Firefox fix
+                                            body.ext-gecko & {
+                                                background: url(../images/icons/tabs-trash-black@X2.png) no-repeat left -2px top -2px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 2 */
+                                                background-size: 21px;
+                                            }
+
+                                            opacity: 0.8;
+
+                                            button {
+                                                padding-left: 15px;
+                                                @include text(_size("small"), _color("primary"), _weight("normal"));
+                                            }
+
+                                            &:hover {
+                                                opacity: 1;
+                                            }
+
+                                            img {
+                                                display: none;
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                            }
+
+
+                        }
+
+                        // List Holder
+                        .x-panel-body {
+                            width: 100% !important;
+                            height: auto !important;
+
+                            > div,
+                            .x-grid-group {
+                                width: 100% !important;
+                                height: 100% !important;
+                            }
+
+                            .x-grid3-viewport {
+
+                                .x-grid3-scroller {
+                                    height: calc( 100vh - 430px ) !important;
+                                    width: 100% !important;
+                                    overflow-y: scroll !important;
+                                    max-height: 500px !important;
+
+                                    .x-grid-empty {
+                                        &:before {
+                                            content: _dictionary("no_results");
+                                            @include text(_size("small"), _theme($PARAGRAPH--COLOR, $BACKGROUND-JOBS), _weight("semibold"));
+                                            display: block;
+                                        }
+                                    }
+                                }
+
+                                .x-grid3-header-inner {
+                                    width: 100% !important;
+                                }
+
+                                > .x-grid3-header {
+                                    display: block;
+                                    background: none !important;
+                                    margin-bottom: 20px;
+
+
+                                    .x-grid3-header {
+                                        display: table-cell;
+                                        background: none !important;
+                                        border: none;
+
+                                        &.x-grid3-hd-over,
+                                        &.x-grid3-hd-menu-open {
+
+                                            .x-grid3-hd-inner {
+                                                background: _color("secondary", b) !important;
+
+                                                a {
+                                                    background: url(../images/icons/icon-toggle-expanded-small-normal.png) no-repeat center center; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 3 */
+                                                    margin-right: 5px;
+                                                }
+
+                                                span {
+                                                    color: _color("primary");
+                                                }
+                                            }
+                                        }
+
+
+
+                                    }
+                                }
+                            }
+
+
+                            // Grouped List
+                            .x-grid-group {
+                                background: url(../images/icons/icon-toggle-expanded-small-normal.png) no-repeat left top 10px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 4 */
+
+                                // Collapsed Group
+                                &.x-grid-group-collapsed {
+                                    background: url(../images/icons/expand-side-panel@X2.png) no-repeat left 1px top 9px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 5 */
+                                }
+
+                                // Group header
+                                .x-grid-group-hd {
+                                    border: none;
+                                    margin-bottom: 5px;
+
+                                    .x-grid-group-div {
+                                        background: none !important;
+                                        padding: 0 0 0 11px;
+                                        text-transform: uppercase;
+                                        @include text(10px, _color("quinary"), _weight("semibold"));
+                                    }
+                                }
+                            }
+
+                            // Grouped / Ungrouped List
+                            .x-grid-group,
+                            .x-grid3 {
+
+                                // Group List Container
+                                .x-grid-group-body,
+                                .x-grid3-body {
+
+                                    .x-grid3-row {
+
+                                        &.indigo-cant-delete {
+                                            .action-menu {
+                                                .delete-button {
+                                                    display: none !important;
+                                                }
+                                            }
+                                        }
+
+                                        > table {
+                                            pointer-events: none;
+
+                                            tr {
+                                                white-space: nowrap
+                                            }
+                                        }
+
+                                        position: relative;
+
+                                        // Delete more info buttons
+                                        .action-menu {
+                                            position: absolute;
+                                            right: 5px;
+                                            top: 0;
+                                            margin: 0;
+                                            padding: 0 0 0 10px;
+
+                                            display: none;
+
+                                            button {
+                                                width: 23px;
+                                                height: 25px;
+                                                display: inline-block;
+                                                border: none;
+
+                                                &:hover {
+                                                    cursor: pointer;
+                                                }
+                                            }
+
+                                            .delete-button {
+                                                background: url( _icon("closeLarge", "grey")) center center no-repeat; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 6 */
+                                                background-size: 10px;
+                                            }
+
+                                            .info-button {
+                                                background: url(../images/icons/ic_info_outline-DARK@2x.png) right center no-repeat; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 7 */
+                                                background-size: 18px;
+                                            }
+                                        }
+
+                                        // Selected, Selected & hover should be same as unselected
+                                        &.x-grid3-row-selected {
+                                            .action-menu {
+                                                background: _theme($ROW--BG, $BACKGROUND-JOBS);
+
+                                                .delete-button {
+                                                    background-image: url( _icon("closeLarge", "grey")); /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 8 */
+                                                }
+
+                                                .info-button {
+                                                    background-image: url(../images/icons/ic_info_outline-DARK@2x.png); /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 9 */
+                                                }
+                                            }
+
+                                            background: _theme($ROW--BG, $BACKGROUND-JOBS) !important;
+
+                                            .x-grid3-cell-inner,
+                                            .x-grid3-cell-inner label {
+                                                color: _theme($ROW--COLOR, $BACKGROUND-JOBS) !important;
+                                            }
+
+                                        }
+
+                                        // Hover
+                                        &:hover,
+                                        &.x-grid3-row-selected:hover {
+                                            .action-menu {
+                                                display: block;
+                                                background: _theme($ROW--BG---HOVER, $BACKGROUND-JOBS);
+                                            }
+
+                                            background: _theme($ROW--BG---HOVER, $BACKGROUND-JOBS) !important;
+
+                                            .x-grid3-cell-inner,
+                                            .x-grid3-cell-inner label {
+                                                color: _theme($ROW--COLOR---HOVER, $BACKGROUND-JOBS) !important;
+                                            }
+
+                                        }
+
+                                        .x-grid3-cell-inner,
+                                        .x-grid3-cell-inner label {
+                                            padding: 5px 0 0 10px;
+                                            text-transform: none !important;
+                                            @include text(_size("small"), _theme($ROW--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+                                        }
+                                    }
+                                }
+                            }
+
+
+                            .x-grid3-row-table {
+                                td {
+                                    // width: 10%;
+                                    display: inline-block;
+                                }
+                            }
+                        }
+
+                        // Pager Holder
+                        .x-panel-bbar {
+                            width: 100% !important;
+
+                            .x-toolbar-layout-ct {
+                                position: relative;
+                                z-index: 9999999;
+                                background: _color("primary", a); /* TO THEME */
+                                width: 100% !important;
+                                padding: 2px 11px;
+                                box-sizing: border-box;
+                                margin-top: 2px;
+
+                                .x-toolbar-left .x-toolbar-cell {
+                                    display: inline-block !important;
+                                    margin: 0 2px;
+                                    opacity: 0.8;
+
+                                    .x-btn-mc img {
+                                        display: none;
+                                    }
+
+                                    // Change colours to grey
+                                    &:nth-child(1) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 13 */
+                                        background: url( _icon("navFirst", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 10 */
+                                        margin-left: 0px;
+                                    }
+
+                                    &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 14 */
+                                        background: url(../images/icons/icon_arrow_left_single_grey@X2.png) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 11 */
+                                        margin-left: 5px;
+                                    }
+
+                                    &:nth-child(8) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 15 */
+                                        background: url( _icon("navNext", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 12 */
+                                        margin-right: 5px;
+                                    }
+
+                                    &:nth-child(9) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 16 */
+                                        background: url( _icon("navLast", "grey")) no-repeat center center/14px 14px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 13 */
+                                        margin-right: 5px;
+                                    }
+
+                                    &:nth-child(11) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 17 */
+                                        background: url( _icon("refresh", "grey")) no-repeat center center/16px 12px; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 14 */
+                                    }
+
+                                    .my-paging-text {
+                                        font-family: "Nunito Sans", sans-serif;
+                                        font-size: 12px;
+                                        color: _color("primary"); /* TO THEME */
+                                        font-weight: 100;
+                                    }
+
+                                    .gwt-TextBox {
+                                        font-family: "Nunito Sans", sans-serif;
+                                        font-size: 12px;
+                                        color: _color("primary", g); /* TO THEME */
+                                        font-weight: 100;
+                                        background: rgba(241, 241, 241, 0.7); /* TO THEME */
+                                        padding: 3px;
+                                        border: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .x-panel-bl {
+                    display: none;
+                }
+            }
+
+            // Details Container
+            &:nth-child(2) { /* OPTIMISE SELECTOR ::: css/app/_background-jobs.scss ::: 18 */
+                display: none;
+
+
+                @if ($MODAL-STYLE == "fullscreen") {
+                    width: 100% !important;
+                    position: fixed !important;
+                    height: 100% !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    background: rgba(_color("secondary"), .9);
+                    padding: 0;
+                    box-sizing: border-box;
+
+                    .x-panel-header {
+                        background: none;
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 19px 30px 10px;
+                        margin: 17vh auto 0;
+                        width: 500px;
+                        border: 1px solid _theme($FIELDSET--BORDER, $BACKGROUND-JOBS);
+                        border-bottom: 0;
+                    }
+
+                    .x-panel-bwrap {
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 0 30px 23px;
+                        margin: 0 auto;
+                        width: 500px;
+                        border: 1px solid _theme($FIELDSET--BORDER, $BACKGROUND-JOBS);
+                        border-top: 0;
+                    }
+
+                    .x-panel-toolbar {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        left: auto;
+                        width: 25px!important;
+                        border: none;
+                        box-shadow: none;
+                    }
+
+                } @else if ($MODAL-STYLE == "floating") {
+                    width: 100% !important;
+                    height: 100% !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    background: _color("secondary");
+                    padding: 0;
+                    box-sizing: border-box;
+
+                    .x-panel-header {
+                        background: none;
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 19px 30px 10px;
+                        border: none;
+                    }
+
+                    .x-panel-bwrap {
+                        background: _theme($FIELDSET--BG---HOVER, $BACKGROUND-JOBS);
+                        padding: 0 30px 23px;
+                        margin: 0 auto;
+                        height: 100%;
+                        background: _color("secondary");
+                        z-index: 99999999;
+                        position: relative;
+                    }
+
+                    .x-panel-toolbar {
+                        position: absolute;
+                        top: 20px;
+                        right: 0;
+                        left: auto;
+                        width: 25px!important;
+                        border: none;
+                    }
+                }
+
+
+                // Header
+                .x-panel-header {
+
+                    // Contains minimise button
+                    .x-panel-toolbar {
+                        background: url( _icon("closeLarge", "grey")) no-repeat center bottom; /* OPTIMISE URL ::: css/app/_background-jobs.scss ::: 15 */
+                        background-size: 20px;
+                        width: 25px;
+                        height: 25px;
+                        opacity: 0.8;
+                        display: block;
+
+                        &:hover {
+                            opacity: 1;
+                            cursor: pointer;
+                        }
+
+                        > table {
+                            display: none;
+                        }
+                    }
+
+                    // Text
+                    .x-panel-header-text {
+                        @include text(26px, _theme($TITLE--COLOR, $BACKGROUND-JOBS), _weight("extralight"));
+                    }
+                }
+
+                // Body
+                .x-panel-bwrap {
+
+                    form {
+                        height: auto !important;
+                    }
+
+                    .x-form-item {
+                        > label {
+                            display: inline-block !important;
+                            width: 150px !important;
+                        }
+
+                        > .x-form-element {
+                            display: inline-block;
+                            width: calc(100% - 150px);
+
+                            .x-form-field-wrap {
+                                width: 100% !important;
+
+                                .x-form-text {
+                                    background: transparent;
+                                    box-shadow: none;
+                                    color: _theme($PARAGRAPH--COLOR, $BACKGROUND-JOBS);;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Footer
+        .x-window-bl {
+            display: none;
+        }
+    }
+
+    // Resizable handles
+    .x-resizable-handle {
+        display: none;
+    }
+}
