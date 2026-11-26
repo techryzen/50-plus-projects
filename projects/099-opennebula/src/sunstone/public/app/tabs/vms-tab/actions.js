@@ -1,0 +1,424 @@
+/* -------------------------------------------------------------------------- */
+/* Copyright 2002-2020, OpenNebula Project, OpenNebula Systems                */
+/*                                                                            */
+/* Licensed under the Apache License, Version 2.0 (the "License"); you may    */
+/* not use this file except in compliance with the License. You may obtain    */
+/* a copy of the License at                                                   */
+/*                                                                            */
+/* http://www.apache.org/licenses/LICENSE-2.0                                 */
+/*                                                                            */
+/* Unless required by applicable law or agreed to in writing, software        */
+/* distributed under the License is distributed on an "AS IS" BASIS,          */
+/* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   */
+/* See the License for the specific language governing permissions and        */
+/* limitations under the License.                                             */
+/* -------------------------------------------------------------------------- */
+
+define(function(require) {
+  var Config = require('sunstone-config');
+  var Sunstone = require('sunstone');
+  var Notifier = require('utils/notifier');
+  var Locale = require('utils/locale');
+  var OpenNebulaVM = require('opennebula/vm');
+  var CommonActions = require('utils/common-actions');
+  var Vnc = require('utils/vnc');
+  var Vmrc = require('utils/vmrc');
+  var Spice = require('utils/spice');
+  var Files = require('utils/files');
+
+  var TAB_ID = require('./tabId');
+  var CREATE_DIALOG_ID           = require('./form-panels/create/formPanelId');
+  var DEPLOY_DIALOG_ID           = require('./dialogs/deploy/dialogId');
+  var MIGRATE_DIALOG_ID          = require('./dialogs/migrate/dialogId');
+  var VNC_DIALOG_ID              = require('./dialogs/vnc/dialogId');
+  var VMRC_DIALOG_ID              = require('./dialogs/vmrc/dialogId');
+  var SPICE_DIALOG_ID            = require('./dialogs/spice/dialogId');
+  var GUAC_DIALOG_ID            = require('./dialogs/guac/dialogId');
+  var SAVE_AS_TEMPLATE_DIALOG_ID = require('./dialogs/saveas-template/dialogId');
+  var UPDATECONF_FORM_ID         = require('./form-panels/updateconf/formPanelId');
+
+  var XML_ROOT = "VM";
+  var RESOURCE = "VM";
+
+  var _commonActions = new CommonActions(OpenNebulaVM, RESOURCE, TAB_ID,
+    XML_ROOT, Locale.tr("VM created"));
+
+  var _actions = {
+    "VM.list":    _commonActions.list(),
+    "VM.show": {
+      type: "single",
+      call: OpenNebulaVM.show,
+      callback: function(request, response) {
+        $(".not_firecracker").removeClass("hide");
+        if (Config.isTabEnabled("provision-tab")) {
+          $(".provision_refresh_info", ".provision_list_vms").click();
+        } else {
+          Sunstone.getDataTable(TAB_ID).updateElement(request, response);
+          if (Sunstone.rightInfoVisible($('#' + TAB_ID))) {
+            Sunstone.insertPanels(TAB_ID, response);
+          }
+        }
+        if(response && 
+          response.VM && 
+          response.VM.USER_TEMPLATE && 
+          response.VM.USER_TEMPLATE.HYPERVISOR &&
+          response.VM.USER_TEMPLATE.HYPERVISOR === "firecracker"){
+            $(".not_firecracker").addClass("hide");
+          }
+      },
+      error: Notifier.onError
+    },
+    "VM.refresh": _commonActions.refresh(),
+    "VM.chown": _commonActions.multipleAction('chown'),
+    "VM.chgrp": _commonActions.multipleAction('chgrp'),
+    "VM.hold":    _commonActions.multipleAction('hold'),
+    "VM.release": _commonActions.multipleAction('release'),
+    "VM.suspend": _commonActions.multipleAction('suspend'),
+    "VM.resume": _commonActions.multipleAction('resume'),
+    "VM.stop": _commonActions.multipleAction('stop'),
+    "VM.reboot": _commonActions.multipleAction('reboot'),
+    "VM.reboot_hard": _commonActions.multipleAction('reboot_hard'),
+    "VM.poweroff": _commonActions.multipleAction('poweroff'),
+    "VM.poweroff_hard": _commonActions.multipleAction('poweroff_hard'),
+    "VM.undeploy": _commonActions.multipleAction('undeploy'),
+    "VM.undeploy_hard": _commonActions.multipleAction('undeploy_hard'),
+    "VM.terminate": _commonActions.multipleAction('terminate'),
+    "VM.terminate_hard": _commonActions.multipleAction('terminate_hard'),
+    "VM.recover": _commonActions.multipleAction('recover'),
+    "VM.resched": _commonActions.multipleAction('resched'),
+    "VM.unresched": _commonActions.multipleAction('unresched'),
+    "VM.lockM": _commonActions.multipleAction('lock', false),
+    "VM.lockU": _commonActions.multipleAction('lock', false),
+    "VM.lockA": _commonActions.multipleAction('lock', false),
+    "VM.unlock": _commonActions.multipleAction('unlock', false),
+
+    "VM.chmod": _commonActions.singleAction('chmod'),
+    "VM.rename": _commonActions.singleAction('rename'),
+    "VM.update_template": _commonActions.updateTemplate(),
+    "VM.append_template": _commonActions.appendTemplate(),
+    "VM.deploy_action": _commonActions.singleAction('deploy'),
+    "VM.migrate_action": _commonActions.singleAction('migrate'),
+    "VM.migrate_poff_action": _commonActions.singleAction('migrate_poff'),
+    "VM.migrate_poff_hard_action": _commonActions.singleAction('migrate_poff_hard'),
+    "VM.migrate_live_action": _commonActions.singleAction('livemigrate'),
+    "VM.attachdisk": _commonActions.singleAction('attachdisk'),
+    "VM.detachdisk": _commonActions.singleAction('detachdisk'),
+    "VM.attachnic": _commonActions.singleAction('attachnic'),
+    "VM.detachnic": _commonActions.singleAction('detachnic'),
+    "VM.resize": _commonActions.singleAction('resize'),
+    "VM.disk_resize": _commonActions.singleAction('disk_resize'),
+    "VM.snapshot_create": _commonActions.singleAction('snapshot_create'),
+    "VM.snapshot_revert": _commonActions.singleAction('snapshot_revert'),
+    "VM.snapshot_delete": _commonActions.singleAction('snapshot_delete'),
+    "VM.disk_snapshot_create": _commonActions.singleAction('disk_snapshot_create'),
+    "VM.disk_snapshot_revert": _commonActions.singleAction('disk_snapshot_revert'),
+    "VM.disk_snapshot_rename": _commonActions.singleAction('disk_snapshot_rename'),
+    "VM.disk_snapshot_delete": _commonActions.singleAction('disk_snapshot_delete'),
+    "VM.disk_saveas" : _commonActions.singleAction('disk_saveas'),
+
+    "VM.create_dialog" : {
+      type: "custom",
+      call: function() {
+        Sunstone.showFormPanel(TAB_ID, CREATE_DIALOG_ID, "create");
+      }
+    },
+    "VM.create" : {
+      type: "custom",
+      call: function(id, name) {
+        Sunstone.runAction("Template.instantiate", [id], name);
+      },
+      callback: function(request, response) {
+        Sunstone.runAction("VM.refresh");
+      },
+      error: Notifier.onError
+    },
+    "VM.deploy" : {
+      type: "custom",
+      call: function() {
+        Sunstone.getDialog(DEPLOY_DIALOG_ID).show();
+      }
+    },
+    "VM.silent_deploy_action" : {
+      type: "single",
+      call: OpenNebulaVM.deploy,
+      error: Notifier.onError
+    },
+    "VM.migrate" : {
+      type: "custom",
+      call: function() {
+       var dialog = Sunstone.getDialog(MIGRATE_DIALOG_ID);
+       dialog.reset();
+       dialog.setLive(false);
+       dialog.setType(0);
+       dialog.show();
+     }
+    },
+    "VM.migrate_poff" : {
+      type: "custom",
+      call: function() {
+       var dialog = Sunstone.getDialog(MIGRATE_DIALOG_ID);
+       dialog.reset();
+       dialog.setLive(false);
+       dialog.setType(1);
+       dialog.show();
+     }
+    },
+    "VM.migrate_poff_hard" : {
+      type: "custom",
+      call: function() {
+       var dialog = Sunstone.getDialog(MIGRATE_DIALOG_ID);
+       dialog.reset();
+       dialog.setLive(false);
+       dialog.setType(2);
+       dialog.show();
+     }
+    },
+    "VM.migrate_live" : {
+      type: "custom",
+      call: function() {
+       var dialog = Sunstone.getDialog(MIGRATE_DIALOG_ID);
+       dialog.reset();
+       dialog.setLive(true);
+       dialog.setType(0);
+       dialog.show();
+     }
+    },
+    "VM.save_rdp" : {
+      type: "custom",
+      call: function(args) {
+        var vm = Sunstone.getElementRightInfo(TAB_ID);
+
+        if (args && args.ip && args.name) {
+          var credentials = {};
+          args.username && (credentials["USERNAME"] = args.username);
+          args.password && (credentials["PASSWORD"] = args.password);
+          Files.downloadRdpFile(args.ip, args.name, credentials);
+        }
+        else if (vm && vm.NAME && vm.TEMPLATE && vm.TEMPLATE.NIC) {
+          var name = vm.NAME;
+          var nics = vm.TEMPLATE.NIC;
+          nics = Array.isArray(nics) ? vm.TEMPLATE.NIC : [vm.TEMPLATE.NIC];
+
+          // append nic_alias in nics
+          if (vm.TEMPLATE.NIC_ALIAS) {
+            var alias = vm.TEMPLATE.NIC_ALIAS;
+            alias = Array.isArray(alias) ? alias : [alias];
+            nics = $.merge(alias, nics)
+          }
+
+          var nic = nics.find(n => n.RDP && String(n.RDP).toUpperCase() === "YES");
+          var ip = nic && nic.IP ? nic.IP : '';
+          var credentials = {};
+
+          if (vm.TEMPLATE.CONTEXT) {
+            var context = vm.TEMPLATE.CONTEXT;
+            for (var prop in context) {
+              var propUpperCase = String(prop).toUpperCase();
+              (propUpperCase === "USERNAME" || propUpperCase === "PASSWORD")
+                && (credentials[propUpperCase] = context[prop]);
+            }
+          }
+
+          nic && Files.downloadRdpFile(ip, name, credentials);
+        } else {
+          Notifier.notifyError(Locale.tr("Data for rdp file isn't correct"));
+          return false;
+        }
+      }
+    },
+    "VM.save_virt_viewer" : {
+      type: "custom",
+      call: function() {
+        var vm = Sunstone.getElementRightInfo(TAB_ID) || {};
+        var wDataFile = OpenNebulaVM.isWFileSupported(vm);
+        if (vm && vm.ID && wDataFile) {
+          Sunstone.runAction("VM.save_virt_viewer_action", vm.ID, wDataFile);
+        } else {
+          Notifier.notifyError(Locale.tr("Data for virt-viewer file isn't correct"));
+          return false;
+        }
+      }
+    },
+    "VM.save_virt_viewer_action" : {
+      type: "single",
+      call: OpenNebulaVM.vnc,
+      callback: function(_, response) {
+        _.request && $.each(_.request.data, function(_, vm) {
+          var hostname = vm.extra_param.hostname;
+          var type = vm.extra_param.type;
+          var port = vm.extra_param.port;
+
+          (hostname && type && port)
+            ? Files.downloadWFile(response, hostname, type, port)
+            : Notifier.notifyError(Locale.tr("Data for virt-viewer file isn't correct"));
+        });
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+    },
+    "VM.startvnc" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          if (!Vnc.lockStatus()) {
+            Vnc.lock();
+            Sunstone.runAction("VM.startvnc_action", elem);
+          } else {
+            Notifier.notifyError(Locale.tr("VNC Connection in progress"))
+            return false;
+          }
+        });
+      }
+    },
+    "VM.startvnc_action" : {
+      type: "single",
+      call: OpenNebulaVM.vnc,
+      callback: function(request, response) {
+       var dialog = Sunstone.getDialog(VNC_DIALOG_ID);
+       dialog.setElement(response);
+       dialog.show();
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+        Vnc.unlock();
+      },
+      notify: true
+    },
+    "VM.startvmrc" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          if (!Vmrc.lockStatus()) {
+            Vmrc.lock();
+            var vm_name = OpenNebulaVM.getName(elem);
+            Sunstone.runAction("VM.startvmrc_action", elem, vm_name);
+          } else {
+            Notifier.notifyError(Locale.tr("VMRC Connection in progress"))
+            return false;
+          }
+        });
+      }
+    },
+    "VM.startvmrc_action" : {
+      type: "single",
+      call: OpenNebulaVM.vmrc,
+      callback: function(request, response) {
+       var dialog = Sunstone.getDialog(VMRC_DIALOG_ID);
+       response["vm_name"] = request.request.data[0].extra_param;
+       dialog.setElement(response);
+       dialog.show();
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+        Vmrc.unlock();
+      },
+      notify: true
+    },
+    "VM.startspice" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          if (!Spice.lockStatus()) {
+            Spice.lock();
+            Sunstone.runAction("VM.startspice_action", elem);
+          } else {
+            Notifier.notifyError(Locale.tr("SPICE Connection in progress"))
+            return false;
+          }
+        });
+      }
+    },
+    "VM.startspice_action" : {
+      type: "single",
+      call: OpenNebulaVM.vnc,
+      callback: function(request, response) {
+       var dialog = Sunstone.getDialog(SPICE_DIALOG_ID);
+       dialog.setElement(response);
+       dialog.show();
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+        Spice.unlock();
+      },
+      notify: true
+    },
+    "VM.guac_vnc" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          Sunstone.runAction("VM.startguac_action", elem, 'vnc');
+        });
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+    },
+    "VM.guac_rdp" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          Sunstone.runAction("VM.startguac_action", elem, 'rdp');
+        });
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+    },
+    "VM.guac_ssh" : {
+      type: "custom",
+      call: function() {
+        $.each(Sunstone.getDataTable(TAB_ID).elements(), function(index, elem) {
+          Sunstone.runAction("VM.startguac_action", elem, 'ssh');
+        });
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+    },
+    "VM.startguac_action" : {
+      type: "single",
+      call: OpenNebulaVM.guac,
+      callback: function(request, response) {
+       var dialog = Sunstone.getDialog(GUAC_DIALOG_ID);
+       dialog.setElement(response);
+       dialog.show();
+      },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+      notify: true
+    },
+    "VM.save_as_template" : {
+      type: "single",
+      call: function() {
+       var dialog = Sunstone.getDialog(SAVE_AS_TEMPLATE_DIALOG_ID);
+       dialog.show();
+       },
+      error: function(req, resp) {
+        Notifier.onError(req, resp);
+      },
+      notify: false
+    },
+    "VM.updateconf": {
+      type: "single",
+      call: OpenNebulaVM.updateconf,
+      callback: function (req) {
+        Sunstone.resetFormPanel(TAB_ID, UPDATECONF_FORM_ID);
+        Sunstone.hideFormPanel(TAB_ID);
+
+        Sunstone.runAction("VM.refresh");
+      },
+      elements: function(opts) {
+        return Sunstone.getDataTable(TAB_ID).elements(opts);
+      },
+      error: function(request, response) {
+        Sunstone.hideFormPanelLoading(TAB_ID);
+        Notifier.onError(request, response);
+      },
+      notify: false
+    }
+  };
+
+  return _actions;
+});

@@ -1,0 +1,43 @@
+{
+  "id": 99,
+  "name": "OpenNebula",
+  "upstream_url": "https://github.com/OpenNebula",
+  "origin_as_reported": "2008",
+  "domain": "Cloud management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/OpenNebula/one",
+  "selected_upstream_commit": "25efce3a611c1dfe0dadafb328afec32ed39dc55",
+  "selected_commit_date": "2020-12-22T11:49:49Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 99,
+    "branch": "project/099-opennebula",
+    "upstream_commit": "25efce3a611c1dfe0dadafb328afec32ed39dc55",
+    "import_commit": "0186696fe469d5e46d0dcb09d7965d02452ba23e",
+    "files": 3860,
+    "archive_sha256": "0f1fd6e0bc344f5a8ffb1359d5d1c23602d47729413dc51606dfd46f359e694d",
+    "source_bytes": 35950581,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "c24f7dbc742cff41548a24459b96740969662cbd",
+    "provenance_added": true
+  },
+  "folder": "projects/099-opennebula"
+}
