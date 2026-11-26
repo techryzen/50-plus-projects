@@ -1,0 +1,43 @@
+{
+  "id": 85,
+  "name": "Plone",
+  "upstream_url": "https://github.com/plone",
+  "origin_as_reported": "2001",
+  "domain": "Enterprise CMS",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/plone/Products.CMFPlone",
+  "selected_upstream_commit": "491a1e20b1eb3e3638d9349bce8b96d9dab76298",
+  "selected_commit_date": "2020-12-23T22:26:44Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Plone CMS core product",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 85,
+    "branch": "project/085-plone",
+    "upstream_commit": "491a1e20b1eb3e3638d9349bce8b96d9dab76298",
+    "import_commit": "fe3075a32e378a8acb6b3ce1d1dfaad5cab4a6c7",
+    "files": 631,
+    "archive_sha256": "4766ea71ed2ebd6830be8f1b84925d29a0992fd57da7456a5f32016a25c6fbc7",
+    "source_bytes": 3076219,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "972901b12e9983a64fbef290e54d5607b15ad211",
+    "provenance_added": true
+  },
+  "folder": "projects/085-plone"
+}

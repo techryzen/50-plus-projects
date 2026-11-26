@@ -1,0 +1,43 @@
+{
+  "id": 41,
+  "name": "FOLIO",
+  "upstream_url": "https://github.com/folio-org",
+  "origin_as_reported": "2016",
+  "domain": "Library services platform",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/folio-org/okapi",
+  "selected_upstream_commit": "8127a1345ac9073376b0105498c930d4cea614fe",
+  "selected_commit_date": "2020-12-18T22:51:51Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "FOLIO Okapi core/gateway; not all library-service modules",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 41,
+    "branch": "project/041-folio",
+    "upstream_commit": "8127a1345ac9073376b0105498c930d4cea614fe",
+    "import_commit": "e8625d9fbb0bc3e9bc8c681da06af490d10a5a8e",
+    "files": 296,
+    "archive_sha256": "11ff4de4fe77eb08a711d65deafef2e810193a9d4412df7ff2164535ddea6b5c",
+    "source_bytes": 3591898,
+    "has_gitmodules": true,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "f2c2fc209bcce72bfd1e769dbaa2a536481ce556",
+    "provenance_added": true
+  },
+  "folder": "projects/041-folio"
+}

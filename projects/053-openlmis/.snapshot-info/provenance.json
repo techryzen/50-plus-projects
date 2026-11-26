@@ -1,0 +1,43 @@
+{
+  "id": 53,
+  "name": "OpenLMIS",
+  "upstream_url": "https://github.com/OpenLMIS",
+  "origin_as_reported": "2012",
+  "domain": "Medical supply chain",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/OpenLMIS/openlmis-requisition",
+  "selected_upstream_commit": "6f37d6930bba105cba426ab20bf4f890dad7d12a",
+  "selected_commit_date": "2020-12-18T07:02:27Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "OpenLMIS requisition service; not the full distribution",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Historical source license checked; preserve all notices and module-specific licenses. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 53,
+    "branch": "project/053-openlmis",
+    "upstream_commit": "6f37d6930bba105cba426ab20bf4f890dad7d12a",
+    "import_commit": "7d114697e464ba9974b9df62c140b10fb06d76b6",
+    "files": 834,
+    "archive_sha256": "5498b27325bbe746406ce4c464e9839d99f0f8afbc401aaf62c0c6295a4e72bd",
+    "source_bytes": 3861896,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "b3a43910cf8af678a295594f4380e62a39f48f13",
+    "provenance_added": true
+  },
+  "folder": "projects/053-openlmis"
+}

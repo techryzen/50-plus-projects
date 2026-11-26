@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+    #set( $title = $helpers.getObjectTitle($rdf, $topic) )
+
+    #parse("views/common.vsl")
+<html>
+<head>
+    <title>$title</title>
+    <meta charset="UTF-8">
+    #parse("views/common-head.vsl")
+</head>
+
+
+<body  class="fcrepo_resource">
+  <div  id="main" class="container" resource="$topic.getURI()">
+    #parse("views/common-node-header.vsl")
+    <div class="col-md-12">
+      #parse("views/common-breadcrumb.vsl")
+    </div>
+    <div id="historic-versions">
+        <h2>Historic Versions</h2>
+        #set( $versions = $helpers.getVersions($rdf, $topic) )
+        #if($versions.hasNext())
+            <ul>
+            #foreach($subject in $versions)
+                #set($label = $helpers.getVersionLabel($rdf, $subject))
+                <li><a href="$subject.getURI()" class="version_link">$esc.html($label)</a></li>
+            #end
+            </ul>
+        #else
+            <p>No versions have been created for this resource.</p>
+        #end
+  </div>
+</body>
+</html>

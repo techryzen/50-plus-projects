@@ -1,0 +1,20 @@
+version: "2"
+services:
+
+  requisition:
+    image: openlmis/requisition
+    links:
+      - db
+      - log
+    env_file: .env
+
+  db:
+    image: openlmis/postgres:9.6-debezium
+    ports:
+      - "5432"
+    env_file: .env
+
+  log:
+    image: openlmis/rsyslog:1
+    volumes:
+      - '../logs/requisition:/var/log'

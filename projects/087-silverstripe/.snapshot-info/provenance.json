@@ -1,0 +1,43 @@
+{
+  "id": 87,
+  "name": "Silverstripe",
+  "upstream_url": "https://github.com/silverstripe",
+  "origin_as_reported": "2000",
+  "domain": "Web content management",
+  "technologies_as_reported": null,
+  "category": "content-and-infrastructure",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/silverstripe/silverstripe-cms",
+  "selected_upstream_commit": "8788d62bc4bee6b1ce3c8311b3ea4700c452cdeb",
+  "selected_commit_date": "2020-12-31T06:47:02Z",
+  "selected_branch": "6",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Silverstripe CMS component",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "BSD-3-Clause",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 87,
+    "branch": "project/087-silverstripe",
+    "upstream_commit": "8788d62bc4bee6b1ce3c8311b3ea4700c452cdeb",
+    "import_commit": "441676b5fa3f1f6dbd5bbe6cf79058690c33a892",
+    "files": 367,
+    "archive_sha256": "cf42b3c6849d6ae7b3b304dc35857bd5b69b721376fbc3522b573595efb2f1a8",
+    "source_bytes": 1337433,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "92a7a4995be2691c7bec32df2a40fb1c1a3e46ed",
+    "provenance_added": true
+  },
+  "folder": "projects/087-silverstripe"
+}

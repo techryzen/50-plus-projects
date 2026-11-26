@@ -1,0 +1,43 @@
+{
+  "id": 48,
+  "name": "Fedora Commons",
+  "upstream_url": "https://github.com/fcrepo",
+  "origin_as_reported": "1997",
+  "domain": "Digital repository management",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/fcrepo/fcrepo",
+  "selected_upstream_commit": "bc53de0904e3e01ee98ebb461c2b8e975f75686e",
+  "selected_commit_date": "2020-12-17T22:30:23Z",
+  "selected_branch": "main",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 48,
+    "branch": "project/048-fedora-commons",
+    "upstream_commit": "bc53de0904e3e01ee98ebb461c2b8e975f75686e",
+    "import_commit": "111b5ac242493649adf46ebd69881a8cd9251f86",
+    "files": 864,
+    "archive_sha256": "b6a6b7080a81034aeddf7a95defd479cb57614e441522c97b37a70eb637af993",
+    "source_bytes": 4199231,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "b5e7ed916e019e0ee426502c908891f770b0394b",
+    "provenance_added": true
+  },
+  "folder": "projects/048-fedora-commons"
+}

@@ -1,0 +1,31 @@
+version: "2"
+services:
+
+  requisition:
+    image: openlmis/requisition
+    links:
+      - db
+      - redis
+      - log
+    env_file: .env
+
+  db:
+    image: openlmis/postgres:9.6-debezium
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://localhost:514"
+        syslog-facility: "local1"
+    depends_on: [log]
+    env_file: .env
+
+  redis:
+    image: redis:3.2.12
+    depends_on: [log]
+
+  log:
+    image: openlmis/rsyslog:1
+    ports:
+      - "514:514"
+    volumes:
+      - '../logs/requisition:/var/log'

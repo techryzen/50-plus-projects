@@ -1,0 +1,64 @@
+version: "2"
+services:
+
+  builder:
+    image: openlmis/dev:5.1
+    links:
+      - db
+      - redis
+      - log
+    volumes:
+      - '.:/app'
+    command:
+      - './build.sh'
+    environment:
+      GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+    env_file: .env
+
+  sonar:
+    image: openlmis/dev:5.1
+    links:
+      - db
+      - redis
+      - log
+    volumes:
+      - '.:/app'
+    entrypoint:
+      - 'gradle'
+    command:
+      - 'sonarqube'
+    environment:
+      GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+    env_file: .env
+
+  demo-data:
+    image: openlmis/dev:5.1
+    links:
+      - db
+      - log
+    volumes:
+      - '.:/app'
+    entrypoint:
+      - 'gradle'
+    command:
+      - 'demoDataSeed'
+    environment:
+      GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+    env_file: .env
+
+  image:
+    build: .
+    image: openlmis/requisition
+
+  db:
+    image: openlmis/postgres:9.6-debezium
+    env_file: .env
+
+  redis:
+    image: redis:3.2.12
+
+  log:
+    image: openlmis/rsyslog:1
+    volumes:
+      - '../logs/requisition:/var/log'
+

@@ -1,0 +1,1 @@
+UPDATE requisition.available_requisition_columns SET label = 'Skip' WHERE name = 'skipped';

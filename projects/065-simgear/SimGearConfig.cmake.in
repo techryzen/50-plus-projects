@@ -1,0 +1,35 @@
+include(CMakeFindDependencyMacro)
+
+find_dependency(ZLIB)
+find_dependency(Threads)
+find_dependency(CURL)
+
+# OSG
+
+set(SIMGEAR_HEADLESS @SIMGEAR_HEADLESS@)
+set(SIMGEAR_SOUND @ENABLE_SOUND@)
+set(USE_AEONWAVE @USE_AEONWAVE@)
+set(ENABLE_ASAN @ENABLE_ASAN@)
+set(SIMGEAR_SHARED @SIMGEAR_SHARED@)
+
+# SSE/SSE2 support
+
+set(ENABLE_SIMD @ENABLE_SIMD@)
+
+# OpenRTI support
+set(ENABLE_RTI @ENABLE_RTI@)
+if(ENABLE_RTI)
+    find_dependency(PkgConfig)
+    if(PKG_CONFIG_FOUND)
+      pkg_check_modules(RTI IMPORTED_TARGET hla-rti13)
+    endif(PKG_CONFIG_FOUND)
+endif(ENABLE_RTI)
+
+# Alternative terrain engine based on pagedLOD
+
+set(ENABLE_GDAL @ENABLE_GDAL@)
+if (ENABLE_GDAL)
+  find_dependency(GDAL)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/SimGearTargets.cmake")

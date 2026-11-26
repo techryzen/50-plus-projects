@@ -1,0 +1,43 @@
+{
+  "id": 47,
+  "name": "Islandora",
+  "upstream_url": "https://github.com/Islandora",
+  "origin_as_reported": "2006",
+  "domain": "Digital collections management",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/Islandora/islandora",
+  "selected_upstream_commit": "7f0d54e1ebbd4bece20e5c213a0063d793dcc380",
+  "selected_commit_date": "2020-12-18T16:13:07Z",
+  "selected_branch": "2.x",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 47,
+    "branch": "project/047-islandora",
+    "upstream_commit": "7f0d54e1ebbd4bece20e5c213a0063d793dcc380",
+    "import_commit": "b95beb903975b900aba72d82f41350e915a48688",
+    "files": 265,
+    "archive_sha256": "ede48f67f5432ad3ef4d54bb8ef8e0b1783bbb28a552a977fa4510ac039dae09",
+    "source_bytes": 1765882,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "9893d8f130f68f8e15ef610960d2635e1505fd19",
+    "provenance_added": true
+  },
+  "folder": "projects/047-islandora"
+}

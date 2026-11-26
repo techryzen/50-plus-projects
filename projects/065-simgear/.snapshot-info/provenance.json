@@ -1,0 +1,43 @@
+{
+  "id": 65,
+  "name": "SimGear",
+  "upstream_url": "https://github.com/FlightGear/simgear",
+  "origin_as_reported": "1999*",
+  "domain": "Flight simulation components",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/FlightGear/simgear",
+  "selected_upstream_commit": "b62808bb4ccf0b1b8dd70d27cf453e58121f06b8",
+  "selected_commit_date": "2020-12-30T16:38:04Z",
+  "selected_branch": "next",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "LGPL-2.0",
+    "evidence_path": "COPYING",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 65,
+    "branch": "project/065-simgear",
+    "upstream_commit": "b62808bb4ccf0b1b8dd70d27cf453e58121f06b8",
+    "import_commit": "f901d96ecc3094da2a38bdc68cbde8e6d6488246",
+    "files": 1022,
+    "archive_sha256": "0b01086d5e2eabb5eb061ee1a7be5a912d7dcce52c914f555a814acf5d56ca2c",
+    "source_bytes": 8048306,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "d8bfc6c53abec3a6e9108d8171a5e97377672fbb",
+    "provenance_added": true
+  },
+  "folder": "projects/065-simgear"
+}
