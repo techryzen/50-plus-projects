@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 4,
+    "requested_repository": "idempiere/idempiere",
+    "repository": "idempiere/idempiere",
+    "url": "https://github.com/idempiere/idempiere",
+    "description": "iDempiere. Community Powered Enterprise.  Full Open Source Business Suite ERP/CRM/MFG/SCM/POS",
+    "size_kb": 420233,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "afde8a0cf1c2b9f7ddb9da1f6fd544f512c287b6",
+    "commit_date": "2020-12-31T12:21:04Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE.md",
+    "license_url": "https://github.com/idempiere/idempiere/blob/afde8a0cf1c2b9f7ddb9da1f6fd544f512c287b6/LICENSE.md",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "GPL-2.0 (Compiere Public License heading)",
+    "evidence_path": "LICENSE.md",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "c56571c4e52d48121a156ab0227abdeb76e06b7fec65ba26c36ffb20aa01d076",
+  "source_import_commit": "775cf6023b5af1ba9a47f19124d3ad0c8d59e419",
+  "source_files": 11115,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
