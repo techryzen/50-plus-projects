@@ -1,0 +1,6 @@
+<libraries xmlns="http://labkey.org/clientLibrary/xml/">
+    <dependencies>
+        <!-- Backwards compatible support for requesting "clientapi_core" as a dependency -->
+        <dependency path="labkey_api_js"/>
+    </dependencies>
+</libraries>

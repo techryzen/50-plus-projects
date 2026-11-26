@@ -1,0 +1,210 @@
+@import "~@labkey/components/dist/assets/scss/theme";
+@import './restoreBootstrapInCore.scss';
+
+.bold-text {
+  font-weight: bold;
+}
+
+.no-highlight {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.clickable {
+  cursor:pointer;
+}
+
+.parent-panel {
+  min-width: 1200px;
+  padding-bottom: 40px;
+}
+
+.parent-panel__save-button {
+  text-transform: none;
+}
+
+.global-settings__title-text {
+  margin-bottom: 16px;
+}
+
+.global-settings__text-row {
+  margin-bottom: 14px;
+}
+
+.global-settings__text {
+  margin-left: 14px;
+}
+
+.configurations__auth-tab{
+  margin-top: 14px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 16px;
+}
+
+.configurations__help-link {
+  float: right;
+}
+
+.configurations__dropdown {
+  margin-bottom: 17px;
+  display: block;
+}
+
+.configurations__config-section-title {
+  margin-bottom: 18px;
+}
+
+.deleteIcon {
+  color: #999999;
+  &:hover {
+    color: #d9534f;
+  }
+}
+
+.editOrViewIcon {
+  color: #999999;
+  &:hover {
+    color: #0176AC;
+  }
+}
+
+.domain-row-base-fields {
+  padding-top: 15px;
+}
+
+.auth-row__delete-modal {
+  height: 150px;
+  margin-top: 15px;
+}
+
+.auth-row__delete-modal__textBox {
+  padding: 0 20px 10px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.auth-row__delete-modal-bottom {
+  height: 65px;
+}
+
+.auth-row__delete-modal__cancel {
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
+}
+
+.auth-row__confirm-delete {
+  float: right;
+  margin-right: 10px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
+}
+
+.globalAuthConfig-textInput{
+  width: 15em;
+}
+
+.globalAuthConfig-leftMargin{
+  margin-left: 29px;
+}
+
+.database-modal__field-row {
+  height: 50px;
+}
+
+.database-modal__field {
+  float: right;
+}
+
+.database-modal__bottom {
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.sso-fields__label {
+  width: 130px;
+}
+
+.sso-fields__file-attachment {
+  width: 300px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.sso-fields__image-holder {
+  float: left;
+  width: 255px;
+  height: 95px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sso-field__image-border {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.sso-fields__image__header-logo {
+  max-height: 26px;
+  width: auto;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.sso-fields__image__page-logo {
+  max-height: 44px;
+  width: auto;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.sso-fields__null-image {
+  margin-left: 7px;
+}
+
+.sso-fields__delete-img {
+  color: #d9534f;
+}
+
+.sso-fields__delete-img--page-logo {
+  position: relative;
+  bottom: 54px;
+  left: 54px;
+}
+
+.sso-fields__delete-img--header-logo {
+  position: relative;
+  bottom: 40px;
+  left: 30px;
+}
+
+.sso-fields__image-holder--view-only {
+  margin-left: 265px;
+}
+
+.sso-fields__null-image__text {
+  font-size: smaller;
+  color: #DCDCDC;
+  margin-left: 5px;
+}
+
+.sso-fields__spacer {
+  height: 12px;
+}
+
+.fa-cloud-upload:before {
+  content: "\f0ee";
+}

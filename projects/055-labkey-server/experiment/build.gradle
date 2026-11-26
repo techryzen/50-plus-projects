@@ -1,0 +1,21 @@
+import org.labkey.gradle.util.BuildUtils
+plugins {
+   id 'org.labkey.build.module'
+}
+
+sourceSets {
+   main {
+      resources {
+         srcDirs = ['src'] // src is included because it contains some sql scripts
+         exclude '**/*.java'
+         exclude '**/*.jsp'
+      }
+   }
+}
+
+dependencies{
+   implementation "com.opencsv:opencsv:${opencsvVersion}"
+   external "org.apache.commons:commons-math3:${commonsMath3Version}"
+   BuildUtils.addLabKeyDependency(project: project, config: "modules", depProjectPath: BuildUtils.getPlatformModuleProjectPath(project.gradle, "pipeline"), depProjectConfig: "published", depExtension: "module")
+   BuildUtils.addLabKeyDependency(project: project, config: "modules", depProjectPath: BuildUtils.getPlatformModuleProjectPath(project.gradle, "query"), depProjectConfig: "published", depExtension: "module")
+}

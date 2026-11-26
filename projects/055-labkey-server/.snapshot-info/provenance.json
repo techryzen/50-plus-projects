@@ -1,0 +1,43 @@
+{
+  "id": 55,
+  "name": "LabKey Server",
+  "upstream_url": "https://github.com/LabKey",
+  "origin_as_reported": "2003",
+  "domain": "Biomedical research management",
+  "technologies_as_reported": null,
+  "category": "institutional-and-scientific",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/LabKey/platform",
+  "selected_upstream_commit": "0aeb251c1fa0245933b3e522160e58ba802c201e",
+  "selected_commit_date": "2020-12-31T04:09:46Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "Apache-2.0 with separately licensed bundled libraries",
+    "evidence_path": "api/src/org/labkey/api/data/Container.java",
+    "scope": "Historical license evidence checked; retain all notices and bundled licenses. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 55,
+    "branch": "project/055-labkey-server",
+    "upstream_commit": "0aeb251c1fa0245933b3e522160e58ba802c201e",
+    "import_commit": "46c7027bc05b983c12a5803be90535e044ed3ea2",
+    "files": 11499,
+    "archive_sha256": "b777276746c338be013259e253f6a3f806b5f3517fc27aa3056e096433859915",
+    "source_bytes": 112154413,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "2b26dc820c731f9d2222a499b76680811b9129bb",
+    "provenance_added": true
+  },
+  "folder": "projects/055-labkey-server"
+}
