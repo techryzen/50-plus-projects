@@ -1,0 +1,43 @@
+{
+  "id": 36,
+  "name": "OpenBoxes",
+  "upstream_url": "https://github.com/openboxes",
+  "origin_as_reported": "2010",
+  "domain": "Inventory and supply chain",
+  "technologies_as_reported": null,
+  "category": "enterprise-and-commerce",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/openboxes/openboxes",
+  "selected_upstream_commit": "2062a7646d1b7310bc29afeaf3c7c5f81c321655",
+  "selected_commit_date": "2020-12-29T21:57:11Z",
+  "selected_branch": "develop",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "EPL-1.0",
+    "evidence_path": "epl-v10.html",
+    "scope": "Historical license evidence checked; retain all notices and bundled licenses. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 36,
+    "branch": "project/036-openboxes",
+    "upstream_commit": "2062a7646d1b7310bc29afeaf3c7c5f81c321655",
+    "import_commit": "d74b19af9cfbf7adb2161ee987669d2734e8b249",
+    "files": 4503,
+    "archive_sha256": "a2af44cead4fbe93aa5b2d6d1406bda5550a748ed0f848387c15aa65584ac691",
+    "source_bytes": 25272768,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "77a3d08b1a08991872ee1d0b4f8b3d89880e42bd",
+    "provenance_added": true
+  },
+  "folder": "projects/036-openboxes"
+}
