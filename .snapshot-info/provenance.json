@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 11,
+    "requested_repository": "openremote/openremote",
+    "repository": "openremote/core",
+    "url": "https://github.com/openremote/core",
+    "description": "100% open-source IoT Platform - Integrate your devices, add intelligence, build custom apps",
+    "size_kb": 312057,
+    "fork": false,
+    "default_branch": "main",
+    "commit": "4abf78cb9cda332211e73199dfdca0f175891240",
+    "commit_date": "2020-12-21T09:08:15Z",
+    "license_spdx": "NOASSERTION",
+    "license_path": "LICENSE.txt",
+    "license_url": "https://github.com/openremote/core/blob/4abf78cb9cda332211e73199dfdca0f175891240/LICENSE.txt",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0-or-later",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "8c753b339968830945acb78ff18aa4c904f6c5180551b26a1dad467a84c9a70b",
+  "source_import_commit": "2fb29dc64cb08f5d35233e8a42d458238484df20",
+  "source_files": 3890,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
