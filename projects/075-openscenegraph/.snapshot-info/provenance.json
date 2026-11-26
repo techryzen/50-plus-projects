@@ -1,0 +1,43 @@
+{
+  "id": 75,
+  "name": "OpenSceneGraph",
+  "upstream_url": "https://github.com/openscenegraph",
+  "origin_as_reported": "1998",
+  "domain": "3D visualization",
+  "technologies_as_reported": null,
+  "category": "simulation-and-games",
+  "qualification_status": "unverified_shortlist_candidate",
+  "license_review_status": "checked_for_this_unmodified_source_import",
+  "redistribution_approved": true,
+  "source_repository": "https://github.com/openscenegraph/OpenSceneGraph",
+  "selected_upstream_commit": "ebca7bb462eacfe6f790f0f6d324d5e61a1cb555",
+  "selected_commit_date": "2020-12-24T15:32:44Z",
+  "selected_branch": "master",
+  "selection_method": "Latest commit returned before 2021-01-01 on the selected repository default-branch ancestry; not a search across every release branch or mirror.",
+  "source_role": "Selected main/core source repository",
+  "source_notes": null,
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "OSGPL with LGPL and wxWindows exceptions",
+    "evidence_path": "LICENSE.txt",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "status": "included",
+  "hold_reason": null,
+  "import": {
+    "id": 75,
+    "branch": "project/075-openscenegraph",
+    "upstream_commit": "ebca7bb462eacfe6f790f0f6d324d5e61a1cb555",
+    "import_commit": "38e165b76cdac5f43ce6d75d653a197baf73e4a0",
+    "files": 3575,
+    "archive_sha256": "0bdf4a86294fba28b4972262e5d8f62085e9f7bde505e814cb44aa32d770c818",
+    "source_bytes": 28529770,
+    "has_gitmodules": false,
+    "lfs_pointer_paths": [],
+    "verification": "Every imported file blob and executable/symlink mode matches the downloaded archive.",
+    "status": "imported",
+    "source_import_commit": "8278cabcf4fc017b6c41e4ffd01a281fb6683e39",
+    "provenance_added": true
+  },
+  "folder": "projects/075-openscenegraph"
+}
