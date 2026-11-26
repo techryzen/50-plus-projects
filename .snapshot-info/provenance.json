@@ -1,0 +1,29 @@
+{
+  "upstream": {
+    "id": 16,
+    "requested_repository": "civicrm/civicrm-core",
+    "repository": "civicrm/civicrm-core",
+    "url": "https://github.com/civicrm/civicrm-core",
+    "description": "CiviCRM (Core Application and Framework)",
+    "size_kb": 418929,
+    "fork": false,
+    "default_branch": "master",
+    "commit": "4cc3286d702a70b28e3e6d59b7cc4b27762ff4c6",
+    "commit_date": "2020-12-31T20:19:55Z",
+    "license_spdx": "AGPL-3.0",
+    "license_path": "LICENSE",
+    "license_url": "https://github.com/civicrm/civicrm-core/blob/4cc3286d702a70b28e3e6d59b7cc4b27762ff4c6/LICENSE",
+    "status": "snapshot_resolved"
+  },
+  "license_review": {
+    "decision": "allow_unmodified_source_import",
+    "license_summary": "AGPL-3.0",
+    "evidence_path": "LICENSE",
+    "scope": "Top-level historical license and redistribution terms checked. Preserve all per-file notices and bundled licenses; no relicensing or execution. Not an exhaustive dependency audit."
+  },
+  "source_archive_sha256": "10e1afb446251d66a5bc7954617b19114f2ffe8c3dd73fcfba34798185731040",
+  "source_import_commit": "a34518b7548c88f5a2b595e76f10c4b89557f282",
+  "source_files": 6038,
+  "scope": "One selected source repository, not its complete ecosystem or history. External submodules, dependencies and LFS content are not downloaded.",
+  "modifications": "Original archive files are byte-for-byte unchanged. Only .snapshot-info/ was added by the collection."
+}
